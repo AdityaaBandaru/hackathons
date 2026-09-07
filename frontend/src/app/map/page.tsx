@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState, type KeyboardEvent } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useQuery } from "@tanstack/react-query";
@@ -207,6 +207,45 @@ function ModeSwitcher({
   mode: MapMode;
   onChange: (mode: MapMode) => void;
 }) {
+  const buttonRefs = useRef<Partial<Record<MapMode, HTMLButtonElement | null>>>(
+    {},
+  );
+
+  // Roving tabindex + arrow-key movement, per the WAI-ARIA APG radio group
+  // pattern -- this group already declares role="radiogroup"/"radio", so it
+  // must behave like one: Tab enters/leaves the group at a single stop (the
+  // checked option), and Left/Right/Up/Down move *and* select, same as a
+  // native <input type="radio"> group.
+  function moveTo(index: number) {
+    const nextMode = MAP_MODES[(index + MAP_MODES.length) % MAP_MODES.length];
+    onChange(nextMode);
+    buttonRefs.current[nextMode]?.focus();
+  }
+
+  function handleKeyDown(event: KeyboardEvent<HTMLButtonElement>) {
+    const currentIndex = MAP_MODES.indexOf(mode);
+    switch (event.key) {
+      case "ArrowRight":
+      case "ArrowDown":
+        event.preventDefault();
+        moveTo(currentIndex + 1);
+        break;
+      case "ArrowLeft":
+      case "ArrowUp":
+        event.preventDefault();
+        moveTo(currentIndex - 1);
+        break;
+      case "Home":
+        event.preventDefault();
+        moveTo(0);
+        break;
+      case "End":
+        event.preventDefault();
+        moveTo(MAP_MODES.length - 1);
+        break;
+    }
+  }
+
   return (
     <div
       role="radiogroup"
@@ -216,10 +255,15 @@ function ModeSwitcher({
       {MAP_MODES.map((candidate) => (
         <button
           key={candidate}
+          ref={(el) => {
+            buttonRefs.current[candidate] = el;
+          }}
           type="button"
           role="radio"
           aria-checked={mode === candidate}
+          tabIndex={mode === candidate ? 0 : -1}
           onClick={() => onChange(candidate)}
+          onKeyDown={handleKeyDown}
           className={`rounded-md px-3 py-1.5 text-sm font-medium ring-1 ring-inset transition ${
             mode === candidate
               ? "bg-blue-600 text-white ring-blue-600"
@@ -304,7 +348,7 @@ function DrawnInspector({
                     className={`flex-none rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase ${
                       isSelected
                         ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-300"
-                        : "bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400"
+                        : "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400"
                     }`}
                   >
                     {isSelected ? "selected" : "candidate"}

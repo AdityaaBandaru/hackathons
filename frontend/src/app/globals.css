@@ -24,3 +24,22 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/*
+ * MapLibre's canvas is keyboard-focusable (arrow keys pan, +/- zoom) and gets
+ * a real focus outline from the browser, but it was invisible for two
+ * stacked reasons: (1) the map's container clips it with overflow-hidden
+ * (needed for the container's rounded corners), and an outline draws outside
+ * the canvas's own border box, landing exactly in the clipped region; (2) an
+ * inset box-shadow on the canvas itself avoids that clip but is painted
+ * *behind* the canvas's own drawn bitmap, which repaints opaquely over its
+ * whole box every frame, so it never surfaces either.
+ *
+ * The fix styles the wrapper instead of the canvas: the wrapper paints no
+ * bitmap of its own, and an element's own box-shadow is never clipped by its
+ * own overflow-hidden (that property only clips a box's *descendants*), so a
+ * ring drawn here survives both problems.
+ */
+.maplibregl-map:has(.maplibregl-canvas:focus-visible) {
+  box-shadow: 0 0 0 3px #2563eb;
+}

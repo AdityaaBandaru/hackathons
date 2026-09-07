@@ -293,4 +293,90 @@ describe("MapPage", () => {
       within(card).getByText(/not selected in current scenario/i),
     ).toBeInTheDocument();
   });
+
+  // -------------------------------------------------------------------
+  // Keyboard: the mode switcher declares role="radiogroup"/"radio", so it
+  // must behave like one -- roving tabindex (one Tab stop) and arrow keys
+  // that move *and* select, per the WAI-ARIA APG radio group pattern.
+  // -------------------------------------------------------------------
+
+  describe("mode switcher keyboard behaviour", () => {
+    it("only the checked mode is a Tab stop; the rest are removed from tab order", async () => {
+      renderMap();
+      await waitFor(() => screen.getByTestId("drawn-count"));
+      const radios = screen.getAllByRole("radio");
+      const checked = radios.find((r) => r.getAttribute("aria-checked") === "true");
+      const unchecked = radios.filter((r) => r !== checked);
+
+      expect(checked).toHaveAttribute("tabIndex", "0");
+      expect(unchecked).toHaveLength(3);
+      for (const radio of unchecked) {
+        expect(radio).toHaveAttribute("tabIndex", "-1");
+      }
+    });
+
+    it("ArrowRight moves both focus and selection to the next mode", async () => {
+      const user = userEvent.setup();
+      renderMap();
+      await waitFor(() => screen.getByTestId("drawn-count"));
+
+      const allPossibilities = screen.getByRole("radio", {
+        name: "All Possibilities",
+      });
+      allPossibilities.focus();
+      await user.keyboard("{ArrowRight}");
+
+      // Wraps from the last mode back to the first.
+      const baseline = screen.getByRole("radio", { name: "Baseline" });
+      expect(baseline).toHaveAttribute("aria-checked", "true");
+      expect(baseline).toHaveFocus();
+      expect(allPossibilities).toHaveAttribute("aria-checked", "false");
+      expect(allPossibilities).toHaveAttribute("tabIndex", "-1");
+    });
+
+    it("ArrowLeft moves both focus and selection to the previous mode", async () => {
+      const user = userEvent.setup();
+      renderMap();
+      await waitFor(() => screen.getByTestId("drawn-count"));
+
+      screen.getByRole("radio", { name: "All Possibilities" }).focus();
+      await user.keyboard("{ArrowLeft}");
+
+      const selectedLegacy = screen.getByRole("radio", { name: "Selected Legacy" });
+      expect(selectedLegacy).toHaveAttribute("aria-checked", "true");
+      expect(selectedLegacy).toHaveFocus();
+    });
+
+    it("Home and End jump to the first and last mode", async () => {
+      const user = userEvent.setup();
+      renderMap();
+      await waitFor(() => screen.getByTestId("drawn-count"));
+
+      screen.getByRole("radio", { name: "All Possibilities" }).focus();
+      await user.keyboard("{Home}");
+      expect(screen.getByRole("radio", { name: "Baseline" })).toHaveAttribute(
+        "aria-checked",
+        "true",
+      );
+
+      screen.getByRole("radio", { name: "Baseline" }).focus();
+      await user.keyboard("{End}");
+      expect(
+        screen.getByRole("radio", { name: "All Possibilities" }),
+      ).toHaveAttribute("aria-checked", "true");
+    });
+
+    it("arrow-key selection still applies the same rendering rules as a click", async () => {
+      // Selecting Baseline by arrow key must hide every proposal exactly as
+      // clicking it does (rule 12) -- this isn't a separate code path.
+      const user = userEvent.setup();
+      renderMap(makeMapScenario());
+      await waitFor(() => screen.getByTestId("drawn-count"));
+
+      screen.getByRole("radio", { name: "All Possibilities" }).focus();
+      await user.keyboard("{ArrowRight}"); // -> Baseline
+
+      expect(counts()).toEqual({ drawn: 0, selected: 0, candidate: 0 });
+    });
+  });
 });
