@@ -1,0 +1,311 @@
+[
+  {
+    "sourceId": "acs",
+    "title": "ACS Five-Year Data",
+    "publisher": "U.S. Census Bureau",
+    "publicationDate": null,
+    "documentType": "api",
+    "usedFor": "Resident demographics and equity",
+    "url": "https://www.census.gov/data/developers/data-sets/acs-5year.html"
+  },
+  {
+    "sourceId": "area-maps",
+    "title": "Venue and transit access pages",
+    "publisher": "Host venues and agencies",
+    "publicationDate": null,
+    "usedFor": "planning anchors and access-zone names",
+    "url": "See Pedestrian Areas.source_url for the area-specific page"
+  },
+  {
+    "sourceId": "ca-post-2026",
+    "title": "From the 2026 FIFA World Cup to LA28",
+    "publisher": "State of California",
+    "publicationDate": "2026-07-27",
+    "documentType": "html",
+    "usedFor": "California attendance and transit totals",
+    "url": "https://www.gov.ca.gov/2026/07/27/from-the-2026-fifa-world-cup-to-la28-california-is-ready/"
+  },
+  {
+    "sourceId": "eagles-ed",
+    "title": "Ed Sheeran record attendance at Lincoln Financial Field",
+    "publisher": "Billy Penn / Eagles spokesperson",
+    "publicationDate": "2023-06-05",
+    "usedFor": "Philadelphia concert analog",
+    "url": "https://billypenn.com/2023/06/05/ed-sheeran-philips-steaks-lincoln-financial-field/"
+  },
+  {
+    "sourceId": "epa-moves",
+    "title": "MOtor Vehicle Emission Simulator",
+    "publisher": "U.S. Environmental Protection Agency",
+    "publicationDate": null,
+    "documentType": "model",
+    "usedFor": "Vehicle emission factors",
+    "url": "https://www.epa.gov/moves"
+  },
+  {
+    "sourceId": "fhwa-signals",
+    "title": "Traffic Signal Retiming Practices",
+    "publisher": "Federal Highway Administration",
+    "publicationDate": null,
+    "documentType": "html",
+    "usedFor": "Signal cost analog",
+    "url": "https://ops.fhwa.dot.gov/publications/fhwahop20002/ch2.htm"
+  },
+  {
+    "sourceId": "fifa-by-numbers",
+    "title": "FIFA World Cup 2026 by the numbers",
+    "publisher": "FIFA",
+    "publicationDate": null,
+    "documentType": "html",
+    "usedFor": "Tournament totals",
+    "url": "https://inside.fifa.com/tournament-organisation/fifa-world-cup-2026-by-the-numbers"
+  },
+  {
+    "sourceId": "fifa-capacity-2026",
+    "title": "Final stadium capacities",
+    "publisher": "FIFA",
+    "publicationDate": null,
+    "documentType": "html",
+    "usedFor": "Venue capacity",
+    "url": "https://inside.fifa.com/organisation/news/fifa-world-cup-stadium-capacities-confirmed"
+  },
+  {
+    "sourceId": "fifa-fanfest-2026",
+    "title": "Fan Festival final results",
+    "publisher": "FIFA",
+    "publicationDate": null,
+    "documentType": "html",
+    "usedFor": "Fan-festival totals",
+    "url": "https://inside.fifa.com/organisation/media-releases/fan-festival-extends-historic-world-cup-2026-experience-millions-record-breaking-celebrations-host-countries"
+  },
+  {
+    "sourceId": "fifa-numbers",
+    "title": "FIFA World Cup 2026 by the numbers",
+    "publisher": "FIFA",
+    "publicationDate": null,
+    "usedFor": "tournament totals",
+    "url": "https://inside.fifa.com/tournament-organisation/fifa-world-cup-2026-by-the-numbers"
+  },
+  {
+    "sourceId": "fifa-stadiums",
+    "title": "World Cup 2026 stadium information",
+    "publisher": "FIFA",
+    "publicationDate": null,
+    "usedFor": "stadium capacities",
+    "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/stadium-information-details"
+  },
+  {
+    "sourceId": "fta-wc26",
+    "title": "FTA World Cup Funding Apportionment Table",
+    "publisher": "Federal Transit Administration",
+    "publicationDate": "2026-04-09",
+    "usedFor": "official allocation",
+    "url": "https://www.transit.dot.gov/funding/apportionments/fta-world-cup-funding-apportionment-table"
+  },
+  {
+    "sourceId": "fta-world-cup-2026",
+    "title": "FTA World Cup Funding Apportionment Table",
+    "publisher": "Federal Transit Administration",
+    "publicationDate": "2026-04-09",
+    "documentType": "xlsx",
+    "usedFor": "Official allocation for 11 U.S. host regions",
+    "url": "https://www.transit.dot.gov/funding/apportionments/fta-world-cup-funding-apportionment-table"
+  },
+  {
+    "sourceId": "gtfs",
+    "title": "GTFS Schedule Reference",
+    "publisher": "MobilityData GTFS community",
+    "publicationDate": "2026-04-27",
+    "documentType": "specification",
+    "usedFor": "Routes, stops, trips, times and shapes",
+    "url": "https://gtfs.org/documentation/schedule/reference/"
+  },
+  {
+    "sourceId": "la-metro-post-2026",
+    "title": "Metro State of the Agency 2026",
+    "publisher": "Los Angeles County Metropolitan Transportation Authority",
+    "publicationDate": "2026-07-22",
+    "documentType": "html",
+    "usedFor": "Direct stadium rides",
+    "url": "https://thesource.metro.net/metro-state-of-agency-celebrates-a-year-of-milestones-and-looking-ahead-to-another-transformative-year/"
+  },
+  {
+    "sourceId": "la-post",
+    "title": "Metro state of the agency 2026",
+    "publisher": "LA Metro",
+    "publicationDate": "2026-07-22",
+    "usedFor": "direct stadium rides",
+    "url": "https://thesource.metro.net/metro-state-of-agency-celebrates-a-year-of-milestones-and-looking-ahead-to-another-transformative-year/"
+  },
+  {
+    "sourceId": "marta-post",
+    "title": "MARTA safely moves millions during World Cup 2026",
+    "publisher": "MARTA",
+    "publicationDate": "2026-07-17",
+    "usedFor": "Atlanta observed rail demand",
+    "url": "https://itsmarta.com/marta-safely-moves-millions.aspx"
+  },
+  {
+    "sourceId": "marta-post-2026",
+    "title": "MARTA Safely Moves Millions During FIFA World Cup 2026",
+    "publisher": "MARTA",
+    "publicationDate": "2026-07-17",
+    "documentType": "html",
+    "usedFor": "Daily and station demand",
+    "url": "https://itsmarta.com/marta-safely-moves-millions.aspx"
+  },
+  {
+    "sourceId": "mass-post",
+    "title": "Successful World Cup operations across Massachusetts",
+    "publisher": "Commonwealth of Massachusetts",
+    "publicationDate": "2026-07-13",
+    "usedFor": "Boston rail operations",
+    "url": "https://www.mass.gov/news/governor-healey-celebrates-successful-world-cup-operations-across-massachusetts"
+  },
+  {
+    "sourceId": "mass-post-2026",
+    "title": "Successful World Cup Operations Across Massachusetts",
+    "publisher": "Commonwealth of Massachusetts",
+    "publicationDate": "2026-07-13",
+    "documentType": "html",
+    "usedFor": "MBTA/Keolis event-rail operations",
+    "url": "https://www.mass.gov/news/governor-healey-celebrates-successful-world-cup-operations-across-massachusetts"
+  },
+  {
+    "sourceId": "miami-plan-2026",
+    "title": "Miami-Dade Transportation Plan",
+    "publisher": "Miami-Dade County",
+    "publicationDate": "2026-06-02",
+    "documentType": "html",
+    "usedFor": "Official shuttle and mobility plan",
+    "url": "https://www.miamidade.gov/global/release.page?Mduid_release=rel178040771715787"
+  },
+  {
+    "sourceId": "nacto-buslane",
+    "title": "Chicago Pop-Up Essential Bus Lanes",
+    "publisher": "NACTO",
+    "publicationDate": null,
+    "documentType": "html",
+    "usedFor": "Tactical bus-lane cost analog",
+    "url": "https://nacto.org/latest/pop-up-essential-bus-lanes-chicago/"
+  },
+  {
+    "sourceId": "nfl-ne-mia",
+    "title": "Dolphins at Patriots gamebook",
+    "publisher": "NFL",
+    "publicationDate": "2024-10-06",
+    "usedFor": "Gillette Stadium analog",
+    "url": "https://static.clubs.nfl.com/image/upload/patriots/epox1w0eoj3ips7qs7r8.pdf"
+  },
+  {
+    "sourceId": "nfl-sb51",
+    "title": "Super Bowl LI gamebook",
+    "publisher": "NFL",
+    "publicationDate": "2017-02-05",
+    "usedFor": "NRG Stadium analog",
+    "url": "https://static.clubs.nfl.com/image/upload/v1578329293/patriots/duxq4dvro9amapous1vq.pdf"
+  },
+  {
+    "sourceId": "njt-aar",
+    "title": "New Jersey interagency transportation after-action report",
+    "publisher": "NJ Transit",
+    "publicationDate": "2026-07-21",
+    "usedFor": "observed pedestrian and transit outcomes",
+    "url": "https://www.njtransit.com/press-releases/new-jersey-interagency-transportation-after-action-report-aar-njny-stadium-fifa"
+  },
+  {
+    "sourceId": "njt-aar-2026",
+    "title": "New Jersey Interagency Transportation After Action Report",
+    "publisher": "NJ Transit",
+    "publicationDate": "2026-07-21",
+    "documentType": "html",
+    "usedFor": "Match-level mode counts, egress times and lessons",
+    "url": "https://www.njtransit.com/press-releases/new-jersey-interagency-transportation-after-action-report-aar-njny-stadium-fifa"
+  },
+  {
+    "sourceId": "ntd",
+    "title": "National Transit Database",
+    "publisher": "Federal Transit Administration",
+    "publicationDate": null,
+    "documentType": "xlsx/csv",
+    "usedFor": "Ridership, expenses, service and safety",
+    "url": "https://www.transit.dot.gov/ntd/ntd-data"
+  },
+  {
+    "sourceId": "osm",
+    "title": "OpenStreetMap data export",
+    "publisher": "OpenStreetMap contributors",
+    "publicationDate": null,
+    "documentType": "osm/geojson",
+    "usedFor": "Roads, paths, buildings and transit geometry",
+    "url": "https://wiki.openstreetmap.org/wiki/Downloading_data"
+  },
+  {
+    "sourceId": "septa-plan-2026",
+    "title": "SEPTA Infrastructure Improvements and Preparations",
+    "publisher": "SEPTA",
+    "publicationDate": null,
+    "documentType": "html",
+    "usedFor": "Official plan; not final observed results",
+    "url": "https://wwww.septa.org/news/infrastructure-improvements-for-fifa/"
+  },
+  {
+    "sourceId": "sound-post",
+    "title": "World Cup daily and monthly ridership records",
+    "publisher": "Sound Transit",
+    "publicationDate": "2026-07-10",
+    "usedFor": "match-day Link boardings",
+    "url": "https://www.soundtransit.org/get-to-know-us/news-events/news-releases/sound-transit-set-all-time-records-daily-monthly-ridership"
+  },
+  {
+    "sourceId": "soundtransit-post-2026",
+    "title": "World Cup Daily and Monthly Ridership Records",
+    "publisher": "Sound Transit",
+    "publicationDate": "2026-07-10",
+    "documentType": "html",
+    "usedFor": "Preliminary APC-based match-day boardings",
+    "url": "https://www.soundtransit.org/get-to-know-us/news-events/news-releases/sound-transit-set-all-time-records-daily-monthly-ridership"
+  },
+  {
+    "sourceId": "usgs-3dep",
+    "title": "3D Elevation Program",
+    "publisher": "U.S. Geological Survey",
+    "publicationDate": null,
+    "documentType": "dem/lidar",
+    "usedFor": "Terrain and elevation",
+    "url": "https://www.usgs.gov/the-national-map-data-delivery/gis-data-download"
+  },
+  {
+    "sourceId": "vta-analog",
+    "title": "Taylor Swift VTA ridership release",
+    "publisher": "VTA",
+    "publicationDate": "2023-08-03",
+    "usedFor": "concert and Super Bowl transit analogs",
+    "url": "https://www.vta.org/media/37311"
+  },
+  {
+    "sourceId": "vta-board-2026",
+    "title": "VTA Board Correspondence 07/17/2026",
+    "publisher": "Santa Clara Valley Transportation Authority",
+    "publicationDate": "2026-07-17",
+    "documentType": "pdf",
+    "usedFor": "VTA stadium trips",
+    "url": "https://www.vta.org/sites/default/files/2026-07/Board%20Correspondence%2007_17_26.pdf"
+  },
+  {
+    "sourceId": "vta-post",
+    "title": "VTA board correspondence 07/17/2026",
+    "publisher": "VTA",
+    "publicationDate": "2026-07-17",
+    "usedFor": "stadium trips",
+    "url": "https://www.vta.org/sites/default/files/2026-07/Board%20Correspondence%2007_17_26.pdf"
+  },
+  {
+    "sourceId": "wwe-38",
+    "title": "WrestleMania 38 attendance release",
+    "publisher": "WWE",
+    "publicationDate": "2022-04-04",
+    "usedFor": "AT&T Stadium analog",
+    "url": "https://corporate.wwe.com/f/docs/press-releases/04042022_107.pdf"
+  }
+]
