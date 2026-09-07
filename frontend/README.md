@@ -2,9 +2,9 @@
 
 Next.js (App Router) + TypeScript + Tailwind CSS dashboard for the World Cup
 2026 Host-City Mobility Investment and Legacy Optimizer, connected to the
-Phase 1-3 FastAPI backend. Phase 4 scope: landing page, an 11-region
-comparison page, a per-city evidence page, and an optimizer page with a
-sensitivity panel. No map yet -- that's Phase 5.
+Phase 1-3 FastAPI backend. Landing page, an 11-region comparison page, a
+per-city evidence page, an optimizer page with a sensitivity panel, and a
+MapLibre project map.
 
 ## Pages
 
@@ -14,6 +14,7 @@ sensitivity panel. No map yet -- that's Phase 5.
 | `/compare` | All 11 host regions: budgets, funding-phase split, demand |
 | `/cities/[cityId]` | One city's full evidence: funding, match-day data, analog events, pedestrian areas, modeled projects |
 | `/optimize` | Adjustable weights/constraints, calls the real MILP optimizer, plus a sensitivity panel |
+| `/map` | MapLibre map of the Meadowlands with four scenario-driven display modes |
 
 ## Setup
 
@@ -64,3 +65,14 @@ npm run build
 - **Loading, error, and infeasible states are distinct**
   (`src/components/StatusStates.tsx`). A 422 `infeasible_scenario` response
   renders the solver's own diagnostics, not a generic error.
+- **The map draws only what the optimizer selected.** `src/lib/mapModes.ts`
+  is the single rule for what each display mode may render, kept pure so the
+  invariants (baseline hides everything; an unselected ID is never drawn as
+  selected) are proven by test rather than by eyeballing a canvas. The map's
+  geometry is the pre-generated `reference/geojson/nynj_projects.geojson`,
+  copied into `public/`; nothing is regenerated.
+- **MapLibre's worker is served from `public/maplibre/`**, copied out of
+  `node_modules` by `npm run copy:maplibre` (wired into predev/prebuild/
+  pretest). MapLibre otherwise resolves an empty worker URL once bundled,
+  which silently leaves every GeoJSON source empty. The basemap is keyless
+  OpenStreetMap raster tiles; override with `NEXT_PUBLIC_BASEMAP_TILE_URL`.

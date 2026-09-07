@@ -5,6 +5,7 @@ const links = [
   { href: "/compare", label: "Compare Cities" },
   { href: "/cities/nynj", label: "City Evidence" },
   { href: "/optimize", label: "Optimizer" },
+  { href: "/map", label: "Map" },
 ];
 
 export function Nav() {

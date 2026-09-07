@@ -2,6 +2,7 @@
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
+import { ScenarioProvider } from "./scenario";
 
 /**
  * One QueryClient per browser session (not per render): created lazily inside
@@ -22,6 +23,8 @@ export function Providers({ children }: { children: React.ReactNode }) {
   );
 
   return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+      <ScenarioProvider>{children}</ScenarioProvider>
+    </QueryClientProvider>
   );
 }

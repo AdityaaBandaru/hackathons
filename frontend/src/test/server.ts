@@ -4,6 +4,8 @@ import {
   makeCities,
   makeFundingForCity,
   makeInterventions,
+  makeNynjGeoJson,
+  makeNynjProjects,
   makeOptimizeResult,
 } from "./fixtures";
 
@@ -34,6 +36,19 @@ export const defaultHandlers = [
       funding: makeFundingForCity(cityId),
     });
   }),
+  http.get(`${API_BASE}/api/v1/cities/:cityId/projects`, ({ params }) => {
+    const cityId = String(params.cityId);
+    return HttpResponse.json({
+      cityId,
+      hostRegion: cityId,
+      projects: cityId === "nynj" ? makeNynjProjects() : [],
+      legacyProjects: [],
+    });
+  }),
+  // The map fetches its geometry as a static asset from the frontend origin.
+  http.get("/geojson/nynj_projects.geojson", () =>
+    HttpResponse.json(makeNynjGeoJson()),
+  ),
   http.get(`${API_BASE}/api/v1/interventions`, () =>
     HttpResponse.json(makeInterventions()),
   ),

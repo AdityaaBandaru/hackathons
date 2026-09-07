@@ -19,6 +19,7 @@ import {
 import { ResultsPanel } from "@/components/optimizer/ResultsPanel";
 import { SensitivityPanel } from "@/components/optimizer/SensitivityPanel";
 import { formatCents } from "@/lib/format";
+import { useScenario } from "@/lib/scenario";
 import type { OptimizeRequestBody, OptimizeWeights } from "@/lib/types";
 
 // Matches reference/examples/nynj_optimize_request.json -- the canonical
@@ -42,6 +43,7 @@ const DEFAULT_CONSTRAINTS: ConstraintsFormState = {
 };
 
 export default function OptimizePage() {
+  const { publishScenario } = useScenario();
   const citiesQuery = useQuery({ queryKey: ["cities"], queryFn: getCities });
   const interventionsQuery = useQuery({
     queryKey: ["interventions"],
@@ -77,6 +79,9 @@ export default function OptimizePage() {
 
   const optimizeMutation = useMutation({
     mutationFn: (body: OptimizeRequestBody) => optimize(body),
+    // A successful run becomes the current scenario, which is the only thing
+    // the map will draw as "selected" (CLAUDE.md rule 11).
+    onSuccess: (result) => publishScenario(result),
   });
   const sensitivityMutation = useMutation({
     mutationFn: (body: OptimizeRequestBody) => optimizeSensitivity(body),

@@ -300,3 +300,142 @@ export function makeOptimizeResult(
     ...overrides,
   };
 }
+
+// ---------------------------------------------------------------------------
+// Map fixtures
+// ---------------------------------------------------------------------------
+
+/**
+ * The six nynj project IDs used by the map tests, mirroring the real
+ * projects3d records (including access/bike, which the canonical scenario
+ * does not fund).
+ */
+export const NYNJ_MAP_PROJECT_IDS = [
+  "nynj-service-TMP",
+  "nynj-service-PERM",
+  "nynj-station-TMP",
+  "nynj-station-PERM",
+  "nynj-bike-TMP",
+  "nynj-bike-PERM",
+];
+
+export function makeNynjProjects(): import("@/lib/types").Project3D[] {
+  return NYNJ_MAP_PROJECT_IDS.map((projectId, index) => {
+    const isPermanent = projectId.endsWith("-PERM");
+    const isBike = projectId.startsWith("nynj-bike");
+    return {
+      projectId,
+      hostRegionCode: 8,
+      cityId: "nynj",
+      hostRegion: "New York/New Jersey",
+      category: projectId.split("-")[1],
+      categoryName: `${projectId.split("-")[1]} package`,
+      phase: isPermanent ? ("permanent" as const) : ("temporary" as const),
+      areaId: "nynj-meadowlands-station",
+      areaShortCode: "NYNJ-MRS",
+      exactAreaName: "Meadowlands Rail Station and aerial walkway",
+      latitude: 40.807664,
+      longitude: -74.069833,
+      analysisRadiusM: 250,
+      geometryType: "point_model",
+      lengthM: 100,
+      widthM: 10,
+      heightM: 5,
+      bearingDeg: 0,
+      zOffsetM: 0,
+      colorHex: "#F59E0B",
+      opacity: 0.55,
+      renderEnabled: isBike ? ("No" as const) : ("Yes" as const),
+      designDescription: "conceptual design description",
+      implementationStatus: "concept_only",
+      spatialPrecision: "planning_anchor ±25–100 m",
+      evidenceClass: "engineering_assumption",
+      sourceUrl: "https://www.njtransit.com/meadowlands",
+      allocationCents: isBike ? 0 : 50_000_000 + index * 1_000_000,
+    };
+  });
+}
+
+export function makeNynjGeoJson() {
+  return {
+    type: "FeatureCollection",
+    metadata: { crs: "EPSG:4326", heroScenario: true },
+    features: NYNJ_MAP_PROJECT_IDS.map((project_id, index) => ({
+      type: "Feature",
+      id: project_id,
+      properties: { project_id, color: "#F59E0B" },
+      geometry: {
+        type: "Point",
+        coordinates: [-74.069833 + index * 0.001, 40.807664],
+      },
+    })),
+  };
+}
+
+/** An optimizer result whose portfolio covers 4 of the 6 map candidates. */
+export function makeMapScenario(): import("@/lib/types").OptimizeResult {
+  const base = makeOptimizeResult();
+  return {
+    ...base,
+    selectedProjectIds: [
+      "nynj-service-TMP",
+      "nynj-service-PERM",
+      "nynj-station-TMP",
+      "nynj-station-PERM",
+    ],
+    selectedProjects: [
+      {
+        projectId: "nynj-service-TMP",
+        cityId: "nynj",
+        category: "service",
+        categoryName: "service package",
+        phase: "temporary",
+        units: 3,
+        decisionUnit: "2,500 vehicle-hours",
+        allocationCents: 132_000_000,
+        usefulLifeYears: 1,
+        isMajorConstruction: false,
+        isAccessibility: false,
+      },
+      {
+        projectId: "nynj-service-PERM",
+        cityId: "nynj",
+        category: "service",
+        categoryName: "service package",
+        phase: "permanent",
+        units: 3,
+        decisionUnit: "2,500 vehicle-hours",
+        allocationCents: 33_000_000,
+        usefulLifeYears: 1,
+        isMajorConstruction: false,
+        isAccessibility: false,
+      },
+      {
+        projectId: "nynj-station-TMP",
+        cityId: "nynj",
+        category: "station",
+        categoryName: "station package",
+        phase: "temporary",
+        units: 2,
+        decisionUnit: "one station",
+        allocationCents: 50_000_000,
+        usefulLifeYears: 25,
+        isMajorConstruction: true,
+        isAccessibility: true,
+      },
+      {
+        projectId: "nynj-station-PERM",
+        cityId: "nynj",
+        category: "station",
+        categoryName: "station package",
+        phase: "permanent",
+        units: 2,
+        decisionUnit: "one station",
+        allocationCents: 200_000_000,
+        usefulLifeYears: 25,
+        isMajorConstruction: true,
+        isAccessibility: true,
+      },
+    ],
+  };
+}
