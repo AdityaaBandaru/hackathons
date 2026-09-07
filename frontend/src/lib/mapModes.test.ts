@@ -195,30 +195,81 @@ describe("resolveMapSelection", () => {
   // All Possibilities
   // -------------------------------------------------------------------
 
-  it("All Possibilities draws every candidate translucently and selects none", () => {
+  it("All Possibilities always draws every candidate translucently, scenario or not", () => {
+    for (const scenario of [null, [], SCENARIO]) {
+      const selection = resolveMapSelection(
+        "allPossibilities",
+        scenario,
+        ALL_CANDIDATE_IDS,
+      );
+      expect(selection.candidateIds).toEqual(ALL_CANDIDATE_IDS);
+      expect(selection.candidateIds).toHaveLength(24);
+    }
+  });
+
+  it("All Possibilities highlights exactly the scenario's selected candidates on top", () => {
     const selection = resolveMapSelection(
       "allPossibilities",
       SCENARIO,
       ALL_CANDIDATE_IDS,
     );
-    expect(selection.candidateIds).toEqual(ALL_CANDIDATE_IDS);
-    expect(selection.candidateIds).toHaveLength(24);
-    // "possible" must never be styled as "chosen"
-    expect(selection.selectedIds).toEqual([]);
+    // Highlighted IDs are the scenario's own selection -- not derived, not a
+    // subset chosen by this function, and not the complement of anything.
+    expect(new Set(selection.selectedIds)).toEqual(
+      new Set(SCENARIO.map((p) => p.projectId)),
+    );
+    expect(selection.selectedIds).toHaveLength(18);
+    // Layered on top, not instead of: every highlighted ID is still one of
+    // the drawn candidates (rule: don't remove the undifferentiated set).
+    for (const id of selection.selectedIds) {
+      expect(selection.candidateIds).toContain(id);
+    }
   });
 
-  it("All Possibilities does not depend on a scenario existing", () => {
-    const withScenario = resolveMapSelection(
-      "allPossibilities",
-      SCENARIO,
-      ALL_CANDIDATE_IDS,
-    );
-    const without = resolveMapSelection(
+  it("All Possibilities highlights nothing when no scenario has been run", () => {
+    const selection = resolveMapSelection(
       "allPossibilities",
       null,
       ALL_CANDIDATE_IDS,
     );
-    expect(without).toEqual(withScenario);
+    expect(selection.selectedIds).toEqual([]);
+    // ...but the candidates are still all drawn.
+    expect(selection.candidateIds).toEqual(ALL_CANDIDATE_IDS);
+  });
+
+  it("All Possibilities never invents a highlight: only real scenario IDs qualify", () => {
+    // The invariant this mode must not violate just because it now overlays
+    // a highlight: an ID absent from the scenario's own selectedIds must
+    // never receive the "selected" treatment, however tempting it might be
+    // to e.g. highlight everything or guess from category popularity.
+    const selection = resolveMapSelection(
+      "allPossibilities",
+      SCENARIO,
+      ALL_CANDIDATE_IDS,
+    );
+    const scenarioIds = new Set(SCENARIO.map((p) => p.projectId));
+    for (const id of selection.selectedIds) {
+      expect(scenarioIds.has(id)).toBe(true);
+    }
+    for (const unselectedId of UNSELECTED_IDS) {
+      expect(selection.selectedIds).not.toContain(unselectedId);
+      // It's still drawn -- just not highlighted.
+      expect(selection.candidateIds).toContain(unselectedId);
+    }
+  });
+
+  it("All Possibilities drops a highlight for a selected ID with no geometry here", () => {
+    const foreign: ScenarioProject[] = [
+      { projectId: "atlanta-service-TMP", phase: "temporary" },
+      { projectId: "nynj-service-TMP", phase: "temporary" },
+    ];
+    const selection = resolveMapSelection(
+      "allPossibilities",
+      foreign,
+      ALL_CANDIDATE_IDS,
+    );
+    expect(selection.selectedIds).toEqual(["nynj-service-TMP"]);
+    expect(selection.candidateIds).toEqual(ALL_CANDIDATE_IDS);
   });
 
   // -------------------------------------------------------------------

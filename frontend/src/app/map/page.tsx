@@ -73,8 +73,12 @@ export default function MapPage() {
     [mode, scenario, candidateIds],
   );
 
+  // In "allPossibilities" mode a highlighted project appears in both
+  // selectedIds and candidateIds (it's drawn as a candidate, with the
+  // selected styling layered on top) -- dedupe here so it's listed once,
+  // as "selected" (DrawnInspector's role lookup checks selectedIds first).
   const drawnIds = useMemo(
-    () => [...selection.selectedIds, ...selection.candidateIds],
+    () => [...new Set([...selection.selectedIds, ...selection.candidateIds])],
     [selection],
   );
 

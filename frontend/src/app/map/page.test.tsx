@@ -88,7 +88,42 @@ describe("MapPage", () => {
       "true",
     );
     expect(counts()).toEqual({ drawn: 6, selected: 0, candidate: 6 });
-    // "possible" is never styled as "chosen"
+    // "possible" is never styled as "chosen" when there's nothing to choose from
+    expect(Object.values(drawnRoles()).every((r) => r === "candidate")).toBe(true);
+  });
+
+  it("All Possibilities keeps drawing every candidate while highlighting the scenario's own picks", async () => {
+    renderMap(makeMapScenario());
+    await waitFor(() => screen.getByTestId("drawn-count"));
+    // Already on All Possibilities (the default mode).
+
+    // Nothing was removed from the undifferentiated candidate set: all 6
+    // still draw, and the scenario's 4 picks are additionally highlighted.
+    expect(counts()).toEqual({ drawn: 6, selected: 4, candidate: 6 });
+
+    const roles = drawnRoles();
+    expect(roles["nynj-service-TMP"]).toBe("selected");
+    expect(roles["nynj-service-PERM"]).toBe("selected");
+    expect(roles["nynj-station-TMP"]).toBe("selected");
+    expect(roles["nynj-station-PERM"]).toBe("selected");
+    // bike was never selected by the scenario -- still drawn, not highlighted.
+    expect(roles["nynj-bike-TMP"]).toBe("candidate");
+    expect(roles["nynj-bike-PERM"]).toBe("candidate");
+  });
+
+  it("All Possibilities never invents a highlight: only the scenario's actual selectedIds qualify", async () => {
+    // A scenario that selected nothing at all (an empty portfolio is a valid
+    // optimizer result, e.g. at zero budget) must highlight nothing -- not
+    // "everything", not "the first project", not a guess.
+    const emptyScenario = {
+      ...makeMapScenario(),
+      selectedProjectIds: [],
+      selectedProjects: [],
+    };
+    renderMap(emptyScenario);
+    await waitFor(() => screen.getByTestId("drawn-count"));
+
+    expect(counts()).toEqual({ drawn: 6, selected: 0, candidate: 6 });
     expect(Object.values(drawnRoles()).every((r) => r === "candidate")).toBe(true);
   });
 

@@ -13,7 +13,9 @@
  *
  * And the rule that makes both of them safe (rule 11): the optimizer's
  * response is the *only* source of "selected". Nothing here derives, guesses,
- * or falls back to a default portfolio. With no scenario, nothing is selected.
+ * or falls back to a default portfolio. With no scenario, nothing is
+ * selected -- including in "allPossibilities" mode, where every candidate is
+ * still drawn, just with no highlight layered on top of any of them.
  */
 
 export const MAP_MODES = [
@@ -39,7 +41,7 @@ export const MAP_MODE_DESCRIPTIONS: Record<MapMode, string> = {
   selectedLegacy:
     "Only the permanent-phase projects the current optimizer scenario selected.",
   allPossibilities:
-    "Every candidate project the optimizer could choose from, drawn translucently. None is marked as selected.",
+    "Every candidate project the optimizer could choose from, drawn translucently. Projects the current scenario actually selected are additionally highlighted.",
 };
 
 /** Modes that draw nothing at all unless an optimizer scenario exists. */
@@ -59,9 +61,17 @@ export interface ScenarioProject {
 }
 
 export interface MapSelection {
-  /** Drawn in full-strength "selected" styling. */
+  /**
+   * Drawn in full-strength "selected" styling. In "allPossibilities" mode
+   * this overlaps with candidateIds by design: a chosen project is drawn as
+   * a candidate (it is still one of the possibilities) *and* highlighted on
+   * top, rather than one or the other.
+   */
   selectedIds: string[];
-  /** Drawn translucently as an unselected candidate. */
+  /** Drawn translucently. Includes every candidate in "allPossibilities"
+   * mode, whether or not the scenario chose it -- highlighting a chosen one
+   * layers selectedIds' styling on top of this, it never removes it from
+   * here. */
   candidateIds: string[];
 }
 
@@ -89,10 +99,20 @@ export function resolveMapSelection(
       // Rule 12: nothing modeled is drawn, whatever the scenario says.
       return EMPTY_SELECTION;
 
-    case "allPossibilities":
-      // Every candidate, translucent. Nothing is styled as selected here --
-      // "possible" is not "chosen", and the two must not look alike.
-      return { selectedIds: [], candidateIds: [...allCandidateIds] };
+    case "allPossibilities": {
+      // Every candidate is drawn translucently regardless of the scenario --
+      // removing an undifferentiated candidate here is not allowed. Layered
+      // on top: the scenario's own selected projects (and only those) get
+      // the "selected" styling too, so a chosen project reads as both
+      // "possible" and "chosen". With no scenario, or one for another city,
+      // nothing is highlighted -- the candidates still draw, just plain.
+      const highlightedIds = scenarioProjects
+        ? scenarioProjects
+            .map((project) => project.projectId)
+            .filter((id) => available.has(id))
+        : [];
+      return { selectedIds: highlightedIds, candidateIds: [...allCandidateIds] };
+    }
 
     case "temporaryOperations":
     case "selectedLegacy": {

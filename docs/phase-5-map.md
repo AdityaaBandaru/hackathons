@@ -32,7 +32,7 @@ record — **0 mismatches**. That is what makes joining the map to the API by
 | Baseline | nothing at all |
 | Temporary Operations | only the scenario's temporary-phase project IDs |
 | Selected Legacy | only the scenario's permanent-phase project IDs |
-| All Possibilities | all 24 candidates, translucent, none marked selected |
+| All Possibilities | all 24 candidates, translucent; the current scenario's own picks are additionally highlighted on top |
 
 The mode rule lives in one pure function, `resolveMapSelection`, so the
 invariants can be proven by test instead of by inspecting a WebGL canvas:
@@ -44,8 +44,14 @@ invariants can be proven by test instead of by inspecting a WebGL canvas:
   and no derivation. With no scenario, nothing is selected.
 - An ID the loaded geometry has no feature for is dropped, so an Atlanta
   scenario against this map selects nothing rather than erroring.
-- "All Possibilities" leaves `selectedIds` empty on purpose: *possible* must
-  never be styled as *chosen*.
+- "All Possibilities" never removes a project from the undifferentiated
+  candidate set to highlight it — `candidateIds` always holds all 24, whether
+  or not the scenario chose any of them. `selectedIds` is layered on top,
+  populated only from the scenario's own `selectedProjects`, so a chosen
+  project renders as both "possible" (still in `candidateIds`) and "chosen"
+  (also in `selectedIds`, drawn with the stronger styling on top of the
+  translucent one). With no scenario, `selectedIds` is empty and every
+  candidate still draws, plain.
 
 `ScenarioProvider` holds the current `OptimizeResult`. It is written in
 exactly one place — the optimizer page's `onSuccess` — and has no setter that
@@ -91,19 +97,24 @@ Neither of these was visible to the type checker, the linter, or the build.
 
 ```bash
 cd backend && ./.venv/bin/python -m pytest    # 142 passed
-cd frontend && npm test && npm run build      # 57 passed, build clean
+cd frontend && npm test && npm run build      # 64 passed, build clean
 ```
 
-Frontend tests: 57 (13 from Phase 4, 44 new across three files).
+Frontend tests: 64 (13 from Phase 4, 51 new across three files).
 
-- `mapModes.test.ts` (21) — the pure rule, including that baseline hides every
+- `mapModes.test.ts` (24) — the pure rule, including that baseline hides every
   ID individually, that no unselected ID reaches `selectedIds` in any mode,
-  and that a null scenario selects nothing.
-- `ProjectMap.test.tsx` (11) — the same invariants asserted against the actual
+  that a null scenario selects nothing, and that in "All Possibilities" the
+  highlighted subset is exactly the scenario's own `selectedIds` intersected
+  with the loaded geometry — never more, never derived, never present without
+  a scenario.
+- `ProjectMap.test.tsx` (13) — the same invariants asserted against the actual
   MapLibre layer filters, with the library faked, so the *rendering* path is
-  proven, not just the logic.
-- `map/page.test.tsx` (12) — modes, the no-scenario and wrong-city banners, and
-  the click card's name/phase/cost/evidence/source.
+  proven, not just the logic, including that a highlighted feature is still
+  present in its candidate layer's filter (additive, not a replacement).
+- `map/page.test.tsx` (14) — modes, the no-scenario and wrong-city banners,
+  the click card's name/phase/cost/evidence/source, and that an empty
+  scenario portfolio highlights nothing rather than guessing.
 
 Live-verified in the browser against the running backend, in both dev and a
 production build: all four modes (Baseline visibly empty; Selected Legacy and

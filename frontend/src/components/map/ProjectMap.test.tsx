@@ -236,13 +236,55 @@ describe("ProjectMap", () => {
     }
   });
 
-  it("All Possibilities fills only candidate layers, leaving selected empty", () => {
+  it("All Possibilities fills candidate layers with every ID, unconditionally", () => {
     renderMode("allPossibilities");
     for (const layer of filtersFor("candidate")) {
       expect(idsInFilter(layer.filter)).toEqual(CANDIDATE_IDS);
     }
+  });
+
+  it("All Possibilities layers the selected styling on top of the scenario's own picks", () => {
+    renderMode("allPossibilities");
+    // service and station were selected by SCENARIO; bike was not.
+    for (const layer of filtersFor("selected")) {
+      const ids = idsInFilter(layer.filter);
+      expect(ids).toEqual([
+        "nynj-service-TMP",
+        "nynj-service-PERM",
+        "nynj-station-TMP",
+        "nynj-station-PERM",
+      ]);
+      expect(ids).not.toContain("nynj-bike-TMP");
+      expect(ids).not.toContain("nynj-bike-PERM");
+    }
+    // Every highlighted feature is still present in the candidate layer too
+    // -- the highlight is additive, not a replacement.
+    for (const candidateLayer of filtersFor("candidate")) {
+      const candidateIds = idsInFilter(candidateLayer.filter);
+      for (const selectedLayer of filtersFor("selected")) {
+        for (const id of idsInFilter(selectedLayer.filter)) {
+          expect(candidateIds).toContain(id);
+        }
+      }
+    }
+  });
+
+  it("All Possibilities highlights nothing when no scenario has been run", () => {
+    const selection = resolveMapSelection("allPossibilities", null, CANDIDATE_IDS);
+    render(
+      <ProjectMap
+        geojson={GEOJSON}
+        selection={selection}
+        activeProjectId={null}
+        onSelectProject={() => {}}
+      />,
+    );
     for (const layer of filtersFor("selected")) {
       expect(idsInFilter(layer.filter)).toEqual([]);
+    }
+    // Candidates are still all drawn.
+    for (const layer of filtersFor("candidate")) {
+      expect(idsInFilter(layer.filter)).toEqual(CANDIDATE_IDS);
     }
   });
 
