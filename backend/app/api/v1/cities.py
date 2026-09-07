@@ -89,6 +89,11 @@ def get_city_evidence(city_id: str, seed: SeedData = Depends(get_seed)) -> dict[
     matchData is populated only for nynj -- it is the New Jersey Transit
     after-action report data and does not exist for any other host region;
     other cities correctly get an empty list rather than an invented one.
+
+    funding is this city's 13 funding.json rows (12 intervention categories
+    plus reserve) -- the only place the official/temporary/permanent budget
+    figures shown elsewhere (the /cities summary) carry the evidenceClass and
+    sourceUrl that justify them.
     """
     region = get_city_or_404(seed, city_id)
     host_region_name = region["hostRegion"]
@@ -108,6 +113,7 @@ def get_city_evidence(city_id: str, seed: SeedData = Depends(get_seed)) -> dict[
     )
     pedestrian_areas = plain_list(seed.areas_by_city_id.get(city_id, ()))
     match_data = plain_list(seed.njMatchData) if city_id == "nynj" else []
+    funding = plain_list(seed.funding_by_city_id.get(city_id, ()))
 
     return {
         "cityId": city_id,
@@ -117,6 +123,7 @@ def get_city_evidence(city_id: str, seed: SeedData = Depends(get_seed)) -> dict[
         "analogEvents": analog_events,
         "pedestrianAreas": pedestrian_areas,
         "matchData": match_data,
+        "funding": funding,
     }
 
 

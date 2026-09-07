@@ -13,15 +13,28 @@ and ``/api/v1/optimize/sensitivity``. The map arrives in a later phase.
 from __future__ import annotations
 
 import logging
+import os
 from contextlib import asynccontextmanager
 from typing import Any, AsyncIterator
 
 from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
 
 from . import __version__
 from .api.v1 import router as api_v1_router
 from .config import BUNDLE_VERSION, CANONICAL_CRS, HERO_SCENARIO_CITY_ID
 from .seed import SeedData, load_seed
+
+# The Phase 4 frontend runs on a different origin (Next.js dev server, by
+# default localhost:3000) and calls this API directly from the browser, so it
+# needs CORS headers. No cookies or credentials cross this boundary -- the API
+# is read-only plus a stateless optimizer -- so an explicit origin allowlist is
+# enough; nothing here needs `allow_credentials`. Overridable via
+# CORS_ALLOWED_ORIGINS (comma-separated) for a non-default frontend port/host.
+DEFAULT_CORS_ORIGINS = (
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+)
 
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s %(levelname)-8s %(name)s: %(message)s"
@@ -60,6 +73,19 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+
+_configured_origins = os.environ.get("CORS_ALLOWED_ORIGINS")
+_cors_origins = (
+    tuple(origin.strip() for origin in _configured_origins.split(",") if origin.strip())
+    if _configured_origins
+    else DEFAULT_CORS_ORIGINS
+)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=list(_cors_origins),
+    allow_methods=["GET", "POST"],
+    allow_headers=["Content-Type"],
+)
 
 app.include_router(api_v1_router)
 

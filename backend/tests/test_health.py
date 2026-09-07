@@ -28,3 +28,17 @@ def test_health_reports_loaded_counts(client):
 
 def test_seed_available_on_app_state(client):
     assert len(app.state.seed.hostRegions) == 11
+
+
+def test_cors_allows_the_default_frontend_origin(client):
+    """Phase 4's frontend (localhost:3000) must be able to call this API
+    directly from the browser."""
+    response = client.get("/health", headers={"Origin": "http://localhost:3000"})
+    assert response.status_code == 200
+    assert response.headers["access-control-allow-origin"] == "http://localhost:3000"
+
+
+def test_cors_rejects_an_unlisted_origin(client):
+    response = client.get("/health", headers={"Origin": "http://evil.example.com"})
+    assert response.status_code == 200  # simple GET still succeeds...
+    assert "access-control-allow-origin" not in response.headers  # ...but not cross-origin

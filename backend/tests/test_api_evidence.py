@@ -21,9 +21,32 @@ def test_evidence_endpoint_shape(client):
         "analogEvents",
         "pedestrianAreas",
         "matchData",
+        "funding",
     }
     assert body["cityId"] == "atlanta"
     assert body["hostRegion"] == "Atlanta"
+
+
+def test_evidence_funding_section_has_evidence_class_and_source(client):
+    """Every funding row carries the evidenceClass/sourceUrl the /cities
+    summary's budget figures otherwise lack."""
+    body = client.get("/api/v1/cities/atlanta/evidence").json()
+    funding = body["funding"]
+    assert len(funding) == 13  # 12 intervention categories + reserve
+    categories = {row["category"] for row in funding}
+    assert "reserve" in categories
+    assert "service" in categories
+    for row in funding:
+        assert row["evidenceClass"]
+        assert row["sourceUrl"]
+        assert isinstance(row["modeledCategoryAllocationCents"], int)
+
+
+def test_evidence_funding_reconciles_to_the_city_summary(client):
+    evidence = client.get("/api/v1/cities/nynj/evidence").json()
+    summary = client.get("/api/v1/cities/nynj").json()
+    total = sum(row["modeledCategoryAllocationCents"] for row in evidence["funding"])
+    assert total == summary["funding"]["officialBudgetCents"]
 
 
 def test_unknown_city_evidence_returns_404(client):
