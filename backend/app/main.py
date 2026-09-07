@@ -1,7 +1,10 @@
 """FastAPI application entrypoint.
 
 Phase 1 scope: load and validate the seed bundle at startup, and expose
-``GET /health``. The evidence API, optimizer and map arrive in later phases.
+``GET /health``.
+
+Phase 2 scope: the read-only evidence API under ``/api/v1`` (cities,
+interventions, sources). The optimizer and map arrive in later phases.
 """
 
 from __future__ import annotations
@@ -13,6 +16,7 @@ from typing import Any, AsyncIterator
 from fastapi import FastAPI, Request
 
 from . import __version__
+from .api.v1 import router as api_v1_router
 from .config import BUNDLE_VERSION, CANONICAL_CRS, HERO_SCENARIO_CITY_ID
 from .seed import SeedData, load_seed
 
@@ -54,9 +58,7 @@ app = FastAPI(
 )
 
 
-def get_seed(request: Request) -> SeedData:
-    """Dependency accessor for the loaded seed."""
-    return request.app.state.seed
+app.include_router(api_v1_router)
 
 
 @app.get("/health", tags=["system"])
