@@ -1,0 +1,691 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "crs": "EPSG:4326",
+    "warning": "Planning anchors are not surveyed construction coordinates."
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": "atl-vine-city",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.4038,
+          33.7565
+        ]
+      },
+      "properties": {
+        "area_code": 1,
+        "area_short_code": "ATL-VC",
+        "area_id": "atl-vine-city",
+        "city_id": "atlanta",
+        "host_region": "Atlanta",
+        "exact_area_name": "Vine City Station–Northside Drive approach",
+        "area_type": "rail_station_walkshed",
+        "analysis_radius_m": 250,
+        "city_event_ped_design_total": 25931,
+        "area_share": 0.58,
+        "area_design_pedestrians": 15040,
+        "volume_basis": "capacity × modeled external-pedestrian share",
+        "comparator_metric": "Vine City share of 2026 match-day rail demand",
+        "comparator_value": 0.14,
+        "comparator_qualifier": "reported share",
+        "spatial_precision": "planning_anchor ±25–100 m",
+        "evidence_class": "engineering_assumption with cited comparator",
+        "source_url": "https://www.itsmarta.com/Vine-City.aspx"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "atl-sec-district",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3986,
+          33.7564
+        ]
+      },
+      "properties": {
+        "area_code": 2,
+        "area_short_code": "ATL-SEC",
+        "area_id": "atl-sec-district",
+        "city_id": "atlanta",
+        "host_region": "Atlanta",
+        "exact_area_name": "GWCC/CNN Center–Andrew Young International Boulevard approach",
+        "area_type": "downtown_event_district",
+        "analysis_radius_m": 300,
+        "city_event_ped_design_total": 25931,
+        "area_share": 0.42,
+        "area_design_pedestrians": 10891,
+        "volume_basis": "capacity × modeled external-pedestrian share",
+        "comparator_metric": "SEC District share of 2026 match-day rail demand",
+        "comparator_value": 0.38,
+        "comparator_qualifier": "reported share",
+        "spatial_precision": "planning_anchor ±25–100 m",
+        "evidence_class": "engineering_assumption with cited comparator",
+        "source_url": "https://www.mercedesbenzstadium.com/stadium-maps"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bos-foxboro-station",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.2597,
+          42.0889
+        ]
+      },
+      "properties": {
+        "area_code": 3,
+        "area_short_code": "BOS-FXR",
+        "area_id": "bos-foxboro-station",
+        "city_id": "boston",
+        "host_region": "Boston",
+        "exact_area_name": "Foxboro Station platform and stadium underpass",
+        "area_type": "event_rail_station",
+        "analysis_radius_m": 250,
+        "city_event_ped_design_total": 14112,
+        "area_share": 0.65,
+        "area_design_pedestrians": 9173,
+        "volume_basis": "capacity × modeled external-pedestrian share",
+        "comparator_metric": "Average event-train round-trip tickets per 2026 match",
+        "comparator_value": 15563,
+        "comparator_qualifier": "derived: 108,940 / 7",
+        "spatial_precision": "planning_anchor ±25–100 m",
+        "evidence_class": "engineering_assumption with cited comparator",
+        "source_url": "https://www.mbta.com/stops/place-FB-0191"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bos-patriot-place-gate-a",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -71.2648,
+          42.0916
+        ]
+      },
+      "properties": {
+        "area_code": 4,
+        "area_short_code": "BOS-GA",
+        "area_id": "bos-patriot-place-gate-a",
+        "city_id": "boston",
+        "host_region": "Boston",
+        "exact_area_name": "Patriot Place north plaza and Gate A",
+        "area_type": "stadium_plaza",
+        "analysis_radius_m": 300,
+        "city_event_ped_design_total": 14112,
+        "area_share": 0.35,
+        "area_design_pedestrians": 4939,
+        "volume_basis": "capacity × modeled external-pedestrian share",
+        "comparator_metric": "World Cup stadium capacity",
+        "comparator_value": 64146,
+        "comparator_qualifier": "official final capacity",
+        "spatial_precision": "planning_anchor ±25–100 m",
+        "evidence_class": "engineering_assumption with cited comparator",
+        "source_url": "https://www.gillettestadium.com/"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "dal-att-way-east-plaza",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -97.0909,
+          32.7479
+        ]
+      },
+      "properties": {
+        "area_code": 5,
+        "area_short_code": "DAL-EPL",
+        "area_id": "dal-att-way-east-plaza",
+        "city_id": "dallas",
+        "host_region": "Dallas",
+        "exact_area_name": "AT&T Way east plaza approach",
+        "area_type": "stadium_plaza",
+        "analysis_radius_m": 300,
+        "city_event_ped_design_total": 10597,
+        "area_share": 0.55,
+        "area_design_pedestrians": 5828,
+        "volume_basis": "capacity × modeled external-pedestrian share",
+        "comparator_metric": "WrestleMania 38 average attendance per night",
+        "comparator_value": 78176,
+        "comparator_qualifier": "derived: 156,352 / 2",
+        "spatial_precision": "planning_anchor ±25–100 m",
+        "evidence_class": "engineering_assumption with cited comparator",
+        "source_url": "https://attstadium.com/stadium-info/parking/"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "dal-miller-litehouse",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -97.0915,
+          32.7506
+        ]
+      },
+      "properties": {
+        "area_code": 6,
+        "area_short_code": "DAL-MLH",
+        "area_id": "dal-miller-litehouse",
+        "city_id": "dallas",
+        "host_region": "Dallas",
+        "exact_area_name": "Miller LiteHouse pickup at North Collins Street and Cowboys Way",
+        "area_type": "curb_mobility_zone",
+        "analysis_radius_m": 350,
+        "city_event_ped_design_total": 10597,
+        "area_share": 0.45,
+        "area_design_pedestrians": 4769,
+        "volume_basis": "capacity × modeled external-pedestrian share",
+        "comparator_metric": "WrestleMania 38 total two-night attendance",
+        "comparator_value": 156352,
+        "comparator_qualifier": "promoter-announced",
+        "spatial_precision": "planning_anchor ±25–100 m",
+        "evidence_class": "engineering_assumption with cited comparator",
+        "source_url": "https://attstadium.com/stadium-info/parking/"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "hou-stadium-park-astrodome",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -95.407,
+          29.6852
+        ]
+      },
+      "properties": {
+        "area_code": 7,
+        "area_short_code": "HOU-SPA",
+        "area_id": "hou-stadium-park-astrodome",
+        "city_id": "houston",
+        "host_region": "Houston",
+        "exact_area_name": "Stadium Park/Astrodome Station–Fannin Street approach",
+        "area_type": "light_rail_station",
+        "analysis_radius_m": 250,
+        "city_event_ped_design_total": 21321,
+        "area_share": 0.6,
+        "area_design_pedestrians": 12793,
+        "volume_basis": "capacity × modeled external-pedestrian share",
+        "comparator_metric": "Super Bowl LI paid attendance",
+        "comparator_value": 70807,
+        "comparator_qualifier": "official gamebook",
+        "spatial_precision": "planning_anchor ±25–100 m",
+        "evidence_class": "engineering_assumption with cited comparator",
+        "source_url": "https://www.ridemetro.org/riding-metro/houston-attractions/reliant-park"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "hou-kirby-nrg",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -95.4141,
+          29.6846
+        ]
+      },
+      "properties": {
+        "area_code": 8,
+        "area_short_code": "HOU-KIR",
+        "area_id": "hou-kirby-nrg",
+        "city_id": "houston",
+        "host_region": "Houston",
+        "exact_area_name": "Kirby Drive and NRG Parkway west gate",
+        "area_type": "arterial_stadium_gate",
+        "analysis_radius_m": 300,
+        "city_event_ped_design_total": 21321,
+        "area_share": 0.4,
+        "area_design_pedestrians": 8528,
+        "volume_basis": "capacity × modeled external-pedestrian share",
+        "comparator_metric": "World Cup stadium capacity",
+        "comparator_value": 68777,
+        "comparator_qualifier": "official final capacity",
+        "spatial_precision": "planning_anchor ±25–100 m",
+        "evidence_class": "engineering_assumption with cited comparator",
+        "source_url": "https://www.reliantpark.com/maps/"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "kc-blue-ridge-gate3",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -94.4806,
+          39.0471
+        ]
+      },
+      "properties": {
+        "area_code": 9,
+        "area_short_code": "KC-BRC",
+        "area_id": "kc-blue-ridge-gate3",
+        "city_id": "kansas-city",
+        "host_region": "Kansas City",
+        "exact_area_name": "Blue Ridge Cutoff Gate 3 and bus zone",
+        "area_type": "bus_arrival_zone",
+        "analysis_radius_m": 350,
+        "city_event_ped_design_total": 8285,
+        "area_share": 0.55,
+        "area_design_pedestrians": 4557,
+        "volume_basis": "capacity × modeled external-pedestrian share",
+        "comparator_metric": "World Cup stadium capacity",
+        "comparator_value": 69045,
+        "comparator_qualifier": "official final capacity",
+        "spatial_precision": "planning_anchor ±25–100 m",
+        "evidence_class": "engineering_assumption with cited comparator",
+        "source_url": "https://www.arrowheadstadiumkc.com/plan-your-visit/parking-tailgating/maps-directions"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "kc-west-plaza",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -94.4871,
+          39.0491
+        ]
+      },
+      "properties": {
+        "area_code": 10,
+        "area_short_code": "KC-WPL",
+        "area_id": "kc-west-plaza",
+        "city_id": "kansas-city",
+        "host_region": "Kansas City",
+        "exact_area_name": "Arrowhead west parking and plaza approach",
+        "area_type": "parking_plaza",
+        "analysis_radius_m": 400,
+        "city_event_ped_design_total": 8285,
+        "area_share": 0.45,
+        "area_design_pedestrians": 3728,
+        "volume_basis": "capacity × modeled external-pedestrian share",
+        "comparator_metric": "In-house Chiefs event crowd benchmark",
+        "comparator_value": 70000,
+        "comparator_qualifier": "lower-bound reported",
+        "spatial_precision": "planning_anchor ±25–100 m",
+        "evidence_class": "engineering_assumption with cited comparator",
+        "source_url": "https://www.arrowheadstadiumkc.com/plan-your-visit/parking-tailgating/maps-directions"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "la-sofi-south-plaza",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -118.3441,
+          33.9509
+        ]
+      },
+      "properties": {
+        "area_code": 11,
+        "area_short_code": "LA-SPP",
+        "area_id": "la-sofi-south-plaza",
+        "city_id": "los-angeles",
+        "host_region": "Los Angeles",
+        "exact_area_name": "SoFi south plaza at Pincay Drive and Prairie Avenue",
+        "area_type": "stadium_plaza",
+        "analysis_radius_m": 350,
+        "city_event_ped_design_total": 14098,
+        "area_share": 0.5,
+        "area_design_pedestrians": 7049,
+        "volume_basis": "capacity × modeled external-pedestrian share",
+        "comparator_metric": "Super Bowl LVI attendance",
+        "comparator_value": 70048,
+        "comparator_qualifier": "official result",
+        "spatial_precision": "planning_anchor ±25–100 m",
+        "evidence_class": "engineering_assumption with cited comparator",
+        "source_url": "https://www.sofistadium.com/plan-your-visit/maps"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "la-downtown-inglewood",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -118.3557,
+          33.9552
+        ]
+      },
+      "properties": {
+        "area_code": 12,
+        "area_short_code": "LA-DTI",
+        "area_id": "la-downtown-inglewood",
+        "city_id": "los-angeles",
+        "host_region": "Los Angeles",
+        "exact_area_name": "Downtown Inglewood K Line shuttle interchange",
+        "area_type": "rail_shuttle_interchange",
+        "analysis_radius_m": 400,
+        "city_event_ped_design_total": 14098,
+        "area_share": 0.5,
+        "area_design_pedestrians": 7049,
+        "volume_basis": "capacity × modeled external-pedestrian share",
+        "comparator_metric": "Direct stadium rides during 2026 tournament",
+        "comparator_value": 212865,
+        "comparator_qualifier": "reported tournament total",
+        "spatial_precision": "planning_anchor ±25–100 m",
+        "evidence_class": "engineering_assumption with cited comparator",
+        "source_url": "https://www.metro.net/riding/gameday/"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "mia-nw199-nw27",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.2425,
+          25.957
+        ]
+      },
+      "properties": {
+        "area_code": 13,
+        "area_short_code": "MIA-NW27",
+        "area_id": "mia-nw199-nw27",
+        "city_id": "miami",
+        "host_region": "Miami",
+        "exact_area_name": "NW 199th Street and NW 27th Avenue approach",
+        "area_type": "arterial_stadium_gate",
+        "analysis_radius_m": 400,
+        "city_event_ped_design_total": 9027,
+        "area_share": 0.55,
+        "area_design_pedestrians": 4965,
+        "volume_basis": "capacity × modeled external-pedestrian share",
+        "comparator_metric": "Official 2026 shuttle hubs",
+        "comparator_value": 4,
+        "comparator_qualifier": "official plan count",
+        "spatial_precision": "planning_anchor ±25–100 m",
+        "evidence_class": "engineering_assumption with cited comparator",
+        "source_url": "https://www.hardrockstadium.com/parking/"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "mia-south-gate",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.2383,
+          25.9549
+        ]
+      },
+      "properties": {
+        "area_code": 14,
+        "area_short_code": "MIA-SG",
+        "area_id": "mia-south-gate",
+        "city_id": "miami",
+        "host_region": "Miami",
+        "exact_area_name": "Hard Rock Stadium south-gate rideshare and shuttle zone",
+        "area_type": "curb_mobility_zone",
+        "analysis_radius_m": 350,
+        "city_event_ped_design_total": 9027,
+        "area_share": 0.45,
+        "area_design_pedestrians": 4062,
+        "volume_basis": "capacity × modeled external-pedestrian share",
+        "comparator_metric": "World Cup stadium capacity",
+        "comparator_value": 64478,
+        "comparator_qualifier": "official final capacity",
+        "spatial_precision": "planning_anchor ±25–100 m",
+        "evidence_class": "engineering_assumption with cited comparator",
+        "source_url": "https://www.hardrockstadium.com/parking/"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "nynj-meadowlands-station",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.069833,
+          40.807664
+        ]
+      },
+      "properties": {
+        "area_code": 15,
+        "area_short_code": "NYNJ-MRS",
+        "area_id": "nynj-meadowlands-station",
+        "city_id": "nynj",
+        "host_region": "New York/New Jersey",
+        "exact_area_name": "Meadowlands Rail Station and aerial walkway",
+        "area_type": "event_rail_station",
+        "analysis_radius_m": 250,
+        "city_event_ped_design_total": 65000,
+        "area_share": 0.55,
+        "area_design_pedestrians": 35750,
+        "volume_basis": "observed 2026 city total; area split modeled",
+        "comparator_metric": "Pedestrians at the 2026 final",
+        "comparator_value": 65000,
+        "comparator_qualifier": "observed final",
+        "spatial_precision": "planning_anchor ±25–100 m",
+        "evidence_class": "engineering_assumption with cited comparator",
+        "source_url": "https://www.njtransit.com/meadowlands"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "nynj-american-dream-corridor",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.07075,
+          40.81145
+        ]
+      },
+      "properties": {
+        "area_code": 16,
+        "area_short_code": "NYNJ-ADM",
+        "area_id": "nynj-american-dream-corridor",
+        "city_id": "nynj",
+        "host_region": "New York/New Jersey",
+        "exact_area_name": "American Dream–MetLife protected corridor",
+        "area_type": "intercampus_walkway",
+        "analysis_radius_m": 350,
+        "city_event_ped_design_total": 65000,
+        "area_share": 0.45,
+        "area_design_pedestrians": 29250,
+        "volume_basis": "observed 2026 city total; area split modeled",
+        "comparator_metric": "Pedestrians at the 2026 final",
+        "comparator_value": 65000,
+        "comparator_qualifier": "observed final",
+        "spatial_precision": "planning_anchor ±25–100 m",
+        "evidence_class": "engineering_assumption with cited comparator",
+        "source_url": "https://www.njtransit.com/press-releases/new-jersey-interagency-transportation-after-action-report-aar-njny-stadium-fifa"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "phi-nrg-station",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.1736,
+          39.9047
+        ]
+      },
+      "properties": {
+        "area_code": 17,
+        "area_short_code": "PHI-NRG",
+        "area_id": "phi-nrg-station",
+        "city_id": "philadelphia",
+        "host_region": "Philadelphia",
+        "exact_area_name": "NRG Station and Broad Street queue zone",
+        "area_type": "metro_terminal",
+        "analysis_radius_m": 250,
+        "city_event_ped_design_total": 30746,
+        "area_share": 0.6,
+        "area_design_pedestrians": 18448,
+        "volume_basis": "capacity × modeled external-pedestrian share",
+        "comparator_metric": "Planned SEPTA riders per 2026 match",
+        "comparator_value": 31000,
+        "comparator_qualifier": "official plan; approximately",
+        "spatial_precision": "planning_anchor ±25–100 m",
+        "evidence_class": "engineering_assumption with cited comparator",
+        "source_url": "https://wwww.septa.org/news/infrastructure-improvements-for-fifa/"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "phi-lots-de",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.16965,
+          39.90006
+        ]
+      },
+      "properties": {
+        "area_code": 18,
+        "area_short_code": "PHI-DE",
+        "area_id": "phi-lots-de",
+        "city_id": "philadelphia",
+        "host_region": "Philadelphia",
+        "exact_area_name": "Lincoln Financial Field Lots D/E east approach",
+        "area_type": "stadium_parking_walkway",
+        "analysis_radius_m": 300,
+        "city_event_ped_design_total": 30746,
+        "area_share": 0.4,
+        "area_design_pedestrians": 12298,
+        "volume_basis": "capacity × modeled external-pedestrian share",
+        "comparator_metric": "Ed Sheeran 2023 attendance",
+        "comparator_value": 77900,
+        "comparator_qualifier": "venue spokesperson via local media",
+        "spatial_precision": "planning_anchor ±25–100 m",
+        "evidence_class": "engineering_assumption with cited comparator",
+        "source_url": "https://www.lincolnfinancialfield.com/lots-de/"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sf-great-america-station",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.974908,
+          37.403468
+        ]
+      },
+      "properties": {
+        "area_code": 19,
+        "area_short_code": "SF-GA",
+        "area_id": "sf-great-america-station",
+        "city_id": "sf-bay",
+        "host_region": "San Francisco Bay Area",
+        "exact_area_name": "Great America VTA station platform queue",
+        "area_type": "light_rail_station",
+        "analysis_radius_m": 250,
+        "city_event_ped_design_total": 26154,
+        "area_share": 0.65,
+        "area_design_pedestrians": 17000,
+        "volume_basis": "capacity × modeled external-pedestrian share",
+        "comparator_metric": "Peak 2026 VTA stadium trips",
+        "comparator_value": 42000,
+        "comparator_qualifier": "reported: nearly",
+        "spatial_precision": "planning_anchor ±25–100 m",
+        "evidence_class": "engineering_assumption with cited comparator",
+        "source_url": "https://www.vta.org/go/stations/great-america"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sf-tasman-debartolo",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -121.9696,
+          37.4035
+        ]
+      },
+      "properties": {
+        "area_code": 20,
+        "area_short_code": "SF-TAS",
+        "area_id": "sf-tasman-debartolo",
+        "city_id": "sf-bay",
+        "host_region": "San Francisco Bay Area",
+        "exact_area_name": "Tasman Drive and Marie P. DeBartolo Way east plaza",
+        "area_type": "stadium_plaza",
+        "analysis_radius_m": 300,
+        "city_event_ped_design_total": 26154,
+        "area_share": 0.35,
+        "area_design_pedestrians": 9154,
+        "volume_basis": "capacity × modeled external-pedestrian share",
+        "comparator_metric": "Taylor Swift 2023 VTA light-rail boardings",
+        "comparator_value": 23400,
+        "comparator_qualifier": "observed boardings",
+        "spatial_precision": "planning_anchor ±25–100 m",
+        "evidence_class": "engineering_assumption with cited comparator",
+        "source_url": "https://www.vta.org/media/37311"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sea-stadium-station",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.3272,
+          47.5917
+        ]
+      },
+      "properties": {
+        "area_code": 21,
+        "area_short_code": "SEA-STA",
+        "area_id": "sea-stadium-station",
+        "city_id": "seattle",
+        "host_region": "Seattle",
+        "exact_area_name": "Stadium Station and Royal Brougham Way approach",
+        "area_type": "light_rail_station",
+        "analysis_radius_m": 250,
+        "city_event_ped_design_total": 36809,
+        "area_share": 0.55,
+        "area_design_pedestrians": 20245,
+        "volume_basis": "capacity × modeled external-pedestrian share",
+        "comparator_metric": "Peak 2026 match-day Link boardings",
+        "comparator_value": 309000,
+        "comparator_qualifier": "preliminary systemwide",
+        "spatial_precision": "planning_anchor ±25–100 m",
+        "evidence_class": "engineering_assumption with cited comparator",
+        "source_url": "https://www.soundtransit.org/ride-with-us/popular-destinations/lumen-field"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sea-occidental-south",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.3328,
+          47.5925
+        ]
+      },
+      "properties": {
+        "area_code": 22,
+        "area_short_code": "SEA-OCC",
+        "area_id": "sea-occidental-south",
+        "city_id": "seattle",
+        "host_region": "Seattle",
+        "exact_area_name": "Occidental Avenue South plaza approach",
+        "area_type": "stadium_plaza",
+        "analysis_radius_m": 300,
+        "city_event_ped_design_total": 36809,
+        "area_share": 0.45,
+        "area_design_pedestrians": 16564,
+        "volume_basis": "capacity × modeled external-pedestrian share",
+        "comparator_metric": "Taylor Swift 2023 first-night attendance",
+        "comparator_value": 72171,
+        "comparator_qualifier": "reported record",
+        "spatial_precision": "planning_anchor ±25–100 m",
+        "evidence_class": "engineering_assumption with cited comparator",
+        "source_url": "https://www.lumenfield.com/multi-day-events/taylor-swift-2023"
+      }
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "funding.schema.json",
+  "title": "World Cup 2026 Funding Category",
+  "type": "object",
+  "required": [
+    "cityId",
+    "category",
+    "officialHostBudgetCents",
+    "modeledCategoryAllocationCents",
+    "temporaryAllocationCents",
+    "permanentAllocationCents",
+    "evidenceClass",
+    "sourceUrl"
+  ],
+  "properties": {
+    "cityId": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string"
+    },
+    "officialHostBudgetCents": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "modeledCategoryAllocationCents": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "temporaryAllocationCents": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "permanentAllocationCents": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "evidenceClass": {
+      "type": "string"
+    },
+    "sourceUrl": {
+      "type": "string"
+    }
+  }
+}

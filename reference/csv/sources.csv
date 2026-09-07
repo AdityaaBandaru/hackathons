@@ -1,0 +1,37 @@
+sourceId,title,publisher,publicationDate,documentType,usedFor,url
+acs,ACS Five-Year Data,U.S. Census Bureau,,api,Resident demographics and equity,https://www.census.gov/data/developers/data-sets/acs-5year.html
+area-maps,Venue and transit access pages,Host venues and agencies,,,planning anchors and access-zone names,See Pedestrian Areas.source_url for the area-specific page
+ca-post-2026,From the 2026 FIFA World Cup to LA28,State of California,2026-07-27,html,California attendance and transit totals,https://www.gov.ca.gov/2026/07/27/from-the-2026-fifa-world-cup-to-la28-california-is-ready/
+eagles-ed,Ed Sheeran record attendance at Lincoln Financial Field,Billy Penn / Eagles spokesperson,2023-06-05,,Philadelphia concert analog,https://billypenn.com/2023/06/05/ed-sheeran-philips-steaks-lincoln-financial-field/
+epa-moves,MOtor Vehicle Emission Simulator,U.S. Environmental Protection Agency,,model,Vehicle emission factors,https://www.epa.gov/moves
+fhwa-signals,Traffic Signal Retiming Practices,Federal Highway Administration,,html,Signal cost analog,https://ops.fhwa.dot.gov/publications/fhwahop20002/ch2.htm
+fifa-by-numbers,FIFA World Cup 2026 by the numbers,FIFA,,html,Tournament totals,https://inside.fifa.com/tournament-organisation/fifa-world-cup-2026-by-the-numbers
+fifa-capacity-2026,Final stadium capacities,FIFA,,html,Venue capacity,https://inside.fifa.com/organisation/news/fifa-world-cup-stadium-capacities-confirmed
+fifa-fanfest-2026,Fan Festival final results,FIFA,,html,Fan-festival totals,https://inside.fifa.com/organisation/media-releases/fan-festival-extends-historic-world-cup-2026-experience-millions-record-breaking-celebrations-host-countries
+fifa-numbers,FIFA World Cup 2026 by the numbers,FIFA,,,tournament totals,https://inside.fifa.com/tournament-organisation/fifa-world-cup-2026-by-the-numbers
+fifa-stadiums,World Cup 2026 stadium information,FIFA,,,stadium capacities,https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/stadium-information-details
+fta-wc26,FTA World Cup Funding Apportionment Table,Federal Transit Administration,2026-04-09,,official allocation,https://www.transit.dot.gov/funding/apportionments/fta-world-cup-funding-apportionment-table
+fta-world-cup-2026,FTA World Cup Funding Apportionment Table,Federal Transit Administration,2026-04-09,xlsx,Official allocation for 11 U.S. host regions,https://www.transit.dot.gov/funding/apportionments/fta-world-cup-funding-apportionment-table
+gtfs,GTFS Schedule Reference,MobilityData GTFS community,2026-04-27,specification,"Routes, stops, trips, times and shapes",https://gtfs.org/documentation/schedule/reference/
+la-metro-post-2026,Metro State of the Agency 2026,Los Angeles County Metropolitan Transportation Authority,2026-07-22,html,Direct stadium rides,https://thesource.metro.net/metro-state-of-agency-celebrates-a-year-of-milestones-and-looking-ahead-to-another-transformative-year/
+la-post,Metro state of the agency 2026,LA Metro,2026-07-22,,direct stadium rides,https://thesource.metro.net/metro-state-of-agency-celebrates-a-year-of-milestones-and-looking-ahead-to-another-transformative-year/
+marta-post,MARTA safely moves millions during World Cup 2026,MARTA,2026-07-17,,Atlanta observed rail demand,https://itsmarta.com/marta-safely-moves-millions.aspx
+marta-post-2026,MARTA Safely Moves Millions During FIFA World Cup 2026,MARTA,2026-07-17,html,Daily and station demand,https://itsmarta.com/marta-safely-moves-millions.aspx
+mass-post,Successful World Cup operations across Massachusetts,Commonwealth of Massachusetts,2026-07-13,,Boston rail operations,https://www.mass.gov/news/governor-healey-celebrates-successful-world-cup-operations-across-massachusetts
+mass-post-2026,Successful World Cup Operations Across Massachusetts,Commonwealth of Massachusetts,2026-07-13,html,MBTA/Keolis event-rail operations,https://www.mass.gov/news/governor-healey-celebrates-successful-world-cup-operations-across-massachusetts
+miami-plan-2026,Miami-Dade Transportation Plan,Miami-Dade County,2026-06-02,html,Official shuttle and mobility plan,https://www.miamidade.gov/global/release.page?Mduid_release=rel178040771715787
+nacto-buslane,Chicago Pop-Up Essential Bus Lanes,NACTO,,html,Tactical bus-lane cost analog,https://nacto.org/latest/pop-up-essential-bus-lanes-chicago/
+nfl-ne-mia,Dolphins at Patriots gamebook,NFL,2024-10-06,,Gillette Stadium analog,https://static.clubs.nfl.com/image/upload/patriots/epox1w0eoj3ips7qs7r8.pdf
+nfl-sb51,Super Bowl LI gamebook,NFL,2017-02-05,,NRG Stadium analog,https://static.clubs.nfl.com/image/upload/v1578329293/patriots/duxq4dvro9amapous1vq.pdf
+njt-aar,New Jersey interagency transportation after-action report,NJ Transit,2026-07-21,,observed pedestrian and transit outcomes,https://www.njtransit.com/press-releases/new-jersey-interagency-transportation-after-action-report-aar-njny-stadium-fifa
+njt-aar-2026,New Jersey Interagency Transportation After Action Report,NJ Transit,2026-07-21,html,"Match-level mode counts, egress times and lessons",https://www.njtransit.com/press-releases/new-jersey-interagency-transportation-after-action-report-aar-njny-stadium-fifa
+ntd,National Transit Database,Federal Transit Administration,,xlsx/csv,"Ridership, expenses, service and safety",https://www.transit.dot.gov/ntd/ntd-data
+osm,OpenStreetMap data export,OpenStreetMap contributors,,osm/geojson,"Roads, paths, buildings and transit geometry",https://wiki.openstreetmap.org/wiki/Downloading_data
+septa-plan-2026,SEPTA Infrastructure Improvements and Preparations,SEPTA,,html,Official plan; not final observed results,https://wwww.septa.org/news/infrastructure-improvements-for-fifa/
+sound-post,World Cup daily and monthly ridership records,Sound Transit,2026-07-10,,match-day Link boardings,https://www.soundtransit.org/get-to-know-us/news-events/news-releases/sound-transit-set-all-time-records-daily-monthly-ridership
+soundtransit-post-2026,World Cup Daily and Monthly Ridership Records,Sound Transit,2026-07-10,html,Preliminary APC-based match-day boardings,https://www.soundtransit.org/get-to-know-us/news-events/news-releases/sound-transit-set-all-time-records-daily-monthly-ridership
+usgs-3dep,3D Elevation Program,U.S. Geological Survey,,dem/lidar,Terrain and elevation,https://www.usgs.gov/the-national-map-data-delivery/gis-data-download
+vta-analog,Taylor Swift VTA ridership release,VTA,2023-08-03,,concert and Super Bowl transit analogs,https://www.vta.org/media/37311
+vta-board-2026,VTA Board Correspondence 07/17/2026,Santa Clara Valley Transportation Authority,2026-07-17,pdf,VTA stadium trips,https://www.vta.org/sites/default/files/2026-07/Board%20Correspondence%2007_17_26.pdf
+vta-post,VTA board correspondence 07/17/2026,VTA,2026-07-17,,stadium trips,https://www.vta.org/sites/default/files/2026-07/Board%20Correspondence%2007_17_26.pdf
+wwe-38,WrestleMania 38 attendance release,WWE,2022-04-04,,AT&T Stadium analog,https://corporate.wwe.com/f/docs/press-releases/04042022_107.pdf

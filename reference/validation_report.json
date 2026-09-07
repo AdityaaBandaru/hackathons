@@ -1,0 +1,28 @@
+{
+  "bundleVersion": "2026.09.06-hackathon-v1",
+  "status": "PASS",
+  "counts": {
+    "hostRegions": 11,
+    "fundingRows": 143,
+    "pedestrianAreas": 22,
+    "evidence2026": 21,
+    "analogEvents": 14,
+    "projects3d": 264,
+    "interventions": 12,
+    "mlScenarios": 768,
+    "njMatchRows": 9,
+    "sources": 36
+  },
+  "fundingCents": {
+    "official": 10025021200,
+    "modeledCategoryPlusReserve": 10025021200,
+    "temporary": 4412800000,
+    "permanent": 5555200000,
+    "reserve": 57021200
+  },
+  "criticalNotes": [
+    "Planning anchors and generated geometry are conceptual, not surveyed.",
+    "The optimizer must return canonical workbook project IDs.",
+    "The 768-row ML dataset is synthetic/demo data and is not the main optimization engine."
+  ]
+}

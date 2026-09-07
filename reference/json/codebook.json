@@ -1,0 +1,248 @@
+[
+  {
+    "field": "HostRegionCode",
+    "code": 1,
+    "meaning": "Atlanta",
+    "usageNote": "ML Dataset / all spatial tables"
+  },
+  {
+    "field": "HostRegionCode",
+    "code": 2,
+    "meaning": "Boston",
+    "usageNote": "ML Dataset / all spatial tables"
+  },
+  {
+    "field": "HostRegionCode",
+    "code": 3,
+    "meaning": "Dallas",
+    "usageNote": "ML Dataset / all spatial tables"
+  },
+  {
+    "field": "HostRegionCode",
+    "code": 4,
+    "meaning": "Houston",
+    "usageNote": "ML Dataset / all spatial tables"
+  },
+  {
+    "field": "HostRegionCode",
+    "code": 5,
+    "meaning": "Kansas City",
+    "usageNote": "ML Dataset / all spatial tables"
+  },
+  {
+    "field": "HostRegionCode",
+    "code": 6,
+    "meaning": "Los Angeles",
+    "usageNote": "ML Dataset / all spatial tables"
+  },
+  {
+    "field": "HostRegionCode",
+    "code": 7,
+    "meaning": "Miami",
+    "usageNote": "ML Dataset / all spatial tables"
+  },
+  {
+    "field": "HostRegionCode",
+    "code": 8,
+    "meaning": "New York/New Jersey",
+    "usageNote": "ML Dataset / all spatial tables"
+  },
+  {
+    "field": "HostRegionCode",
+    "code": 9,
+    "meaning": "Philadelphia",
+    "usageNote": "ML Dataset / all spatial tables"
+  },
+  {
+    "field": "HostRegionCode",
+    "code": 10,
+    "meaning": "San Francisco Bay Area",
+    "usageNote": "ML Dataset / all spatial tables"
+  },
+  {
+    "field": "HostRegionCode",
+    "code": 11,
+    "meaning": "Seattle",
+    "usageNote": "ML Dataset / all spatial tables"
+  },
+  {
+    "field": "PrimaryAreaCode",
+    "code": 1,
+    "meaning": "Vine City Station–Northside Drive approach",
+    "usageNote": "Join to area_id atl-vine-city"
+  },
+  {
+    "field": "PrimaryAreaCode",
+    "code": 2,
+    "meaning": "GWCC/CNN Center–Andrew Young International Boulevard approach",
+    "usageNote": "Join to area_id atl-sec-district"
+  },
+  {
+    "field": "PrimaryAreaCode",
+    "code": 3,
+    "meaning": "Foxboro Station platform and stadium underpass",
+    "usageNote": "Join to area_id bos-foxboro-station"
+  },
+  {
+    "field": "PrimaryAreaCode",
+    "code": 4,
+    "meaning": "Patriot Place north plaza and Gate A",
+    "usageNote": "Join to area_id bos-patriot-place-gate-a"
+  },
+  {
+    "field": "PrimaryAreaCode",
+    "code": 5,
+    "meaning": "AT&T Way east plaza approach",
+    "usageNote": "Join to area_id dal-att-way-east-plaza"
+  },
+  {
+    "field": "PrimaryAreaCode",
+    "code": 6,
+    "meaning": "Miller LiteHouse pickup at North Collins Street and Cowboys Way",
+    "usageNote": "Join to area_id dal-miller-litehouse"
+  },
+  {
+    "field": "PrimaryAreaCode",
+    "code": 7,
+    "meaning": "Stadium Park/Astrodome Station–Fannin Street approach",
+    "usageNote": "Join to area_id hou-stadium-park-astrodome"
+  },
+  {
+    "field": "PrimaryAreaCode",
+    "code": 8,
+    "meaning": "Kirby Drive and NRG Parkway west gate",
+    "usageNote": "Join to area_id hou-kirby-nrg"
+  },
+  {
+    "field": "PrimaryAreaCode",
+    "code": 9,
+    "meaning": "Blue Ridge Cutoff Gate 3 and bus zone",
+    "usageNote": "Join to area_id kc-blue-ridge-gate3"
+  },
+  {
+    "field": "PrimaryAreaCode",
+    "code": 10,
+    "meaning": "Arrowhead west parking and plaza approach",
+    "usageNote": "Join to area_id kc-west-plaza"
+  },
+  {
+    "field": "PrimaryAreaCode",
+    "code": 11,
+    "meaning": "SoFi south plaza at Pincay Drive and Prairie Avenue",
+    "usageNote": "Join to area_id la-sofi-south-plaza"
+  },
+  {
+    "field": "PrimaryAreaCode",
+    "code": 12,
+    "meaning": "Downtown Inglewood K Line shuttle interchange",
+    "usageNote": "Join to area_id la-downtown-inglewood"
+  },
+  {
+    "field": "PrimaryAreaCode",
+    "code": 13,
+    "meaning": "NW 199th Street and NW 27th Avenue approach",
+    "usageNote": "Join to area_id mia-nw199-nw27"
+  },
+  {
+    "field": "PrimaryAreaCode",
+    "code": 14,
+    "meaning": "Hard Rock Stadium south-gate rideshare and shuttle zone",
+    "usageNote": "Join to area_id mia-south-gate"
+  },
+  {
+    "field": "PrimaryAreaCode",
+    "code": 15,
+    "meaning": "Meadowlands Rail Station and aerial walkway",
+    "usageNote": "Join to area_id nynj-meadowlands-station"
+  },
+  {
+    "field": "PrimaryAreaCode",
+    "code": 16,
+    "meaning": "American Dream–MetLife protected corridor",
+    "usageNote": "Join to area_id nynj-american-dream-corridor"
+  },
+  {
+    "field": "PrimaryAreaCode",
+    "code": 17,
+    "meaning": "NRG Station and Broad Street queue zone",
+    "usageNote": "Join to area_id phi-nrg-station"
+  },
+  {
+    "field": "PrimaryAreaCode",
+    "code": 18,
+    "meaning": "Lincoln Financial Field Lots D/E east approach",
+    "usageNote": "Join to area_id phi-lots-de"
+  },
+  {
+    "field": "PrimaryAreaCode",
+    "code": 19,
+    "meaning": "Great America VTA station platform queue",
+    "usageNote": "Join to area_id sf-great-america-station"
+  },
+  {
+    "field": "PrimaryAreaCode",
+    "code": 20,
+    "meaning": "Tasman Drive and Marie P. DeBartolo Way east plaza",
+    "usageNote": "Join to area_id sf-tasman-debartolo"
+  },
+  {
+    "field": "PrimaryAreaCode",
+    "code": 21,
+    "meaning": "Stadium Station and Royal Brougham Way approach",
+    "usageNote": "Join to area_id sea-stadium-station"
+  },
+  {
+    "field": "PrimaryAreaCode",
+    "code": 22,
+    "meaning": "Occidental Avenue South plaza approach",
+    "usageNote": "Join to area_id sea-occidental-south"
+  },
+  {
+    "field": "MatchStageCode",
+    "code": 0,
+    "meaning": "Group stage",
+    "usageNote": "ML Dataset"
+  },
+  {
+    "field": "MatchStageCode",
+    "code": 1,
+    "meaning": "Round of 32",
+    "usageNote": "ML Dataset"
+  },
+  {
+    "field": "MatchStageCode",
+    "code": 2,
+    "meaning": "Round of 16",
+    "usageNote": "ML Dataset"
+  },
+  {
+    "field": "MatchStageCode",
+    "code": 3,
+    "meaning": "Quarterfinal",
+    "usageNote": "ML Dataset"
+  },
+  {
+    "field": "MatchStageCode",
+    "code": 4,
+    "meaning": "Semifinal",
+    "usageNote": "ML Dataset"
+  },
+  {
+    "field": "MatchStageCode",
+    "code": 5,
+    "meaning": "Final",
+    "usageNote": "ML Dataset"
+  },
+  {
+    "field": "Outcome",
+    "code": 0,
+    "meaning": "Lower intervention need",
+    "usageNote": "Synthetic binary target"
+  },
+  {
+    "field": "Outcome",
+    "code": 1,
+    "meaning": "High intervention need",
+    "usageNote": "Synthetic binary target"
+  }
+]
