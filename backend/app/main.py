@@ -4,7 +4,10 @@ Phase 1 scope: load and validate the seed bundle at startup, and expose
 ``GET /health``.
 
 Phase 2 scope: the read-only evidence API under ``/api/v1`` (cities,
-interventions, sources). The optimizer and map arrive in later phases.
+interventions, sources).
+
+Phase 3 scope: the mixed-integer portfolio optimizer at ``/api/v1/optimize``
+and ``/api/v1/optimize/sensitivity``. The map arrives in a later phase.
 """
 
 from __future__ import annotations
