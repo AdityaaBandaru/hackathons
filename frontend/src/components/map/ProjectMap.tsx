@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   AttributionControl,
   Map as MapLibreMap,
@@ -15,6 +15,11 @@ import {
 import "maplibre-gl/dist/maplibre-gl.css";
 import type { FeatureCollection } from "geojson";
 import { buildLayerFilters, type MapSelection } from "@/lib/mapModes";
+import {
+  VOLUMETRIC_GEOMETRY_TYPES,
+  buildVolumeCollection,
+  type MapView,
+} from "@/lib/map3d";
 
 // Meadowlands Sports Complex: the centroid of the generated nynj geometry,
 // which sits on the Meadowlands Rail Station planning anchor.
@@ -33,6 +38,14 @@ const BASEMAP_ATTRIBUTION =
   '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 
 const SOURCE_ID = "nynj-proposals";
+const VOLUME_SOURCE_ID = "nynj-proposals-volumes";
+
+// 3D perspective camera: same centre as the flat view, tilted and turned so
+// the extruded volumes read as solids, and close enough that an 18 m station
+// package is unmistakably a building rather than a smudge.
+export const PERSPECTIVE_ZOOM = 15.3;
+export const PERSPECTIVE_PITCH = 60;
+export const PERSPECTIVE_BEARING = -30;
 
 /**
  * Point MapLibre at its worker explicitly.
@@ -168,11 +181,72 @@ const PROPOSAL_LAYERS: ProposalLayer[] = [
   },
 ];
 
+/**
+ * Extruded volumes, present only while the 3D view is active.
+ *
+ * Height is each feature's own `height_m`; base is ground level. See
+ * lib/map3d.ts for why only some categories extrude and why nothing is
+ * elevated. These are filtered by the same project-ID lists as every other
+ * layer, so the selection invariants are unchanged in 3D.
+ */
+const VOLUME_LAYERS: ProposalLayer[] = [
+  {
+    id: "proposals-volume-candidate",
+    role: "candidate",
+    geometry: "Polygon",
+    spec: (filter) => ({
+      id: "proposals-volume-candidate",
+      type: "fill-extrusion",
+      source: VOLUME_SOURCE_ID,
+      filter: filter as FilterSpecification,
+      paint: {
+        "fill-extrusion-color": ["get", "color"],
+        "fill-extrusion-height": ["get", "height_m"],
+        "fill-extrusion-base": 0,
+        "fill-extrusion-opacity": 0.45,
+        "fill-extrusion-vertical-gradient": true,
+      },
+    }),
+  },
+  {
+    id: "proposals-volume-selected",
+    role: "selected",
+    geometry: "Polygon",
+    spec: (filter) => ({
+      id: "proposals-volume-selected",
+      type: "fill-extrusion",
+      source: VOLUME_SOURCE_ID,
+      filter: filter as FilterSpecification,
+      paint: {
+        "fill-extrusion-color": ["get", "color"],
+        "fill-extrusion-height": ["get", "height_m"],
+        "fill-extrusion-base": 0,
+        "fill-extrusion-opacity": 0.95,
+        "fill-extrusion-vertical-gradient": true,
+      },
+    }),
+  },
+];
+
 /** Compose the ID filter for a layer with its geometry-type restriction. */
-function layerFilter(layer: ProposalLayer, selection: MapSelection) {
+function layerFilter(
+  layer: ProposalLayer,
+  selection: MapSelection,
+  view: MapView = "flat",
+) {
   const filters = buildLayerFilters(selection);
   const idPart = layer.role === "selected" ? filters.selected : filters.candidate;
-  return ["all", ["==", ["geometry-type"], layer.geometry], idPart];
+  const clauses: unknown[] = [["==", ["geometry-type"], layer.geometry], idPart];
+  // In 3D a volumetric project is drawn as an extrusion instead of flat, so
+  // its flat rendering is suppressed here rather than drawn underneath. The
+  // flat view is untouched: this clause only exists while view is "threeD".
+  if (view === "threeD" && !layer.id.startsWith("proposals-volume-")) {
+    clauses.push([
+      "!",
+      ["in", ["get", "geometry_type"], ["literal", [...VOLUMETRIC_GEOMETRY_TYPES]]],
+    ]);
+  }
+  return ["all", ...clauses];
 }
 
 export function ProjectMap({
@@ -180,16 +254,23 @@ export function ProjectMap({
   selection,
   activeProjectId,
   onSelectProject,
+  view = "flat",
 }: {
   geojson: FeatureCollection;
   selection: MapSelection;
   activeProjectId: string | null;
   onSelectProject: (projectId: string | null) => void;
+  /** Flat (default) or tilted with extruded volumes. Same map either way. */
+  view?: MapView;
 }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<MapLibreMap | null>(null);
   const onSelectRef = useRef(onSelectProject);
+  const viewRef = useRef<MapView>(view);
+  const previousViewRef = useRef<MapView>("flat");
+  const compassRef = useRef<NavigationControl | null>(null);
   const [styleReady, setStyleReady] = useState(false);
+  const volumes = useMemo(() => buildVolumeCollection(geojson), [geojson]);
 
   // Keep the latest click handler without re-initialising the map.
   useEffect(() => {
@@ -238,7 +319,12 @@ export function ProjectMap({
         // Layers are created already filtered; there is never a frame in which
         // an unselected proposal is drawn as selected.
         map.addLayer(layer.spec(layerFilter(layer, selection)));
+      }
 
+      // Click/hover handlers for every layer that can ever exist, volumes
+      // included. MapLibre only consults layers present at event time, so
+      // registering for the 3D layers before they are added is safe.
+      for (const layer of [...PROPOSAL_LAYERS, ...VOLUME_LAYERS]) {
         map.on("click", layer.id, (event: MapLayerMouseEvent) => {
           const feature = event.features?.[0];
           const projectId = feature?.properties?.project_id;
@@ -254,9 +340,10 @@ export function ProjectMap({
 
       // Clicking empty map dismisses the card.
       map.on("click", (event: MapMouseEvent) => {
-        const hits = map.queryRenderedFeatures(event.point, {
-          layers: PROPOSAL_LAYERS.map((l) => l.id),
-        });
+        const present = [...PROPOSAL_LAYERS, ...VOLUME_LAYERS]
+          .map((l) => l.id)
+          .filter((id) => map.getLayer(id));
+        const hits = map.queryRenderedFeatures(event.point, { layers: present });
         if (hits.length === 0) onSelectRef.current(null);
       });
 
@@ -277,14 +364,96 @@ export function ProjectMap({
   useEffect(() => {
     const map = mapRef.current;
     if (!map || !styleReady) return;
+    for (const layer of [...PROPOSAL_LAYERS, ...VOLUME_LAYERS]) {
+      if (!map.getLayer(layer.id)) continue;
+      map.setFilter(
+        layer.id,
+        layerFilter(layer, selection, viewRef.current) as FilterSpecification,
+      );
+    }
+  }, [selection, styleReady]);
+
+  // Switch perspective in place on the same map instance. Tearing the map
+  // down and rebuilding it for the other view was tried first and proved
+  // unstable (a second WebGL context whose viewport never settled); moving
+  // the camera and swapping layers on one live map is both simpler and how
+  // 2D/3D toggles are normally done.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !styleReady) return;
+    const previous = previousViewRef.current;
+    previousViewRef.current = view;
+    viewRef.current = view;
+
+    // A plain flat mount is a no-op: nothing to tear down, and animating the
+    // camera on first paint would be wrong. Only an actual transition does
+    // work here.
+    if (view === previous) return;
+
+    if (view === "threeD") {
+      if (!map.getSource(VOLUME_SOURCE_ID)) {
+        map.addSource(VOLUME_SOURCE_ID, { type: "geojson", data: volumes });
+      }
+      for (const layer of VOLUME_LAYERS) {
+        if (!map.getLayer(layer.id)) {
+          map.addLayer(layer.spec(layerFilter(layer, selection, view)));
+        }
+      }
+      if (!compassRef.current) {
+        compassRef.current = new NavigationControl({
+          showZoom: false,
+          showCompass: true,
+          visualizePitch: true,
+        });
+        map.addControl(compassRef.current, "top-right");
+      }
+      // A little atmosphere so the tilted horizon reads as a scene.
+      map.setSky({
+        "sky-color": "#bfdbfe",
+        "horizon-color": "#e2e8f0",
+        "fog-color": "#f1f5f9",
+        "sky-horizon-blend": 0.6,
+        "horizon-fog-blend": 0.8,
+        "fog-ground-blend": 0.9,
+      });
+      map.easeTo({
+        zoom: PERSPECTIVE_ZOOM,
+        pitch: PERSPECTIVE_PITCH,
+        bearing: PERSPECTIVE_BEARING,
+        duration: 900,
+      });
+    } else {
+      for (const layer of VOLUME_LAYERS) {
+        if (map.getLayer(layer.id)) map.removeLayer(layer.id);
+      }
+      if (map.getSource(VOLUME_SOURCE_ID)) map.removeSource(VOLUME_SOURCE_ID);
+      if (compassRef.current) {
+        map.removeControl(compassRef.current);
+        compassRef.current = null;
+      }
+      map.setSky(undefined as never);
+      map.easeTo({
+        zoom: MEADOWLANDS_ZOOM,
+        pitch: 0,
+        bearing: 0,
+        duration: 900,
+      });
+    }
+
+    // The flat layers' filters depend on the view (volumetric features are
+    // hidden from them in 3D), so refresh them too.
     for (const layer of PROPOSAL_LAYERS) {
       if (!map.getLayer(layer.id)) continue;
       map.setFilter(
         layer.id,
-        layerFilter(layer, selection) as FilterSpecification,
+        layerFilter(layer, selection, view) as FilterSpecification,
       );
     }
-  }, [selection, styleReady]);
+    // selection is read here but intentionally not a dependency: the effect
+    // above handles selection changes, and re-running the camera animation
+    // on every selection change would be wrong.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [view, styleReady, volumes]);
 
   // Outline the project whose card is open.
   useEffect(() => {
@@ -305,6 +474,11 @@ export function ProjectMap({
       paint: { "line-color": "#0f172a", "line-width": 2, "line-dasharray": [1, 1] },
     });
   }, [activeProjectId, styleReady]);
+
+  // Cleanup: releases the compass control reference with the map.
+  useEffect(() => () => {
+    compassRef.current = null;
+  }, []);
 
   return (
     <div

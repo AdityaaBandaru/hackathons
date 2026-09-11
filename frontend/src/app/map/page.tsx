@@ -15,6 +15,13 @@ import {
   resolveMapSelection,
   type MapMode,
 } from "@/lib/mapModes";
+import {
+  MAP_VIEWS,
+  MAP_VIEW_DESCRIPTIONS,
+  MAP_VIEW_LABELS,
+  THREE_D_MODEL_ASSUMPTIONS,
+  type MapView,
+} from "@/lib/map3d";
 import { LoadingBlock, ErrorBlock } from "@/components/StatusStates";
 import { ProjectCard } from "@/components/map/ProjectCard";
 import { formatCents } from "@/lib/format";
@@ -43,6 +50,9 @@ export default function MapPage() {
   // "All Possibilities" is the default because it is the only mode that shows
   // the full option space without asserting that anything was chosen.
   const [mode, setMode] = useState<MapMode>("allPossibilities");
+  // The perspective toggle is deliberately separate from the four display
+  // modes: both views honour all four identically.
+  const [view, setView] = useState<MapView>("flat");
   const [activeProjectId, setActiveProjectId] = useState<string | null>(null);
   const { scenario } = useScenario();
 
@@ -127,7 +137,10 @@ export default function MapPage() {
         </p>
       </header>
 
-      <ModeSwitcher mode={mode} onChange={setMode} />
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <ModeSwitcher mode={mode} onChange={setMode} />
+        <ViewSwitcher view={view} onChange={setView} />
+      </div>
 
       {isScenarioDependent(mode) && !scenario && (
         <div
@@ -164,10 +177,13 @@ export default function MapPage() {
             selection={selection}
             activeProjectId={activeProjectId}
             onSelectProject={setActiveProjectId}
+            view={view}
           />
           <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
-            {MAP_MODE_DESCRIPTIONS[mode]} Click a project for detail.
+            {MAP_MODE_DESCRIPTIONS[mode]} {MAP_VIEW_DESCRIPTIONS[view]} Click a
+            project for detail.
           </p>
+          {view === "threeD" && <ExtrusionAssumptions />}
         </div>
 
         <div className="space-y-4">
@@ -197,6 +213,90 @@ export default function MapPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+/**
+ * Flat vs. 3D. Two mutually exclusive presentations of the same selection, so
+ * these are toggle buttons with aria-pressed rather than a radio group -- the
+ * four display modes remain the radio group above.
+ */
+function ViewSwitcher({
+  view,
+  onChange,
+}: {
+  view: MapView;
+  onChange: (view: MapView) => void;
+}) {
+  return (
+    <div className="flex gap-1 rounded-md bg-slate-100 p-1 dark:bg-slate-800">
+      {MAP_VIEWS.map((candidate) => (
+        <button
+          key={candidate}
+          type="button"
+          aria-pressed={view === candidate}
+          onClick={() => onChange(candidate)}
+          className={`rounded px-3 py-1 text-sm font-medium transition ${
+            view === candidate
+              ? "bg-white text-slate-900 shadow-sm dark:bg-slate-950 dark:text-slate-100"
+              : "text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100"
+          }`}
+        >
+          {MAP_VIEW_LABELS[candidate]}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+/**
+ * The 3D view's rendering assumptions, disclosed in the view itself.
+ *
+ * Extruding a project asserts a shape and a height, which is exactly the kind
+ * of engineering assumption that has to be stated rather than implied
+ * (CLAUDE.md rule 8) -- including, in particular, what this view does *not*
+ * depict.
+ */
+function ExtrusionAssumptions() {
+  return (
+    <details className="mt-3 rounded-lg border border-purple-200 bg-purple-50 px-4 py-3 text-xs text-purple-900 dark:border-purple-900 dark:bg-purple-950 dark:text-purple-200">
+      <summary className="cursor-pointer font-semibold">
+        How these volumes are drawn — and what they leave out
+      </summary>
+      <p className="mt-2">{THREE_D_MODEL_ASSUMPTIONS.note}</p>
+      <dl className="mt-2 space-y-1.5">
+        <div>
+          <dt className="font-semibold">Height</dt>
+          <dd>{THREE_D_MODEL_ASSUMPTIONS.heightSource}</dd>
+        </div>
+        <div>
+          <dt className="font-semibold">Which projects extrude</dt>
+          <dd>{THREE_D_MODEL_ASSUMPTIONS.extrusionRule}</dd>
+        </div>
+        <div>
+          <dt className="font-semibold">Footprint</dt>
+          <dd>{THREE_D_MODEL_ASSUMPTIONS.footprintSource}</dd>
+        </div>
+        <div>
+          <dt className="font-semibold">Ground level</dt>
+          <dd>{THREE_D_MODEL_ASSUMPTIONS.groundLevel}</dd>
+        </div>
+        <div>
+          <dt className="font-semibold">Not represented</dt>
+          <dd>
+            <ul className="list-disc space-y-1 pl-4">
+              {THREE_D_MODEL_ASSUMPTIONS.notRepresented.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </dd>
+        </div>
+        <div>
+          <dt className="font-semibold">Spatial precision</dt>
+          <dd>{THREE_D_MODEL_ASSUMPTIONS.spatialPrecision}</dd>
+        </div>
+      </dl>
+    </details>
   );
 }
 

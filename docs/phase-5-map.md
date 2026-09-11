@@ -121,3 +121,57 @@ production build: all four modes (Baseline visibly empty; Selected Legacy and
 Temporary Operations each drawing 9 of the scenario's projects; All
 Possibilities drawing all 24), the scenario surviving client-side navigation
 from the optimizer, and a click card on `nynj-station-PERM`.
+
+## 3D perspective view
+
+A **Flat / 3D perspective** toggle on the map page, separate from the four
+display modes. Both views honour all four modes identically: the toggle
+changes how a project is drawn, never which projects are drawn.
+
+**One map, not two.** The first attempt mounted a second MapLibre instance
+for the 3D view and swapped it in and out; a second WebGL context whose
+viewport never settled made it unreliable, and repeated toggling degraded
+both views. The shipped design keeps the single flat map and switches
+perspective in place: `easeTo` tilts the camera (pitch 60, bearing −30,
+zoom 15.3), a volume source and two `fill-extrusion` layers are added, and
+the compass/pitch control appears. Leaving 3D reverses all of it and eases
+the camera back to the flat framing. A plain flat mount does none of this,
+so the flat view's behaviour and tests are untouched.
+
+**Which projects extrude, and how tall** — nothing here is arbitrary
+(`src/lib/map3d.ts`):
+
+- A project extrudes only when its intervention's own `defaultGeometryType`
+  is one of the bundle's two volumetric types: `polygon_extrusion` (hub,
+  parkride, tnc) or `glb_model` (station, toc). `line_extrusion`,
+  `point_model` and `animated_route` categories stay flat, as in the flat
+  view — extruding a bus lane or a signal plan would depict nothing real.
+- Height is each project's own `height_m` from the 3D Projects records,
+  sitting on the ground. The spread is real and phase-dependent: station
+  18 m permanent / 6 m temporary, toc 12 m / 4 m, hub 6 m / 3 m.
+- The two volumetric categories stored as points (station, toc) get a
+  rectangular footprint from their own `length_m`, `width_m` and
+  `bearing_deg`.
+
+**What it deliberately does not show.** Nothing is drawn above ground
+level. The bundle has no elevation data — its only vertical-offset field,
+`zOffsetM`, is 0.05 or 0.1 m on all 264 records, a draw-order nudge — and no
+bridge, elevated-crossing or flyover category exists in the 12-category
+library. This, along with the height source and extrusion rule, is disclosed
+on the page itself in a block that mirrors the optimizer's `modelAssumptions`
+(CLAUDE.md rule 8).
+
+**Tests.** `map3d.test.ts` (20) covers the pure rules: which categories
+extrude, footprint geometry, that a volume with no `height_m` is dropped
+rather than guessed at, and the disclosure text. `ProjectMap.3d.test.tsx`
+(17) mounts the real component flat, switches it to 3D, and proves the
+extrusion layers honour every selection invariant the flat tests prove —
+baseline empty, an unselected ID never extruded as selected, all four modes,
+and the same selected-ID set as the flat view — plus that repeated toggling
+neither duplicates nor leaks layers, sources or controls.
+`ProjectMap.test.tsx` and `mapModes.test.ts` are unchanged.
+
+Frontend: 106 passed (69 before this view, 37 new). Verified live: solid
+extruded volumes with lit faces in all four modes, Baseline empty in 3D, and
+Flat → 3D → Flat → 3D → Flat returning the camera and layer set exactly to
+their flat state each time.
