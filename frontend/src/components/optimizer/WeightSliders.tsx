@@ -25,34 +25,50 @@ export function WeightSliders({
 }) {
   const sum = Object.values(weights).reduce((a, b) => a + b, 0);
   return (
-    <div className="space-y-3">
-      {WEIGHT_LABELS.map(({ key, label, help }) => (
-        <div key={key}>
-          <div className="flex items-baseline justify-between">
-            <label htmlFor={`weight-${key}`} className="text-sm font-medium text-slate-700 dark:text-slate-300">
-              {label}
-            </label>
-            <span className="text-xs text-slate-400">
-              {help} · {weights[key].toFixed(2)}
-            </span>
+    <div className="space-y-3.5">
+      {WEIGHT_LABELS.map(({ key, label, help }) => {
+        const value = weights[key];
+        const share = sum > 0 ? value / sum : 0;
+        return (
+          <div key={key}>
+            <div className="flex items-baseline justify-between gap-2">
+              <label htmlFor={`weight-${key}`} className="text-[13px] text-fg">
+                {label}
+              </label>
+              <span className="flex items-baseline gap-2 text-[11px] text-fg-subtle">
+                <span className="hidden sm:inline">{help}</span>
+                <span className="w-10 text-right font-mono tabular-nums text-fg-muted">
+                  {value.toFixed(2)}
+                </span>
+              </span>
+            </div>
+            <input
+              id={`weight-${key}`}
+              type="range"
+              min={0}
+              max={1}
+              step={0.01}
+              value={value}
+              onChange={(e) =>
+                onChange({ ...weights, [key]: Number(e.target.value) })
+              }
+              className="slider mt-0.5"
+              style={{ "--fill": `${value * 100}%` } as React.CSSProperties}
+            />
+            {/* Normalized share, the number the solver actually sees. */}
+            <div className="-mt-1 h-0.5 overflow-hidden rounded-full bg-transparent">
+              <div
+                className="h-full rounded-full bg-accent-fg/40 transition-[width] duration-300 ease-[var(--ease-out-quint)]"
+                style={{ width: `${share * 100}%` }}
+              />
+            </div>
           </div>
-          <input
-            id={`weight-${key}`}
-            type="range"
-            min={0}
-            max={1}
-            step={0.01}
-            value={weights[key]}
-            onChange={(e) =>
-              onChange({ ...weights, [key]: Number(e.target.value) })
-            }
-            className="mt-1 w-full accent-blue-600"
-          />
-        </div>
-      ))}
-      <p className="text-xs text-slate-500 dark:text-slate-400">
-        Raw sum: {sum.toFixed(2)}. Weights are normalized to 1.0 on the
-        server — their scale here does not matter, only their ratios.
+        );
+      })}
+      <p className="text-[11px] leading-relaxed text-fg-subtle">
+        Raw sum {sum.toFixed(2)}. Weights are normalized to 1.0 on the
+        server — their scale here does not matter, only their ratios (thin
+        bar = normalized share).
       </p>
     </div>
   );

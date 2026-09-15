@@ -1,4 +1,9 @@
-import { classifyEvidence, EVIDENCE_TONE_CLASSES } from "@/lib/evidence";
+import {
+  classifyEvidence,
+  EVIDENCE_TONE_CLASSES,
+  EVIDENCE_TONE_DOT,
+} from "@/lib/evidence";
+import { External } from "@/components/ui/Icons";
 
 /**
  * A small pill showing one evidenceClass string, plus an optional link to the
@@ -20,8 +25,12 @@ export function EvidenceBadge({
     <span className="inline-flex flex-wrap items-center gap-1.5 align-middle">
       <span
         title={qualifier ?? undefined}
-        className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ring-1 ring-inset ${EVIDENCE_TONE_CLASSES[tone]}`}
+        className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded-full py-0.5 pl-1.5 pr-2 text-[11px] font-medium ring-1 ring-inset ${EVIDENCE_TONE_CLASSES[tone]}`}
       >
+        <span
+          aria-hidden="true"
+          className={`h-1.5 w-1.5 rounded-full ${EVIDENCE_TONE_DOT[tone]}`}
+        />
         {label !== evidenceClass ? `${label}: ` : ""}
         {evidenceClass}
       </span>
@@ -30,23 +39,10 @@ export function EvidenceBadge({
           href={sourceUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-0.5 text-xs text-slate-500 underline decoration-dotted hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100"
+          className="inline-flex items-center gap-0.5 text-[11px] text-fg-subtle transition-colors hover:text-fg"
         >
           source
-          <svg
-            aria-hidden="true"
-            viewBox="0 0 12 12"
-            className="h-3 w-3"
-            fill="none"
-          >
-            <path
-              d="M3.5 8.5 8.5 3.5M8.5 3.5H4.5M8.5 3.5V7.5"
-              stroke="currentColor"
-              strokeWidth="1.1"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <External className="h-3 w-3" />
         </a>
       )}
     </span>
@@ -81,9 +77,13 @@ export function EvidenceBadgeGroup({
         return (
           <span
             key={evidenceClass}
-            className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ring-1 ring-inset ${EVIDENCE_TONE_CLASSES[tone]}`}
+            className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded-full py-0.5 pl-1.5 pr-2 text-[11px] font-medium ring-1 ring-inset ${EVIDENCE_TONE_CLASSES[tone]}`}
             title={`${count} of ${records.length} underlying record(s)`}
           >
+            <span
+              aria-hidden="true"
+              className={`h-1.5 w-1.5 rounded-full ${EVIDENCE_TONE_DOT[tone]}`}
+            />
             {label !== evidenceClass ? `${label}: ` : ""}
             {evidenceClass}
             {records.length > 1 ? ` ×${count}` : ""}
@@ -95,9 +95,10 @@ export function EvidenceBadgeGroup({
           href={sharedSourceUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-xs text-slate-500 underline decoration-dotted hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100"
+          className="inline-flex items-center gap-0.5 text-[11px] text-fg-subtle transition-colors hover:text-fg"
         >
           source
+          <External className="h-3 w-3" />
         </a>
       )}
     </span>

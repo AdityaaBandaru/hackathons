@@ -60,7 +60,7 @@ export default function ComparePage() {
 
   const budgetChartOption = {
     tooltip: { trigger: "axis" as const, valueFormatter: (v: unknown) => formatCents(v as number) },
-    grid: { left: 140, right: 24, top: 16, bottom: 24 },
+    grid: { left: 140, right: 24, top: 12, bottom: 28 },
     xAxis: {
       type: "value" as const,
       // ECharts auto-scales a value axis to the data's own range by default,
@@ -79,15 +79,15 @@ export default function ComparePage() {
       {
         type: "bar" as const,
         data: sortedByBudget.map((c) => c.funding.officialBudgetCents).reverse(),
-        itemStyle: { color: "#2563eb" },
-        barMaxWidth: 18,
+        itemStyle: { color: "#7c86ff" },
+        barMaxWidth: 14,
       },
     ],
   };
 
   const phaseSplitOption = {
     tooltip: { trigger: "axis" as const, valueFormatter: (v: unknown) => formatCents(v as number) },
-    legend: { data: ["Temporary", "Permanent", "Reserve"], top: 0 },
+    legend: { data: ["Temporary", "Permanent", "Reserve"], top: 0, icon: "circle", itemWidth: 8, itemHeight: 8 },
     grid: { left: 140, right: 24, top: 40, bottom: 24 },
     xAxis: {
       type: "value" as const,
@@ -106,7 +106,7 @@ export default function ComparePage() {
         data: sortedByBudget
           .map((c) => c.funding.temporaryAllocationCents ?? 0)
           .reverse(),
-        itemStyle: { color: "#f59e0b" },
+        itemStyle: { color: "#fbbf24" },
       },
       {
         name: "Permanent",
@@ -115,68 +115,71 @@ export default function ComparePage() {
         data: sortedByBudget
           .map((c) => c.funding.permanentAllocationCents ?? 0)
           .reverse(),
-        itemStyle: { color: "#059669" },
+        itemStyle: { color: "#34d399" },
       },
       {
         name: "Reserve",
         type: "bar" as const,
         stack: "total",
         data: sortedByBudget.map((c) => c.funding.reserveCents ?? 0).reverse(),
-        itemStyle: { color: "#94a3b8" },
+        itemStyle: { color: "#3f434a" },
       },
     ],
   };
 
   return (
-    <div className="space-y-8">
-      <header>
-        <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
+    <div className="space-y-10">
+      <header className="reveal">
+        <p className="eyebrow">Host regions</p>
+        <h1 className="display mt-2 text-3xl text-fg sm:text-4xl">
           Compare all 11 host regions
         </h1>
-        <p className="mt-2 max-w-3xl text-sm text-slate-600 dark:text-slate-400">
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-fg-muted">
           Official federal transportation allocations and demand for every
           2026 U.S. host region, from{" "}
-          <code className="text-xs">GET /api/v1/cities</code>. Funding
-          evidence classes below are pulled from each city&apos;s underlying
-          funding-category records.
+          <code className="rounded bg-surface-2 px-1 py-0.5 text-[11px] text-fg">GET /api/v1/cities</code>.
+          Funding evidence classes below are pulled from each city&apos;s
+          underlying funding-category records.
         </p>
       </header>
 
-      <div className="grid gap-6 lg:grid-cols-2">
-        <div className="rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
-          <h2 className="text-sm font-semibold text-slate-700 dark:text-slate-300">
+      <div className="grid gap-4 lg:grid-cols-2">
+        <section className="card reveal p-5" style={{ "--i": 1 } as React.CSSProperties}>
+          <h2 className="text-sm font-semibold text-fg">
             Official transportation budget by host region
           </h2>
+          <p className="mt-0.5 text-xs text-fg-subtle">Axis starts at zero; bar length is a true proportion.</p>
           <Chart
             option={budgetChartOption}
             ariaLabel="Bar chart of official transportation budget in dollars by host region"
           />
-        </div>
-        <div className="rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
-          <h2 className="text-sm font-semibold text-slate-700 dark:text-slate-300">
+        </section>
+        <section className="card reveal p-5" style={{ "--i": 2 } as React.CSSProperties}>
+          <h2 className="text-sm font-semibold text-fg">
             Temporary / permanent / reserve split
           </h2>
+          <p className="mt-0.5 text-xs text-fg-subtle">Modeled split of each official total.</p>
           <Chart
             option={phaseSplitOption}
             ariaLabel="Stacked bar chart of temporary, permanent, and reserve allocation by host region"
           />
-        </div>
+        </section>
       </div>
 
-      <div className="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800">
-        <table className="min-w-full divide-y divide-slate-200 text-sm dark:divide-slate-800">
-          <thead className="bg-slate-50 dark:bg-slate-900">
-            <tr className="text-left text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
-              <th className="px-4 py-3">Host region</th>
-              <th className="px-4 py-3">Matches</th>
-              <th className="px-4 py-3">Stadium capacity</th>
-              <th className="px-4 py-3">Tournament demand</th>
-              <th className="px-4 py-3">Official budget</th>
-              <th className="px-4 py-3">Temporary / permanent</th>
-              <th className="px-4 py-3">Enabled projects</th>
+      <div className="table-wrap reveal" style={{ "--i": 3 } as React.CSSProperties}>
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Host region</th>
+              <th>Matches</th>
+              <th>Stadium capacity</th>
+              <th>Tournament demand</th>
+              <th>Official budget</th>
+              <th>Temporary / permanent</th>
+              <th>Enabled projects</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+          <tbody>
             {sortedByBudget.map((city) => (
               <CityRow
                 key={city.cityId}
@@ -204,75 +207,58 @@ function CityRow({
   const tempShare = temp !== null && total > 0 ? temp / total : null;
 
   return (
-    <tr
-      className={
-        city.cityId === "nynj"
-          ? "bg-blue-50/60 dark:bg-blue-950/30"
-          : "hover:bg-slate-50 dark:hover:bg-slate-900/50"
-      }
-    >
-      <td className="px-4 py-3">
-        <Link
-          href={`/cities/${city.cityId}`}
-          className="font-medium text-blue-700 hover:underline dark:text-blue-400"
-        >
+    <tr className={city.cityId === "nynj" ? "is-hero" : undefined}>
+      <td>
+        <Link href={`/cities/${city.cityId}`} className="link font-medium">
           {city.hostRegion}
         </Link>
         {city.cityId === "nynj" && (
-          <span className="ml-2 rounded-full bg-blue-100 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-blue-700 dark:bg-blue-900 dark:text-blue-300">
+          <span className="ml-2 rounded-full bg-accent-soft px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-accent-fg">
             Hero scenario
           </span>
         )}
       </td>
-      <td className="px-4 py-3 text-slate-700 dark:text-slate-300">
-        {formatInt(city.matches)}
-      </td>
-      <td className="px-4 py-3 text-slate-700 dark:text-slate-300">
-        {formatInt(city.stadiumCapacity)}
-      </td>
-      <td className="px-4 py-3">
-        <div className="flex flex-col gap-1">
-          <span className="text-slate-700 dark:text-slate-300">
-            {formatInt(city.tournamentDemand)}
-          </span>
+      <td className="tabular-nums">{formatInt(city.matches)}</td>
+      <td className="tabular-nums">{formatInt(city.stadiumCapacity)}</td>
+      <td>
+        <div className="flex flex-col gap-1.5">
+          <span className="tabular-nums">{formatInt(city.tournamentDemand)}</span>
           <EvidenceBadge evidenceClass={city.demandClass} />
         </div>
       </td>
-      <td className="px-4 py-3">
-        <div className="flex flex-col gap-1">
-          <span className="font-medium text-slate-900 dark:text-slate-100">
+      <td>
+        <div className="flex flex-col gap-1.5">
+          <span className="font-medium tabular-nums text-fg">
             {formatCents(city.funding.officialBudgetCents)}
           </span>
           {funding ? (
             <EvidenceBadgeGroup records={funding} />
           ) : (
-            <span className="text-xs text-slate-400">loading evidence…</span>
+            <span className="text-xs text-fg-subtle">loading evidence…</span>
           )}
         </div>
       </td>
-      <td className="px-4 py-3">
+      <td>
         {tempShare !== null ? (
           <div className="flex items-center gap-2">
-            <div className="h-2 w-24 overflow-hidden rounded-full bg-emerald-200 dark:bg-emerald-900">
+            <div className="h-1.5 w-24 overflow-hidden rounded-full bg-emerald-400/30">
               <div
-                className="h-full bg-amber-500"
+                className="h-full rounded-full bg-amber-400 transition-[width] duration-700 ease-[var(--ease-out-quint)]"
                 style={{ width: `${tempShare * 100}%` }}
               />
             </div>
-            <span className="text-xs text-slate-500 dark:text-slate-400">
+            <span className="text-xs tabular-nums text-fg-subtle">
               {formatPercent(tempShare, 0)} temp
             </span>
           </div>
         ) : (
           "—"
         )}
-        <div className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+        <div className="mt-1 text-xs tabular-nums text-fg-subtle">
           {formatCents(temp)} / {formatCents(perm)}
         </div>
       </td>
-      <td className="px-4 py-3 text-slate-700 dark:text-slate-300">
-        {formatInt(city.enabledProjectCount)}
-      </td>
+      <td className="tabular-nums">{formatInt(city.enabledProjectCount)}</td>
     </tr>
   );
 }

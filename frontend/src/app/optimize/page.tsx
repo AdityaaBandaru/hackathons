@@ -119,26 +119,29 @@ export default function OptimizePage() {
 
   return (
     <div className="space-y-8">
-      <header>
-        <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
+      <header className="reveal">
+        <p className="eyebrow">Optimizer</p>
+        <h1 className="display mt-2 text-3xl text-fg sm:text-4xl">
           Mobility investment optimizer
         </h1>
-        <p className="mt-2 max-w-3xl text-sm text-slate-600 dark:text-slate-400">
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-fg-muted">
           Set an objective and constraints, then run the real backend
           mixed-integer solver at{" "}
-          <code className="text-xs">POST /api/v1/optimize</code>. Nothing is
-          computed in the browser — every number below comes straight from
-          the API response.
+          <code className="rounded bg-surface-2 px-1 py-0.5 text-[11px] text-fg">
+            POST /api/v1/optimize
+          </code>
+          . Nothing is computed in the browser — every number below comes
+          straight from the API response.
         </p>
       </header>
 
-      <div className="grid gap-6 lg:grid-cols-[380px_1fr]">
-        <div className="space-y-6 rounded-xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
+      <div className="grid gap-6 lg:grid-cols-[400px_1fr]">
+        <div
+          className="card reveal space-y-6 self-start p-5"
+          style={{ "--i": 1 } as React.CSSProperties}
+        >
           <div>
-            <label
-              htmlFor="city-select"
-              className="text-sm font-medium text-slate-700 dark:text-slate-300"
-            >
+            <label htmlFor="city-select" className="text-[13px] font-medium text-fg">
               Host region
             </label>
             <select
@@ -148,7 +151,7 @@ export default function OptimizePage() {
                 setCityId(e.target.value);
                 setBudgetOverrideCents(null);
               }}
-              className="mt-1 w-full rounded-md border border-slate-300 px-2 py-1.5 text-sm dark:border-slate-700 dark:bg-slate-900"
+              className="field mt-1.5"
             >
               {cities.map((city) => (
                 <option key={city.cityId} value={city.cityId}>
@@ -159,10 +162,7 @@ export default function OptimizePage() {
           </div>
 
           <div>
-            <label
-              htmlFor="budget-input"
-              className="text-sm font-medium text-slate-700 dark:text-slate-300"
-            >
+            <label htmlFor="budget-input" className="text-[13px] font-medium text-fg">
               Budget (whole dollars)
             </label>
             <input
@@ -177,16 +177,16 @@ export default function OptimizePage() {
                   Number.isFinite(dollars) ? Math.round(dollars * 100) : 0,
                 );
               }}
-              className="mt-1 w-full rounded-md border border-slate-300 px-2 py-1.5 text-sm dark:border-slate-700 dark:bg-slate-900"
+              className="field mt-1.5 tabular-nums"
             />
-            <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+            <p className="mt-1.5 text-xs tabular-nums text-fg-subtle">
               {budgetCents !== null && `= ${formatCents(budgetCents)} · `}
               official budget:{" "}
               {selectedCity ? formatCents(selectedCity.funding.officialBudgetCents) : "—"}
               {selectedCity && (
                 <button
                   type="button"
-                  className="ml-2 text-blue-600 hover:underline dark:text-blue-400"
+                  className="link ml-2"
                   onClick={() => setBudgetOverrideCents(null)}
                 >
                   reset
@@ -195,20 +195,20 @@ export default function OptimizePage() {
             </p>
           </div>
 
+          <div className="divider" />
+
           <div>
-            <p className="text-sm font-medium text-slate-700 dark:text-slate-300">
-              Objective weights
-            </p>
-            <div className="mt-2">
+            <p className="text-[13px] font-medium text-fg">Objective weights</p>
+            <div className="mt-3">
               <WeightSliders weights={weights} onChange={setWeights} />
             </div>
           </div>
 
+          <div className="divider" />
+
           <div>
-            <p className="text-sm font-medium text-slate-700 dark:text-slate-300">
-              Constraints
-            </p>
-            <div className="mt-2">
+            <p className="text-[13px] font-medium text-fg">Constraints</p>
+            <div className="mt-3">
               <ConstraintsForm
                 form={constraintsForm}
                 onChange={setConstraintsForm}
@@ -217,12 +217,12 @@ export default function OptimizePage() {
             </div>
           </div>
 
-          <div className="flex flex-wrap gap-2 pt-2">
+          <div className="flex flex-wrap gap-2 pt-1">
             <button
               type="button"
               onClick={runOptimize}
               disabled={!requestBody || optimizeMutation.isPending}
-              className="rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-50"
+              className="btn btn-primary"
             >
               {optimizeMutation.isPending ? "Solving…" : "Run optimizer"}
             </button>
@@ -234,7 +234,7 @@ export default function OptimizePage() {
                 sensitivityMutation.isPending ||
                 !optimizeMutation.isSuccess
               }
-              className="rounded-md border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 disabled:opacity-50 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800"
+              className="btn btn-secondary"
               title={
                 !optimizeMutation.isSuccess
                   ? "Run the optimizer first"
@@ -248,16 +248,22 @@ export default function OptimizePage() {
           </div>
         </div>
 
-        <div className="space-y-8">
-          <section>
-            <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
-              Result
-            </h2>
+        <div className="min-w-0 space-y-10">
+          <section className="reveal" style={{ "--i": 2 } as React.CSSProperties}>
+            <h2 className="text-lg font-semibold tracking-tight text-fg">Result</h2>
             <div className="mt-3">
               {optimizeMutation.isIdle && (
-                <p className="text-sm text-slate-500 dark:text-slate-400">
-                  Set your objective and constraints, then run the optimizer.
-                </p>
+                <div className="card flex flex-col items-center justify-center gap-2 px-6 py-14 text-center">
+                  <span className="grid h-10 w-10 place-items-center rounded-full border border-border bg-surface-2 text-accent-fg">
+                    <span className="kbd">↵</span>
+                  </span>
+                  <p className="text-sm text-fg-muted">
+                    Set your objective and constraints, then run the optimizer.
+                  </p>
+                  <p className="text-xs text-fg-subtle">
+                    The portfolio it returns becomes the scenario the map draws.
+                  </p>
+                </div>
               )}
               {optimizeMutation.isPending && (
                 <LoadingBlock label="Solving the mixed-integer program…" />
@@ -274,15 +280,15 @@ export default function OptimizePage() {
           {(sensitivityMutation.isPending ||
             sensitivityMutation.isSuccess ||
             sensitivityMutation.isError) && (
-            <section>
-              <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
+            <section className="animate-fade-up">
+              <h2 className="text-lg font-semibold tracking-tight text-fg">
                 Sensitivity analysis
               </h2>
-              <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+              <p className="mt-1 text-sm text-fg-muted">
                 Re-solves the same scenario across attendance, budget,
                 intervention-cost, transit-capacity, and visitor
                 transit-usage assumptions (
-                <code className="text-xs">POST /api/v1/optimize/sensitivity</code>
+                <code className="text-[11px] text-fg">POST /api/v1/optimize/sensitivity</code>
                 ).
               </p>
               <div className="mt-3">

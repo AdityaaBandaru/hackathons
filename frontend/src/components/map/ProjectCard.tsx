@@ -1,6 +1,7 @@
 "use client";
 
 import { EvidenceBadge } from "@/components/EvidenceBadge";
+import { Close } from "@/components/ui/Icons";
 import { formatCents } from "@/lib/format";
 import type { OptimizeResult, Project3D } from "@/lib/types";
 
@@ -34,13 +35,14 @@ export function ProjectCard({
 
   return (
     <aside
+      key={project.projectId}
       aria-label={`Project detail: ${project.categoryName}`}
-      className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900"
+      className="card animate-scale-in p-4"
     >
       <div className="flex items-start justify-between gap-3">
         <div>
-          <p className="font-mono text-xs text-slate-400">{project.projectId}</p>
-          <h3 className="text-base font-semibold text-slate-900 dark:text-slate-100">
+          <p className="font-mono text-[11px] text-fg-subtle">{project.projectId}</p>
+          <h3 className="mt-0.5 text-base font-semibold tracking-tight text-fg">
             {project.categoryName}
           </h3>
         </div>
@@ -48,62 +50,58 @@ export function ProjectCard({
           type="button"
           onClick={onClose}
           aria-label="Close project detail"
-          className="rounded-md px-2 py-1 text-xs text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800"
+          className="btn btn-ghost btn-sm -mr-1 -mt-1 h-7 w-7 px-0"
         >
-          ✕
+          <Close className="h-3.5 w-3.5" />
         </button>
       </div>
 
-      <div className="mt-3 flex flex-wrap items-center gap-2">
-        <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-medium capitalize text-slate-700 dark:bg-slate-800 dark:text-slate-300">
+      <div className="mt-3 flex flex-wrap items-center gap-1.5">
+        <span className="rounded-full bg-white/[0.06] px-2 py-0.5 text-[11px] font-medium capitalize text-fg-muted">
           {project.phase}
         </span>
         {isSelectedInScenario ? (
-          <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-medium text-emerald-800 dark:bg-emerald-900 dark:text-emerald-300">
+          <span className="rounded-full bg-emerald-400/10 px-2 py-0.5 text-[11px] font-medium text-emerald-300 ring-1 ring-inset ring-emerald-400/30">
             Selected in current scenario
           </span>
         ) : (
-          <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-600 dark:bg-slate-800 dark:text-slate-400">
+          <span className="rounded-full bg-white/[0.06] px-2 py-0.5 text-[11px] font-medium text-fg-subtle">
             Not selected in current scenario
           </span>
         )}
       </div>
 
-      <p className="mt-3 text-sm text-slate-600 dark:text-slate-400">
+      <p className="mt-3 text-[13px] leading-relaxed text-fg-muted">
         {project.designDescription}
       </p>
 
-      <dl className="mt-4 space-y-3 text-sm">
+      <dl className="mt-4 space-y-4 text-sm">
         {scenarioProject && (
           <div>
-            <dt className="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
-              This scenario&apos;s allocation
-            </dt>
-            <dd className="font-semibold text-slate-900 dark:text-slate-100">
+            <dt className="metric-label">This scenario&apos;s allocation</dt>
+            <dd className="mt-0.5 font-semibold tabular-nums text-fg">
               {formatCents(scenarioProject.allocationCents)}
-              <span className="ml-2 text-xs font-normal text-slate-500">
+              <span className="ml-2 text-xs font-normal text-fg-subtle">
                 {scenarioProject.units} × {scenarioProject.decisionUnit}
               </span>
             </dd>
-            <dd className="mt-1">
+            <dd className="mt-1.5">
               <EvidenceBadge evidenceClass={scenario!.evidenceClass} />
             </dd>
           </div>
         )}
 
         <div>
-          <dt className="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
-            Seeded allocation
-          </dt>
-          <dd className="font-semibold text-slate-900 dark:text-slate-100">
+          <dt className="metric-label">Seeded allocation</dt>
+          <dd className="mt-0.5 font-semibold tabular-nums text-fg">
             {formatCents(project.allocationCents)}
             {project.allocationCents === 0 && (
-              <span className="ml-2 text-xs font-normal text-slate-500">
+              <span className="ml-2 text-xs font-normal text-fg-subtle">
                 not funded in the bundle&apos;s own demonstration portfolio
               </span>
             )}
           </dd>
-          <dd className="mt-1">
+          <dd className="mt-1.5">
             <EvidenceBadge
               evidenceClass={project.evidenceClass}
               sourceUrl={project.sourceUrl}
@@ -112,25 +110,21 @@ export function ProjectCard({
         </div>
 
         <div>
-          <dt className="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
-            Location basis
-          </dt>
-          <dd className="text-slate-700 dark:text-slate-300">
-            {project.exactAreaName}
-          </dd>
-          <dd className="text-xs text-slate-500 dark:text-slate-400">
+          <dt className="metric-label">Location basis</dt>
+          <dd className="mt-0.5 text-fg">{project.exactAreaName}</dd>
+          <dd className="text-xs leading-relaxed text-fg-subtle">
             {project.spatialPrecision} — a conceptual planning anchor, not a
             surveyed location.
           </dd>
         </div>
 
         <div>
-          <dt className="text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
-            Status
-          </dt>
-          <dd className="text-slate-700 dark:text-slate-300">
-            <code className="text-xs">{project.implementationStatus}</code> — a
-            modeled proposal, not a funded or approved project.
+          <dt className="metric-label">Status</dt>
+          <dd className="mt-0.5 text-[13px] leading-relaxed text-fg-muted">
+            <code className="rounded bg-surface-2 px-1 py-0.5 text-[11px] text-fg">
+              {project.implementationStatus}
+            </code>{" "}
+            — a modeled proposal, not a funded or approved project.
           </dd>
         </div>
       </dl>

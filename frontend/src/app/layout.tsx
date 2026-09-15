@@ -24,19 +24,30 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} dark h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+      <body className="relative flex min-h-full flex-col bg-bg text-fg">
+        {/* Ambient glow sits behind everything; pages sit above it. */}
+        <div
+          aria-hidden="true"
+          className="glow-bg pointer-events-none absolute inset-x-0 top-0 h-[520px]"
+        />
         <Providers>
           <Nav />
-          <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8">
+          <main className="relative mx-auto w-full max-w-6xl flex-1 px-4 py-10 sm:px-6">
             {children}
           </main>
-          <footer className="border-t border-slate-200 px-4 py-6 text-center text-xs text-slate-500 dark:border-slate-800 dark:text-slate-500">
-            Demonstration model. Every figure on this site is either sourced
-            evidence (linked) or a labeled engineering assumption / model
-            output. Nothing here is an official city, state, or federal
-            commitment.
+          <footer className="relative mt-16">
+            <div className="divider" />
+            <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-8 text-xs text-fg-subtle sm:flex-row sm:items-center sm:justify-between sm:px-6">
+              <p className="max-w-2xl leading-relaxed">
+                Demonstration model. Every figure on this site is either
+                sourced evidence (linked) or a labeled engineering assumption
+                / model output. Nothing here is an official city, state, or
+                federal commitment.
+              </p>
+              <p className="font-mono">WC26 · mobility optimizer</p>
+            </div>
           </footer>
         </Providers>
       </body>

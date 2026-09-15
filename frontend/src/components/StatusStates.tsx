@@ -1,16 +1,22 @@
 /** Shared loading / error presentational states. */
 
+import { Spinner } from "@/components/ui/Icons";
+
 export function LoadingBlock({ label = "Loading…" }: { label?: string }) {
   return (
     <div
       role="status"
-      className="flex items-center gap-3 rounded-lg border border-slate-200 bg-slate-50 px-4 py-6 text-sm text-slate-600 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400"
+      className="card animate-fade-in flex flex-col gap-4 px-5 py-5"
     >
-      <span
-        aria-hidden="true"
-        className="h-4 w-4 flex-none animate-spin rounded-full border-2 border-slate-300 border-t-slate-600 dark:border-slate-700 dark:border-t-slate-300"
-      />
-      {label}
+      <div className="flex items-center gap-3 text-sm text-fg-muted">
+        <Spinner className="h-4 w-4 flex-none text-accent-fg" />
+        {label}
+      </div>
+      <div aria-hidden="true" className="space-y-2">
+        <div className="skeleton h-3 w-2/3" />
+        <div className="skeleton h-3 w-1/2" />
+        <div className="skeleton h-3 w-3/5" />
+      </div>
     </div>
   );
 }
@@ -25,18 +31,11 @@ export function ErrorBlock({
   onRetry?: () => void;
 }) {
   return (
-    <div
-      role="alert"
-      className="rounded-lg border border-red-200 bg-red-50 px-4 py-4 text-sm text-red-800 dark:border-red-900 dark:bg-red-950 dark:text-red-300"
-    >
-      <p className="font-semibold">{title}</p>
-      <p className="mt-1">{message}</p>
+    <div role="alert" className="panel-note note-danger animate-scale-in">
+      <p className="font-semibold text-fg">{title}</p>
+      <p className="mt-1 text-[13px] opacity-90">{message}</p>
       {onRetry && (
-        <button
-          type="button"
-          onClick={onRetry}
-          className="mt-3 rounded-md bg-red-100 px-3 py-1.5 text-xs font-medium text-red-800 hover:bg-red-200 dark:bg-red-900 dark:text-red-200 dark:hover:bg-red-800"
-        >
+        <button type="button" onClick={onRetry} className="btn btn-secondary btn-sm mt-3">
           Try again
         </button>
       )}
@@ -52,24 +51,20 @@ export function InfeasibleBlock({
   diagnostics: { code: string; message: string; detail: Record<string, unknown> }[];
 }) {
   return (
-    <div
-      role="alert"
-      className="rounded-lg border border-amber-300 bg-amber-50 px-4 py-4 text-sm text-amber-900 dark:border-amber-800 dark:bg-amber-950 dark:text-amber-200"
-    >
-      <p className="font-semibold">No portfolio satisfies these constraints</p>
-      <p className="mt-1">{message}</p>
+    <div role="alert" className="panel-note note-warn animate-scale-in">
+      <p className="font-semibold text-fg">No portfolio satisfies these constraints</p>
+      <p className="mt-1 text-[13px] opacity-90">{message}</p>
       <ul className="mt-3 space-y-2">
-        {diagnostics.map((d) => (
+        {diagnostics.map((d, i) => (
           <li
             key={d.code}
-            className="rounded-md bg-white/60 p-2 dark:bg-black/20"
+            className="reveal rounded-lg border border-border bg-bg/60 p-3"
+            style={{ "--i": i } as React.CSSProperties}
           >
-            <p className="font-mono text-xs text-amber-700 dark:text-amber-400">
-              {d.code}
-            </p>
-            <p>{d.message}</p>
+            <p className="font-mono text-[11px] text-warn">{d.code}</p>
+            <p className="mt-0.5 text-[13px]">{d.message}</p>
             {Object.keys(d.detail).length > 0 && (
-              <pre className="mt-1 overflow-x-auto rounded bg-black/5 p-2 text-xs dark:bg-white/5">
+              <pre className="mt-2 overflow-x-auto rounded-md bg-black/40 p-2 text-[11px] leading-relaxed text-fg-muted">
                 {JSON.stringify(d.detail, null, 2)}
               </pre>
             )}

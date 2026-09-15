@@ -39,11 +39,22 @@ export function classifyEvidence(evidenceClass: string): EvidenceToneInfo {
   return { tone: "other", label: "Cited source" };
 }
 
+/** Translucent tints on the dark canvas; text stays >= 4.5:1 on every tone. */
 export const EVIDENCE_TONE_CLASSES: Record<EvidenceTone, string> = {
-  observed: "bg-emerald-50 text-emerald-800 ring-emerald-600/20 dark:bg-emerald-950 dark:text-emerald-300 dark:ring-emerald-400/30",
-  official: "bg-blue-50 text-blue-800 ring-blue-600/20 dark:bg-blue-950 dark:text-blue-300 dark:ring-blue-400/30",
-  model: "bg-purple-50 text-purple-800 ring-purple-600/20 dark:bg-purple-950 dark:text-purple-300 dark:ring-purple-400/30",
-  assumption: "bg-amber-50 text-amber-800 ring-amber-600/20 dark:bg-amber-950 dark:text-amber-300 dark:ring-amber-400/30",
-  derived: "bg-slate-100 text-slate-700 ring-slate-500/20 dark:bg-slate-800 dark:text-slate-300 dark:ring-slate-400/20",
-  other: "bg-slate-100 text-slate-700 ring-slate-500/20 dark:bg-slate-800 dark:text-slate-300 dark:ring-slate-400/20",
+  observed: "bg-emerald-400/10 text-emerald-300 ring-emerald-400/30",
+  official: "bg-sky-400/10 text-sky-300 ring-sky-400/30",
+  model: "bg-purple-400/10 text-purple-300 ring-purple-400/30",
+  assumption: "bg-amber-400/10 text-amber-300 ring-amber-400/30",
+  derived: "bg-white/[0.06] text-fg-muted ring-white/15",
+  other: "bg-white/[0.06] text-fg-muted ring-white/15",
+};
+
+/** A matching dot colour per tone, for the badge's leading marker. */
+export const EVIDENCE_TONE_DOT: Record<EvidenceTone, string> = {
+  observed: "bg-emerald-400",
+  official: "bg-sky-400",
+  model: "bg-purple-400",
+  assumption: "bg-amber-400",
+  derived: "bg-fg-subtle",
+  other: "bg-fg-subtle",
 };

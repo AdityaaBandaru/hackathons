@@ -124,34 +124,36 @@ export default function MapPage() {
 
   return (
     <div className="space-y-6">
-      <header>
-        <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
+      <header className="reveal">
+        <p className="eyebrow">New York / New Jersey</p>
+        <h1 className="display mt-2 text-3xl text-fg sm:text-4xl">
           Meadowlands project map
         </h1>
-        <p className="mt-2 max-w-3xl text-sm text-slate-600 dark:text-slate-400">
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-fg-muted">
           The {candidateIds.length} candidate projects for the New York/New
           Jersey host region, drawn from the pre-generated planning geometry.
           Coordinates are conceptual planning anchors, not surveyed locations,
-          and every project shown is a <code className="text-xs">concept_only</code>{" "}
+          and every project shown is a{" "}
+          <code className="rounded bg-surface-2 px-1 py-0.5 text-[11px] text-fg">concept_only</code>{" "}
           proposal.
         </p>
       </header>
 
-      <div className="flex flex-wrap items-center justify-between gap-3">
+      <div
+        className="reveal flex flex-wrap items-center justify-between gap-3"
+        style={{ "--i": 1 } as React.CSSProperties}
+      >
         <ModeSwitcher mode={mode} onChange={setMode} />
         <ViewSwitcher view={view} onChange={setView} />
       </div>
 
       {isScenarioDependent(mode) && !scenario && (
-        <div
-          role="status"
-          className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900 dark:border-amber-900 dark:bg-amber-950 dark:text-amber-200"
-        >
-          <p className="font-semibold">No optimizer scenario has been run yet.</p>
-          <p className="mt-1">
+        <div role="status" className="panel-note note-warn animate-scale-in">
+          <p className="font-semibold text-fg">No optimizer scenario has been run yet.</p>
+          <p className="mt-1 text-[13px] opacity-90">
             This mode draws only what the optimizer selected, and there is
             nothing to draw until it runs. Nothing is assumed or filled in.{" "}
-            <Link href="/optimize" className="underline">
+            <Link href="/optimize" className="link">
               Run the optimizer
             </Link>{" "}
             and come back.
@@ -160,17 +162,17 @@ export default function MapPage() {
       )}
 
       {isScenarioDependent(mode) && scenarioIsForAnotherCity && (
-        <div
-          role="status"
-          className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900 dark:border-amber-900 dark:bg-amber-950 dark:text-amber-200"
-        >
+        <div role="status" className="panel-note note-warn animate-scale-in">
           The current scenario is for {scenario.hostRegion}, but this map shows
           New York/New Jersey. None of its selected projects have geometry here,
           so nothing is drawn as selected.
         </div>
       )}
 
-      <div className="grid gap-6 lg:grid-cols-[1fr_340px]">
+      <div
+        className="reveal grid gap-6 lg:grid-cols-[1fr_340px]"
+        style={{ "--i": 2 } as React.CSSProperties}
+      >
         <div>
           <ProjectMap
             geojson={geometryQuery.data}
@@ -179,7 +181,7 @@ export default function MapPage() {
             onSelectProject={setActiveProjectId}
             view={view}
           />
-          <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
+          <p className="mt-2 text-xs leading-relaxed text-fg-subtle">
             {MAP_MODE_DESCRIPTIONS[mode]} {MAP_VIEW_DESCRIPTIONS[view]} Click a
             project for detail.
           </p>
@@ -197,7 +199,7 @@ export default function MapPage() {
               onClose={() => setActiveProjectId(null)}
             />
           ) : (
-            <p className="rounded-xl border border-dashed border-slate-300 px-4 py-6 text-center text-sm text-slate-500 dark:border-slate-700 dark:text-slate-400">
+            <p className="rounded-xl border border-dashed border-border-strong px-4 py-8 text-center text-sm text-fg-subtle">
               Click a project on the map to see its cost, evidence basis, and
               source.
             </p>
@@ -229,18 +231,13 @@ function ViewSwitcher({
   onChange: (view: MapView) => void;
 }) {
   return (
-    <div className="flex gap-1 rounded-md bg-slate-100 p-1 dark:bg-slate-800">
+    <div className="segmented">
       {MAP_VIEWS.map((candidate) => (
         <button
           key={candidate}
           type="button"
           aria-pressed={view === candidate}
           onClick={() => onChange(candidate)}
-          className={`rounded px-3 py-1 text-sm font-medium transition ${
-            view === candidate
-              ? "bg-white text-slate-900 shadow-sm dark:bg-slate-950 dark:text-slate-100"
-              : "text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100"
-          }`}
         >
           {MAP_VIEW_LABELS[candidate]}
         </button>
@@ -259,30 +256,31 @@ function ViewSwitcher({
  */
 function ExtrusionAssumptions() {
   return (
-    <details className="mt-3 rounded-lg border border-purple-200 bg-purple-50 px-4 py-3 text-xs text-purple-900 dark:border-purple-900 dark:bg-purple-950 dark:text-purple-200">
-      <summary className="cursor-pointer font-semibold">
+    <details className="panel-note note-model group mt-3 animate-fade-in text-xs">
+      <summary className="cursor-pointer list-none font-semibold text-fg marker:hidden [&::-webkit-details-marker]:hidden">
+        <span className="mr-1.5 inline-block transition-transform duration-200 group-open:rotate-90">▸</span>
         How these volumes are drawn — and what they leave out
       </summary>
-      <p className="mt-2">{THREE_D_MODEL_ASSUMPTIONS.note}</p>
-      <dl className="mt-2 space-y-1.5">
+      <p className="mt-2 leading-relaxed opacity-90">{THREE_D_MODEL_ASSUMPTIONS.note}</p>
+      <dl className="mt-3 space-y-2 leading-relaxed opacity-90">
         <div>
-          <dt className="font-semibold">Height</dt>
+          <dt className="font-semibold text-fg">Height</dt>
           <dd>{THREE_D_MODEL_ASSUMPTIONS.heightSource}</dd>
         </div>
         <div>
-          <dt className="font-semibold">Which projects extrude</dt>
+          <dt className="font-semibold text-fg">Which projects extrude</dt>
           <dd>{THREE_D_MODEL_ASSUMPTIONS.extrusionRule}</dd>
         </div>
         <div>
-          <dt className="font-semibold">Footprint</dt>
+          <dt className="font-semibold text-fg">Footprint</dt>
           <dd>{THREE_D_MODEL_ASSUMPTIONS.footprintSource}</dd>
         </div>
         <div>
-          <dt className="font-semibold">Ground level</dt>
+          <dt className="font-semibold text-fg">Ground level</dt>
           <dd>{THREE_D_MODEL_ASSUMPTIONS.groundLevel}</dd>
         </div>
         <div>
-          <dt className="font-semibold">Not represented</dt>
+          <dt className="font-semibold text-fg">Not represented</dt>
           <dd>
             <ul className="list-disc space-y-1 pl-4">
               {THREE_D_MODEL_ASSUMPTIONS.notRepresented.map((item) => (
@@ -292,7 +290,7 @@ function ExtrusionAssumptions() {
           </dd>
         </div>
         <div>
-          <dt className="font-semibold">Spatial precision</dt>
+          <dt className="font-semibold text-fg">Spatial precision</dt>
           <dd>{THREE_D_MODEL_ASSUMPTIONS.spatialPrecision}</dd>
         </div>
       </dl>
@@ -350,7 +348,7 @@ function ModeSwitcher({
     <div
       role="radiogroup"
       aria-label="Map display mode"
-      className="flex flex-wrap gap-2"
+      className="segmented flex-wrap"
     >
       {MAP_MODES.map((candidate) => (
         <button
@@ -364,11 +362,6 @@ function ModeSwitcher({
           tabIndex={mode === candidate ? 0 : -1}
           onClick={() => onChange(candidate)}
           onKeyDown={handleKeyDown}
-          className={`rounded-md px-3 py-1.5 text-sm font-medium ring-1 ring-inset transition ${
-            mode === candidate
-              ? "bg-blue-600 text-white ring-blue-600"
-              : "bg-white text-slate-700 ring-slate-300 hover:bg-slate-50 dark:bg-slate-900 dark:text-slate-300 dark:ring-slate-700 dark:hover:bg-slate-800"
-          }`}
         >
           {MAP_MODE_LABELS[candidate]}
         </button>
@@ -398,12 +391,10 @@ function DrawnInspector({
   return (
     <section
       aria-label="Projects drawn on the map"
-      className="rounded-xl border border-slate-200 bg-white p-4 text-sm dark:border-slate-800 dark:bg-slate-900"
+      className="card p-4 text-sm"
     >
-      <h2 className="font-semibold text-slate-800 dark:text-slate-200">
-        Drawn on map
-      </h2>
-      <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+      <h2 className="font-semibold text-fg">Drawn on map</h2>
+      <p className="mt-1 text-xs text-fg-subtle">
         <span data-testid="drawn-count">{drawnIds.length}</span> project(s) ·{" "}
         <span data-testid="selected-count">{selection.selectedIds.length}</span>{" "}
         selected ·{" "}
@@ -414,14 +405,14 @@ function DrawnInspector({
       </p>
 
       {mode === "baseline" && (
-        <p className="mt-3 rounded-md bg-slate-50 px-3 py-2 text-xs text-slate-600 dark:bg-slate-800 dark:text-slate-400">
+        <p className="mt-3 rounded-lg bg-surface-2 px-3 py-2 text-xs text-fg-muted">
           Baseline hides every modeled proposal. Nothing on this map is a
           proposal right now.
         </p>
       )}
 
       {drawnIds.length > 0 && (
-        <ul className="mt-3 space-y-1" data-testid="drawn-list">
+        <ul className="mt-3 max-h-[420px] space-y-0.5 overflow-y-auto pr-1" data-testid="drawn-list">
           {drawnIds.map((projectId) => {
             const project = projectsById.get(projectId);
             const isSelected = selection.selectedIds.includes(projectId);
@@ -432,23 +423,23 @@ function DrawnInspector({
                   onClick={() => onSelect(projectId)}
                   data-project-id={projectId}
                   data-role={isSelected ? "selected" : "candidate"}
-                  className="flex w-full items-center justify-between gap-2 rounded-md px-2 py-1 text-left hover:bg-slate-50 dark:hover:bg-slate-800"
+                  className="flex w-full items-center justify-between gap-2 rounded-md px-2 py-1.5 text-left transition-colors hover:bg-white/[0.05]"
                 >
                   <span className="truncate">
-                    <span className="font-mono text-xs text-slate-400">
+                    <span className="font-mono text-[11px] text-fg-subtle">
                       {projectId}
                     </span>
                     {project && (
-                      <span className="ml-2 text-xs text-slate-600 dark:text-slate-400">
+                      <span className="ml-2 text-xs text-fg-muted">
                         {project.categoryName}
                       </span>
                     )}
                   </span>
                   <span
-                    className={`flex-none rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase ${
+                    className={`flex-none rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide ${
                       isSelected
-                        ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-300"
-                        : "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400"
+                        ? "bg-emerald-400/10 text-emerald-300 ring-1 ring-inset ring-emerald-400/30"
+                        : "bg-white/[0.06] text-fg-subtle"
                     }`}
                   >
                     {isSelected ? "selected" : "candidate"}
@@ -461,7 +452,7 @@ function DrawnInspector({
       )}
 
       {selection.selectedIds.length > 0 && (
-        <p className="mt-3 border-t border-slate-100 pt-2 text-xs text-slate-500 dark:border-slate-800 dark:text-slate-400">
+        <p className="mt-3 border-t border-border pt-2 text-xs tabular-nums text-fg-subtle">
           Selected total:{" "}
           {formatCents(
             selection.selectedIds.reduce(

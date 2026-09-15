@@ -86,7 +86,7 @@ const PROPOSAL_LAYERS: ProposalLayer[] = [
       filter: filter as FilterSpecification,
       paint: {
         "fill-color": ["get", "color"],
-        "fill-opacity": 0.18,
+        "fill-opacity": 0.28,
         "fill-outline-color": ["get", "color"],
       },
     }),
@@ -103,7 +103,7 @@ const PROPOSAL_LAYERS: ProposalLayer[] = [
       paint: {
         "fill-color": ["get", "color"],
         "fill-opacity": 0.55,
-        "fill-outline-color": "#0f172a",
+        "fill-outline-color": "#ffffff",
       },
     }),
   },
@@ -120,7 +120,7 @@ const PROPOSAL_LAYERS: ProposalLayer[] = [
       paint: {
         "line-color": ["get", "color"],
         "line-width": 3,
-        "line-opacity": 0.3,
+        "line-opacity": 0.45,
         "line-dasharray": [2, 2],
       },
     }),
@@ -154,10 +154,10 @@ const PROPOSAL_LAYERS: ProposalLayer[] = [
       paint: {
         "circle-radius": 6,
         "circle-color": ["get", "color"],
-        "circle-opacity": 0.25,
+        "circle-opacity": 0.4,
         "circle-stroke-width": 1,
         "circle-stroke-color": ["get", "color"],
-        "circle-stroke-opacity": 0.5,
+        "circle-stroke-opacity": 0.7,
       },
     }),
   },
@@ -175,7 +175,7 @@ const PROPOSAL_LAYERS: ProposalLayer[] = [
         "circle-color": ["get", "color"],
         "circle-opacity": 0.9,
         "circle-stroke-width": 2,
-        "circle-stroke-color": "#0f172a",
+        "circle-stroke-color": "#ffffff",
       },
     }),
   },
@@ -300,9 +300,24 @@ export function ProjectMap({
           {
             id: "background",
             type: "background",
-            paint: { "background-color": "#e2e8f0" },
+            paint: { "background-color": "#0d0e10" },
           },
-          { id: "basemap", type: "raster", source: "basemap" },
+          {
+            id: "basemap",
+            type: "raster",
+            source: "basemap",
+            // OSM's standard tiles are light; the app canvas is dark. Rather
+            // than depend on a keyed dark basemap (rule 14), desaturate and
+            // dim the tiles in the raster paint so streets read as quiet grey
+            // linework under the coloured proposals.
+            paint: {
+              "raster-saturation": -1,
+              "raster-brightness-min": 0.02,
+              "raster-brightness-max": 0.34,
+              "raster-contrast": 0.15,
+              "raster-fade-duration": 200,
+            },
+          },
         ],
       },
     });
@@ -409,9 +424,9 @@ export function ProjectMap({
       }
       // A little atmosphere so the tilted horizon reads as a scene.
       map.setSky({
-        "sky-color": "#bfdbfe",
-        "horizon-color": "#e2e8f0",
-        "fog-color": "#f1f5f9",
+        "sky-color": "#0b0d1a",
+        "horizon-color": "#1a1c2e",
+        "fog-color": "#111217",
         "sky-horizon-blend": 0.6,
         "horizon-fog-blend": 0.8,
         "fog-ground-blend": 0.9,
@@ -471,7 +486,7 @@ export function ProjectMap({
         ["get", "project_id"],
         activeProjectId,
       ] as FilterSpecification,
-      paint: { "line-color": "#0f172a", "line-width": 2, "line-dasharray": [1, 1] },
+      paint: { "line-color": "#ffffff", "line-width": 2, "line-dasharray": [1, 1] },
     });
   }, [activeProjectId, styleReady]);
 
@@ -484,7 +499,7 @@ export function ProjectMap({
     <div
       ref={containerRef}
       data-testid="maplibre-container"
-      className="h-[540px] w-full overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800"
+      className="h-[560px] w-full overflow-hidden rounded-xl border border-border bg-bg-elevated shadow-[0_1px_0_0_rgb(255_255_255/0.03)_inset,0_20px_50px_-30px_rgb(0_0_0/0.9)]"
     />
   );
 }

@@ -67,23 +67,25 @@ export default function CityEvidencePage() {
   const projects = projectsQuery.data!;
 
   return (
-    <div className="space-y-10">
-      <header>
-        <Link
-          href="/compare"
-          className="text-xs text-slate-500 hover:underline dark:text-slate-400"
-        >
+    <div className="space-y-12">
+      <header className="reveal">
+        <Link href="/compare" className="link text-xs">
           ← Back to comparison
         </Link>
-        <h1 className="mt-1 text-2xl font-bold text-slate-900 dark:text-slate-100">
-          {city.hostRegion}
-        </h1>
-        <p className="mt-2 max-w-3xl text-sm text-slate-600 dark:text-slate-400">
+        <div className="mt-3 flex flex-wrap items-center gap-3">
+          <h1 className="display text-3xl text-fg sm:text-4xl">{city.hostRegion}</h1>
+          {cityId === "nynj" && (
+            <span className="rounded-full bg-accent-soft px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-accent-fg">
+              Hero scenario
+            </span>
+          )}
+        </div>
+        <p className="mt-2 text-sm text-fg-muted">
           {city.dominantBottleneck} · {city.venueAccessType}
         </p>
       </header>
 
-      <section className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+      <section className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         <Stat label="Matches" value={formatInt(city.matches)} />
         <Stat label="Stadium capacity" value={formatInt(city.stadiumCapacity)} />
         <Stat
@@ -103,10 +105,10 @@ export default function CityEvidencePage() {
         <MatchDataSection matchData={evidence.matchData} />
       ) : (
         <section>
-          <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
+          <h2 className="text-lg font-semibold tracking-tight text-fg">
             Match-day after-action data
           </h2>
-          <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
+          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-fg-muted">
             No per-match after-action report exists for {city.hostRegion} in
             this bundle. The New Jersey Transit after-action report is the
             only match-level dataset on file, and it applies only to the
@@ -162,13 +164,9 @@ function Stat({
   evidence?: { evidenceClass: string; sourceUrl?: string };
 }) {
   return (
-    <div className="rounded-lg border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
-      <p className="text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400">
-        {label}
-      </p>
-      <p className="mt-1 text-xl font-semibold text-slate-900 dark:text-slate-100">
-        {value}
-      </p>
+    <div className="metric reveal" style={{ "--i": 1 } as React.CSSProperties}>
+      <p className="metric-label">{label}</p>
+      <p className="metric-value">{value}</p>
       {evidence && (
         <div className="mt-2">
           <EvidenceBadge
@@ -188,46 +186,44 @@ function FundingSection({
 }) {
   return (
     <section>
-      <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
+      <h2 className="text-lg font-semibold tracking-tight text-fg">
         Funding by intervention category
       </h2>
-      <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+      <p className="mt-1 max-w-2xl text-sm leading-relaxed text-fg-muted">
         How the official budget is modeled as split across the 12 intervention
         categories plus reserve. Every allocation is an engineering
         assumption about how to spend an official total, not itself an
         observed expenditure.
       </p>
-      <div className="mt-3 overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800">
-        <table className="min-w-full divide-y divide-slate-200 text-sm dark:divide-slate-800">
-          <thead className="bg-slate-50 dark:bg-slate-900">
-            <tr className="text-left text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
-              <th className="px-3 py-2">Category</th>
-              <th className="px-3 py-2">Units</th>
-              <th className="px-3 py-2">Allocation</th>
-              <th className="px-3 py-2">Temp / Perm</th>
-              <th className="px-3 py-2">Evidence</th>
+      <div className="table-wrap mt-4">
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Units</th>
+              <th>Allocation</th>
+              <th>Temp / Perm</th>
+              <th>Evidence</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+          <tbody>
             {funding.map((row) => (
               <tr key={row.category}>
-                <td className="px-3 py-2 font-medium text-slate-800 dark:text-slate-200">
+                <td className="whitespace-nowrap font-medium text-fg">
                   {row.categoryName}
-                  <div className="text-xs font-normal text-slate-400">
+                  <div className="text-xs font-normal text-fg-subtle">
                     {row.decisionUnit}
                   </div>
                 </td>
-                <td className="px-3 py-2 text-slate-600 dark:text-slate-400">
-                  {row.selectedUnits}
-                </td>
-                <td className="px-3 py-2 text-slate-800 dark:text-slate-200">
+                <td className="tabular-nums">{row.selectedUnits}</td>
+                <td className="tabular-nums text-fg">
                   {formatCents(row.modeledCategoryAllocationCents)}
                 </td>
-                <td className="px-3 py-2 text-xs text-slate-500 dark:text-slate-400">
+                <td className="text-xs tabular-nums text-fg-subtle">
                   {formatCents(row.temporaryAllocationCents)} /{" "}
                   {formatCents(row.permanentAllocationCents)}
                 </td>
-                <td className="px-3 py-2">
+                <td>
                   <EvidenceBadge
                     evidenceClass={row.evidenceClass}
                     sourceUrl={row.sourceUrl}
@@ -249,49 +245,49 @@ function MatchDataSection({
 }) {
   return (
     <section>
-      <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
+      <h2 className="text-lg font-semibold tracking-tight text-fg">
         Match-day after-action data
       </h2>
-      <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+      <p className="mt-1 max-w-2xl text-sm leading-relaxed text-fg-muted">
         NJ Transit&apos;s after-action report for MetLife Stadium — the
         &quot;Plan&quot; row is the pre-tournament operational plan; every
         other row is an observed final match record.
       </p>
-      <div className="mt-3 overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800">
-        <table className="min-w-full divide-y divide-slate-200 text-sm dark:divide-slate-800">
-          <thead className="bg-slate-50 dark:bg-slate-900">
-            <tr className="text-left text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
-              <th className="px-3 py-2">Match</th>
-              <th className="px-3 py-2">Ticket holders</th>
-              <th className="px-3 py-2">Uber</th>
-              <th className="px-3 py-2">Host shuttles</th>
-              <th className="px-3 py-2">NJT egress</th>
-              <th className="px-3 py-2">Egress time</th>
-              <th className="px-3 py-2">American Dream peds</th>
-              <th className="px-3 py-2">Evidence</th>
+      <div className="table-wrap mt-4">
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Match</th>
+              <th>Ticket holders</th>
+              <th>Uber</th>
+              <th>Host shuttles</th>
+              <th>NJT egress</th>
+              <th>Egress time</th>
+              <th>American Dream peds</th>
+              <th>Evidence</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+          <tbody>
             {matchData.map((row) => (
               <tr
                 key={row.matchNo}
-                className={row.matchNo === 104 ? "bg-blue-50/60 dark:bg-blue-950/30" : ""}
+                className={row.matchNo === 104 ? "is-hero" : undefined}
               >
-                <td className="px-3 py-2 font-medium text-slate-800 dark:text-slate-200">
+                <td className="whitespace-nowrap font-medium text-fg">
                   {row.matchNo === "Plan" ? "Plan" : `#${row.matchNo}`}
-                  <div className="text-xs font-normal text-slate-400">
+                  <div className="text-xs font-normal text-fg-subtle">
                     {row.fixture}
                   </div>
                 </td>
-                <td className="px-3 py-2">{formatInt(row.ticketHolders)}</td>
-                <td className="px-3 py-2">{formatInt(row.uberCount)}</td>
-                <td className="px-3 py-2">{formatInt(row.hostShuttles)}</td>
-                <td className="px-3 py-2">{formatInt(row.njtEgress)}</td>
-                <td className="px-3 py-2">{row.njtEgressMin} min</td>
-                <td className="px-3 py-2">
+                <td className="tabular-nums">{formatInt(row.ticketHolders)}</td>
+                <td className="tabular-nums">{formatInt(row.uberCount)}</td>
+                <td className="tabular-nums">{formatInt(row.hostShuttles)}</td>
+                <td className="tabular-nums">{formatInt(row.njtEgress)}</td>
+                <td className="tabular-nums">{row.njtEgressMin} min</td>
+                <td className="tabular-nums">
                   {formatInt(row.americanDreamPedestrians)}
                 </td>
-                <td className="px-3 py-2">
+                <td>
                   <EvidenceBadge
                     evidenceClass={row.evidenceClass}
                     sourceUrl={row.sourceUrl}
@@ -314,32 +310,33 @@ function AnalogEventsSection({
   if (events.length === 0) return null;
   return (
     <section>
-      <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
+      <h2 className="text-lg font-semibold tracking-tight text-fg">
         Analog events
       </h2>
-      <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+      <p className="mt-1 max-w-2xl text-sm leading-relaxed text-fg-muted">
         Comparable past events at the same venue, used as planning proxies —
         never as a direct forecast of World Cup demand.
       </p>
-      <ul className="mt-3 space-y-2">
-        {events.map((event) => (
+      <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+        {events.map((event, i) => (
           <li
             key={event.analogEventId}
-            className="rounded-lg border border-slate-200 bg-white p-3 dark:border-slate-800 dark:bg-slate-900"
+            className="card card-interactive reveal p-4"
+            style={{ "--i": i } as React.CSSProperties}
           >
             <div className="flex flex-wrap items-baseline justify-between gap-2">
-              <p className="font-medium text-slate-800 dark:text-slate-200">
+              <p className="text-sm font-medium text-fg">
                 {event.event} — {event.venue}
               </p>
-              <span className="text-xs text-slate-400">{event.dateOrPeriod}</span>
+              <span className="font-mono text-[11px] text-fg-subtle">{event.dateOrPeriod}</span>
             </div>
-            <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
+            <p className="mt-1 text-sm tabular-nums text-fg-muted">
               {formatInt(event.totalAttendance)} total attendance ·{" "}
               {event.transitBoardings !== null
                 ? `${formatInt(event.transitBoardings)} transit boardings`
                 : "transit boardings not reported"}
             </p>
-            <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+            <p className="mt-1 text-xs leading-relaxed text-fg-subtle">
               {event.qualifier}
             </p>
             <div className="mt-2">
@@ -372,22 +369,21 @@ function EvidenceMetricsSection({
   if (records.length === 0) return null;
   return (
     <section>
-      <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
+      <h2 className="text-lg font-semibold tracking-tight text-fg">
         {title}
       </h2>
-      <ul className="mt-3 grid gap-2 sm:grid-cols-2">
-        {records.map((record) => (
+      <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {records.map((record, i) => (
           <li
             key={record.id}
-            className="rounded-lg border border-slate-200 bg-white p-3 dark:border-slate-800 dark:bg-slate-900"
+            className="card card-interactive reveal p-4"
+            style={{ "--i": i } as React.CSSProperties}
           >
-            <p className="text-sm font-medium text-slate-800 dark:text-slate-200">
-              {record.metric}
-            </p>
-            <p className="text-lg font-semibold text-slate-900 dark:text-slate-100">
+            <p className="text-[13px] font-medium text-fg-muted">{record.metric}</p>
+            <p className="mt-1 text-xl font-semibold tabular-nums tracking-tight text-fg">
               {record.value}
             </p>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
+            <p className="mt-1 text-xs leading-relaxed text-fg-subtle">
               {record.qualifier}
             </p>
             <div className="mt-2">
@@ -411,23 +407,22 @@ function PedestrianAreasSection({
   if (areas.length === 0) return null;
   return (
     <section>
-      <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
+      <h2 className="text-lg font-semibold tracking-tight text-fg">
         Pedestrian areas
       </h2>
-      <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+      <p className="mt-1 max-w-2xl text-sm leading-relaxed text-fg-muted">
         Planning anchors, not surveyed locations — coordinates mark a named
         access node at the given spatial precision.
       </p>
-      <ul className="mt-3 space-y-2">
-        {areas.map((area) => (
+      <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+        {areas.map((area, i) => (
           <li
             key={area.areaId}
-            className="rounded-lg border border-slate-200 bg-white p-3 dark:border-slate-800 dark:bg-slate-900"
+            className="card card-interactive reveal p-4"
+            style={{ "--i": i } as React.CSSProperties}
           >
-            <p className="font-medium text-slate-800 dark:text-slate-200">
-              {area.exactAreaName}
-            </p>
-            <p className="text-sm text-slate-600 dark:text-slate-400">
+            <p className="text-sm font-medium text-fg">{area.exactAreaName}</p>
+            <p className="mt-1 text-sm tabular-nums text-fg-muted">
               {formatInt(area.areaDesignPedestrians)} design pedestrians (
               {formatPercent(area.areaShare, 0)} of city total) ·{" "}
               {area.spatialPrecision}
@@ -455,31 +450,31 @@ function ProjectsSection({
   const rendered = projects.filter((p) => p.renderEnabled === "Yes");
   return (
     <section>
-      <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
+      <h2 className="text-lg font-semibold tracking-tight text-fg">
         Modeled projects
       </h2>
-      <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+      <p className="mt-1 max-w-2xl text-sm leading-relaxed text-fg-muted">
         {rendered.length} of {projects.length} canonical project records are
         funded (allocation &gt; 0). All are{" "}
-        <code className="text-xs">concept_only</code> proposals on
+        <code className="rounded bg-surface-2 px-1 py-0.5 text-[11px] text-fg">concept_only</code> proposals on
         conceptual planning anchors — the interactive map arrives in a later
         phase.
         {legacyProjects.length > 0 &&
           ` ${legacyProjects.length} richer narrative "legacy" project descriptions are also on file for this hero scenario.`}
       </p>
-      <div className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-        {rendered.map((project) => (
+      <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {rendered.map((project, i) => (
           <div
             key={project.projectId}
-            className="rounded-lg border border-slate-200 bg-white p-3 text-sm dark:border-slate-800 dark:bg-slate-900"
+            className="card card-interactive reveal p-4 text-sm"
+            style={{ "--i": i } as React.CSSProperties}
           >
-            <p className="font-mono text-xs text-slate-400">
-              {project.projectId}
+            <p className="font-mono text-[11px] text-fg-subtle">{project.projectId}</p>
+            <p className="mt-1 font-medium text-fg">
+              {project.categoryName}{" "}
+              <span className="font-normal capitalize text-fg-subtle">· {project.phase}</span>
             </p>
-            <p className="font-medium text-slate-800 dark:text-slate-200">
-              {project.categoryName} ({project.phase})
-            </p>
-            <p className="text-slate-600 dark:text-slate-400">
+            <p className="mt-0.5 tabular-nums text-fg-muted">
               {formatCents(project.allocationCents)}
             </p>
             <div className="mt-2">

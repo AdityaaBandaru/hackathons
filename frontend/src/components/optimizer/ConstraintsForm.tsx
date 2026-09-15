@@ -36,14 +36,17 @@ function SharePicker({
 }) {
   const enabled = value !== null;
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-3">
       <input
         type="checkbox"
         checked={enabled}
         onChange={(e) => onChange(e.target.checked ? 0.5 : null)}
-        className="h-4 w-4 accent-blue-600"
+        className="checkbox"
+        aria-label={`Enable ${label}`}
       />
-      <label className="w-48 text-sm text-slate-700 dark:text-slate-300">
+      <label
+        className={`w-40 text-[13px] transition-colors ${enabled ? "text-fg" : "text-fg-subtle"}`}
+      >
         {label}
       </label>
       <input
@@ -54,9 +57,10 @@ function SharePicker({
         disabled={!enabled}
         value={value ?? 0.5}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="flex-1 accent-blue-600 disabled:opacity-30"
+        className="slider flex-1"
+        style={{ "--fill": `${(value ?? 0.5) * 100}%` } as React.CSSProperties}
       />
-      <span className="w-12 text-right text-xs text-slate-500 dark:text-slate-400">
+      <span className="w-10 text-right font-mono text-[11px] tabular-nums text-fg-muted">
         {enabled ? `${Math.round((value ?? 0) * 100)}%` : "off"}
       </span>
     </div>
@@ -98,7 +102,7 @@ export function ConstraintsForm({
         onChange={(v) => onChange({ ...form, minimumPermanentShare: v })}
       />
 
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-3">
         <input
           type="checkbox"
           checked={form.maximumMajorConstructionProjects !== null}
@@ -108,9 +112,14 @@ export function ConstraintsForm({
               maximumMajorConstructionProjects: e.target.checked ? 4 : null,
             })
           }
-          className="h-4 w-4 accent-blue-600"
+          className="checkbox"
+          aria-label="Enable max. major-construction projects"
         />
-        <label className="w-48 text-sm text-slate-700 dark:text-slate-300">
+        <label
+          className={`flex-1 text-[13px] transition-colors ${
+            form.maximumMajorConstructionProjects !== null ? "text-fg" : "text-fg-subtle"
+          }`}
+        >
           Max. major-construction projects
         </label>
         <input
@@ -124,26 +133,23 @@ export function ConstraintsForm({
               maximumMajorConstructionProjects: Number(e.target.value),
             })
           }
-          className="w-20 rounded-md border border-slate-300 px-2 py-1 text-sm disabled:opacity-30 dark:border-slate-700 dark:bg-slate-900"
+          className="field h-8 w-20 px-2 text-center tabular-nums"
         />
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid gap-4">
         <div>
-          <p className="text-sm font-medium text-slate-700 dark:text-slate-300">
-            Required interventions
-          </p>
-          <div className="mt-1 flex flex-wrap gap-1">
+          <p className="text-[13px] font-medium text-fg">Required interventions</p>
+          <div className="mt-2 flex flex-wrap gap-1.5">
             {interventions.map((iv) => (
               <button
                 key={iv.category}
                 type="button"
                 onClick={() => toggleId("requiredInterventionIds", iv.category)}
                 disabled={form.excludedInterventionIds.includes(iv.category)}
-                className={`rounded-full px-2.5 py-1 text-xs font-medium ring-1 ring-inset disabled:opacity-30 ${
-                  form.requiredInterventionIds.includes(iv.category)
-                    ? "bg-emerald-600 text-white ring-emerald-600"
-                    : "bg-white text-slate-600 ring-slate-300 hover:bg-slate-50 dark:bg-slate-900 dark:text-slate-400 dark:ring-slate-700"
+                aria-pressed={form.requiredInterventionIds.includes(iv.category)}
+                className={`chip ${
+                  form.requiredInterventionIds.includes(iv.category) ? "chip-on-ok" : ""
                 }`}
               >
                 {iv.categoryName}
@@ -152,20 +158,17 @@ export function ConstraintsForm({
           </div>
         </div>
         <div>
-          <p className="text-sm font-medium text-slate-700 dark:text-slate-300">
-            Excluded interventions
-          </p>
-          <div className="mt-1 flex flex-wrap gap-1">
+          <p className="text-[13px] font-medium text-fg">Excluded interventions</p>
+          <div className="mt-2 flex flex-wrap gap-1.5">
             {interventions.map((iv) => (
               <button
                 key={iv.category}
                 type="button"
                 onClick={() => toggleId("excludedInterventionIds", iv.category)}
                 disabled={form.requiredInterventionIds.includes(iv.category)}
-                className={`rounded-full px-2.5 py-1 text-xs font-medium ring-1 ring-inset disabled:opacity-30 ${
-                  form.excludedInterventionIds.includes(iv.category)
-                    ? "bg-red-600 text-white ring-red-600"
-                    : "bg-white text-slate-600 ring-slate-300 hover:bg-slate-50 dark:bg-slate-900 dark:text-slate-400 dark:ring-slate-700"
+                aria-pressed={form.excludedInterventionIds.includes(iv.category)}
+                className={`chip ${
+                  form.excludedInterventionIds.includes(iv.category) ? "chip-on-danger" : ""
                 }`}
               >
                 {iv.categoryName}
