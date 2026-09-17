@@ -23,6 +23,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from . import __version__
 from .api.v1 import router as api_v1_router
 from .config import BUNDLE_VERSION, CANONICAL_CRS, HERO_SCENARIO_CITY_ID
+from .keepalive import start_keep_alive
 from .seed import SeedData, load_seed
 
 # The Phase 4 frontend runs on a different origin (Next.js dev server, by
@@ -59,7 +60,11 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
         len(seed.funding),
         len(seed.projects3d),
     )
+    # Optional self-ping so free-tier hosting never sleeps (see keepalive.py).
+    app.state.keep_alive_task = start_keep_alive()
     yield
+    if app.state.keep_alive_task is not None:
+        app.state.keep_alive_task.cancel()
     logger.info("shutdown")
 
 
