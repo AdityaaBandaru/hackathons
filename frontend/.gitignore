@@ -42,4 +42,3 @@ yarn-error.log*
 next-env.d.ts
 
 # MapLibre worker bundle, copied from node_modules at dev/build time
-/public/maplibre/

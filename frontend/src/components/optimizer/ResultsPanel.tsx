@@ -1,6 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { EvidenceBadge } from "@/components/EvidenceBadge";
+import { ArrowRight } from "@/components/ui/Icons";
 import { formatCents, formatNumber, formatPercent } from "@/lib/format";
 import type { OptimizeResult } from "@/lib/types";
 
@@ -15,6 +17,12 @@ export function ResultsPanel({ result }: { result: OptimizeResult }) {
 
   return (
     <div className="space-y-6">
+      <div className="reveal flex flex-wrap gap-2">
+        <Link href="/studio" className="btn btn-primary btn-sm">
+          Explore selected legacy in 3D
+          <ArrowRight className="h-3.5 w-3.5" />
+        </Link>
+      </div>
       <div className="panel-note note-model reveal">
         <div className="flex flex-wrap items-center gap-2">
           <EvidenceBadge evidenceClass={result.evidenceClass} />

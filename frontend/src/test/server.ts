@@ -1,14 +1,17 @@
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
+import type { Project3D } from "@/lib/types";
 import { setupServer } from "msw/node";
 import { http, HttpResponse } from "msw";
 import {
   makeCities,
   makeFundingForCity,
   makeInterventions,
-  makeNynjGeoJson,
   makeNynjProjects,
   makeOptimizeResult,
 } from "./fixtures";
 
+const seedProjects: Project3D[] = JSON.parse(readFileSync(resolve(process.cwd(), "../backend/app/data/seed/projects3d.json"), "utf8"));
 const API_BASE = "http://localhost:8000";
 
 export const defaultHandlers = [
@@ -41,14 +44,10 @@ export const defaultHandlers = [
     return HttpResponse.json({
       cityId,
       hostRegion: cityId,
-      projects: cityId === "nynj" ? makeNynjProjects() : [],
+      projects: cityId === "nynj" ? makeNynjProjects() : seedProjects.filter((p) => p.cityId === cityId),
       legacyProjects: [],
     });
   }),
-  // The map fetches its geometry as a static asset from the frontend origin.
-  http.get("/geojson/nynj_projects.geojson", () =>
-    HttpResponse.json(makeNynjGeoJson()),
-  ),
   http.get(`${API_BASE}/api/v1/interventions`, () =>
     HttpResponse.json(makeInterventions()),
   ),

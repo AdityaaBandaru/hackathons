@@ -356,22 +356,6 @@ export function makeNynjProjects(): import("@/lib/types").Project3D[] {
   });
 }
 
-export function makeNynjGeoJson() {
-  return {
-    type: "FeatureCollection",
-    metadata: { crs: "EPSG:4326", heroScenario: true },
-    features: NYNJ_MAP_PROJECT_IDS.map((project_id, index) => ({
-      type: "Feature",
-      id: project_id,
-      properties: { project_id, color: "#F59E0B" },
-      geometry: {
-        type: "Point",
-        coordinates: [-74.069833 + index * 0.001, 40.807664],
-      },
-    })),
-  };
-}
-
 /** An optimizer result whose portfolio covers 4 of the 6 map candidates. */
 export function makeMapScenario(): import("@/lib/types").OptimizeResult {
   const base = makeOptimizeResult();

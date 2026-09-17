@@ -57,11 +57,10 @@ export function Sliders({ className }: IconProps) {
   );
 }
 
-export function MapPin({ className }: IconProps) {
+export function Cube({ className }: IconProps) {
   return (
     <svg {...base} className={className}>
-      <path d="M8 14.5s4.5-4 4.5-7.5a4.5 4.5 0 0 0-9 0c0 3.5 4.5 7.5 4.5 7.5Z" />
-      <circle cx="8" cy="7" r="1.5" />
+      <path d="M8 1.5 14 5v6l-6 3.5L2 11V5l6-3.5ZM2 5l6 3.5L14 5M8 8.5v6" />
     </svg>
   );
 }

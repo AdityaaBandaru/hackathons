@@ -652,58 +652,6 @@ pre {
     );
 }
 
-/* MapLibre chrome, restyled for the dark canvas. */
-.maplibregl-ctrl-group {
-  background: var(--color-surface-2) !important;
-  border: 1px solid var(--color-border) !important;
-  border-radius: 8px !important;
-  box-shadow: 0 4px 12px rgb(0 0 0 / 0.5) !important;
-  overflow: hidden;
-}
-.maplibregl-ctrl-group button {
-  background: transparent !important;
-  border-color: var(--color-border) !important;
-}
-.maplibregl-ctrl-group button:hover {
-  background: rgb(255 255 255 / 0.06) !important;
-}
-.maplibregl-ctrl-group button .maplibregl-ctrl-icon {
-  filter: invert(1) opacity(0.85);
-}
-.maplibregl-ctrl-attrib {
-  background: rgb(8 9 10 / 0.7) !important;
-  color: var(--color-fg-subtle) !important;
-  font-size: 10px !important;
-  border-radius: 6px 0 0 0 !important;
-}
-.maplibregl-ctrl-attrib a {
-  color: var(--color-fg-muted) !important;
-}
-.maplibregl-ctrl-scale {
-  background: rgb(8 9 10 / 0.6) !important;
-  border-color: var(--color-fg-muted) !important;
-  color: var(--color-fg-muted) !important;
-}
-
-/*
- * MapLibre's canvas is keyboard-focusable (arrow keys pan, +/- zoom) and gets
- * a real focus outline from the browser, but it was invisible for two
- * stacked reasons: (1) the map's container clips it with overflow-hidden
- * (needed for the container's rounded corners), and an outline draws outside
- * the canvas's own border box, landing exactly in the clipped region; (2) an
- * inset box-shadow on the canvas itself avoids that clip but is painted
- * *behind* the canvas's own drawn bitmap, which repaints opaquely over its
- * whole box every frame, so it never surfaces either.
- *
- * The fix styles the wrapper instead of the canvas: the wrapper paints no
- * bitmap of its own, and an element's own box-shadow is never clipped by its
- * own overflow-hidden (that property only clips a box's *descendants*), so a
- * ring drawn here survives both problems.
- */
-.maplibregl-map:has(.maplibregl-canvas:focus-visible) {
-  box-shadow: 0 0 0 3px var(--color-accent);
-}
-
 /* ---------------------------------------------------------- motion opt-out */
 
 @media (prefers-reduced-motion: reduce) {
@@ -718,3 +666,5 @@ pre {
     scroll-behavior: auto;
   }
 }
+
+/* Geographic site view: labels can move, geometry never does. */

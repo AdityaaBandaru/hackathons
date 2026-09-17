@@ -8,7 +8,7 @@ const links = [
   { href: "/compare", label: "Compare" },
   { href: "/cities/nynj", label: "Evidence" },
   { href: "/optimize", label: "Optimizer" },
-  { href: "/map", label: "Map" },
+  { href: "/studio", label: "3D Studio" },
 ];
 
 function isActive(pathname: string, href: string) {

@@ -175,3 +175,141 @@ Frontend: 106 passed (69 before this view, 37 new). Verified live: solid
 extruded volumes with lit faces in all four modes, Baseline empty in 3D, and
 Flat → 3D → Flat → 3D → Flat returning the camera and layer set exactly to
 their flat state each time.
+
+## 3D design studio and map refinements
+
+Ported from the extended copy of the project (`world-cup-mobility-optimizer 2`)
+and restyled onto the app's dark token system.
+
+**`/studio`** — a Three.js design studio (`src/app/studio`,
+`src/components/map/ProjectStudioScene.tsx`, `src/lib/{studio,projectModels}.ts`).
+Every one of the 264 project records is buildable as a concept model whose
+overall envelope is that record's own `lengthM × widthM × heightM`; the
+architectural detail inside the envelope (canopies, glazing, markings) is
+illustrative and disclosed as such on the page. Corridors longer than 80 m
+show a labeled 80 m section with the full length kept in metadata. The
+studio honours the same four modes as the map through `studioProjects`,
+which routes through `resolveMapSelection`: Baseline shows nothing, and a
+"Compare both" view can never resurrect an unselected counterpart. Orbit /
+top / front cameras, an optional dimension envelope, auto-orbit, and GLB
+export (with project ID, evidence class, source URL and dimensions in node
+metadata). Two exported station assets live in `models/`.
+
+**Map** — clicking a project now frames it (`easeTo`, zoom clamped to
+12.8–17.5) and outlines it: a ring for point features, a line for the rest,
+drawn from the volume source in 3D so it sits on the extrusion. The outline
+exists only for a project the current mode draws, and the click card closes
+the moment its project is hidden (switching to Baseline dismisses it — a
+card must never claim a project the map is not showing). A "Reset view"
+button returns to the Meadowlands framing for the current view. The OSM
+raster source declares `maxzoom: 19` so close-ups scale the last real tile
+rather than requesting z20 tiles that do not exist.
+
+Frontend: 117 passed (10 new: `projectModels.test.ts` builds all 264 records
+inside their envelopes and checks scenario permissions; `studio/page.test.tsx`
+covers compare and Baseline; one new map page test for card dismissal).
+Verified live: studio renders the station in permanent, temporary and
+same-scale comparison; map fly-to, ring highlight, reset, and Baseline
+dismissal.
+
+## City-specific 3D site models
+
+The updated `/map` has an eleven-city selector. All 24 candidate records for each city use their supplied geometry and two named planning anchors. `/map` and `/studio` share `buildProjectModel`; city profiles, anchor types, exact place names and design descriptions determine the illustrative station and hub variants. The site view places full-length corridors; the studio keeps its labelled 80 m detail view. The scene adds anchor analysis rings, a metre grid, north arrow, top/front/reset presets, anchor focus, click-to-focus, and labels with collision handling and leader lines.
+
+`resolveMapSelection` remains the selection authority. An explicit city check prevents a mismatched scenario from selecting anything, even if it contains misleading IDs. Baseline has zero proposal models. The studio now includes all candidates and current optimizer picks regardless of the historic seed demonstration's `renderEnabled` flag; this follows this task's all-candidates/current-scenario requirements. Cards retain exact provenance and implementation-status fields.
+
+The existing row-packing tests were deliberately replaced with geographic placement tests. The historical render-disabled test was replaced by stricter tests proving that seed funding flags cannot suppress a current scenario pick or invent a selection. No backend or reference data was edited.
+
+### Validation and remaining checks
+
+Before the workspace interruption: frontend lint clean, 106 frontend tests passed, production build passed; backend 142 tests passed with two dependency deprecation warnings. The source was subsequently restored from the original upload and the implementation reconstructed. The current restoration's frontend validation result is recorded below.
+
+**Live browser verification is incomplete.** The browser/tool connection stalled before the requested eleven-city map and three-city studio tour could finish. No visual success is claimed. Browser interaction and appearance should still be inspected locally.
+
+### Modelling assumptions
+
+1. Overall model dimensions use the supplied project envelopes. Internal architecture is illustrative, not an approved or as-built design.
+2. City recipes use the actual assigned anchor. The Los Angeles station-category record remains at SoFi south plaza; its K Line interchange is the hub record. No rail is invented at SoFi, Arlington, Arrowhead or Miami anchors that lack a supplied rail context.
+3. Placement projects the unchanged pre-generated WGS84 geometry into local metres around the two-anchor centroid. Precision remains `planning_anchor ±25–100 m`, not surveyed.
+4. Polygon assets conform to the supplied four-sided footprint. Full-length route surfaces follow the supplied LineStrings. These are conceptual alignments; they are not verified street or track alignments.
+5. Bases sit at zero elevation. There is no terrain, surrounding building, stadium or surveyed surrounding road model. Illustrative station stairs and access details do not establish actual elevations or clearances.
+6. Overlapping proposals remain at their recorded positions. Label decluttering moves or hides text only; the list exposes every proposal permitted by the active mode.
+7. Anchor rings show `analysisRadiusM`, an aggregation area rather than a construction boundary.
+8. One concept envelope represents each canonical project ID. Funded unit quantities do not create repeated buildings. Service-route geometry is a concept, not an observed vehicle movement or a new road.
+9. Amber denotes temporary and blue denotes permanent. Candidates are translucent; selected styling derives only from the current optimizer scenario.
+10. The same full envelope is used when a project is selected or merely a candidate. Geometry is not scaled according to funding.
+11. Existing `models/` GLBs and preview images are preserved as prior exports. Export from the updated studio for the current city-specific assets.
+
+### Logic fixes and accuracy follow-up
+
+Included fixes: explicit scenario-city isolation, consistent studio selection badges, preservation of unknown allocation totals instead of converting missing amounts to zero, shared candidate materials without orphaned clones, cleanup of stale label elements, and a world-space active outline.
+
+Improved visual specificity does **not** establish better predictive accuracy. The backend still uses engineering-assumption benefit coefficients. Attendance uniformly scales benefits, so stable portfolios under attendance changes are not evidence of realistic congestion response. Transit capacity and visitor transit usage multiply the same productivity term; separating supply from demand requires a network or queue model. Calibrate coefficients with measured queues, throughput, travel times and costs, then validate against held-out events before making accuracy claims.
+
+The backend's `nextBest` helper ranks marginal benefit per cost without re-enforcing the full scenario constraints or including newly unlocked complementarities. Treat it as a heuristic, not a guaranteed feasible optimized recommendation. These backend assumptions were reviewed but not modified in this frontend task.
+
+Restoration validation: `npm run lint` passed without lint warnings; `npm test` passed **106 tests across 9 files**; `npm run build` passed including TypeScript and all routes. Packaging verified the ZIP CRC and byte-for-byte preservation of **106 backend and reference files**. Browser verification remains incomplete.
+
+### Follow-up after the city-specific update was brought in
+
+Brought the updated frontend into the repository as-is, then:
+
+- **Default framing.** The site model now opens focused on the anchor with the
+  most projects (`flyTo`, immediate) instead of fitting the whole site; with
+  3 km corridors in the bounds a full fit turned the station into a dot.
+  "Reset view" still frames everything.
+- **Candidates** in the site view are drawn at 66 % opacity (was 48 %).
+- **Label stacks** are shallower (160 px close / 96 px far), so fewer labels
+  pile over one anchor; the rest appear on hover, zoom, or in the list.
+- **Model rework** for the categories that read weakest (all still inside
+  their recorded envelopes — the 264-record test is unchanged and passes):
+  signals (pole, controller cabinet, backplated head with visored lenses,
+  pedestrian head, push button; the permanent variant adds a second head and
+  detector), wayfinding (double-sided totem with header band, map panel,
+  directional blades, pictogram tiles), park-and-ride (angled bays in rows,
+  drive aisles, entry apron, shuttle kerb island, accessible bays), managed
+  rideshare hub (lettered pickup bays along raised kerb islands, queue
+  chevrons, waiting island with tactile edge), and the four corridor types,
+  which previously looked identical: red bus lane with "bus only" blocks and
+  separator kerb; blue service-route ribbon with chevrons and stop posts;
+  green bikeway with hatched buffer and symbols; pedestrian corridor with
+  paving joints, planters, crossings and a protective kerb; ADA route with a
+  ribbed tactile guidance strip, stop pads and kerb ramps.
+- **Live verification** completed for all 11 cities on `/map` (24 models
+  each, both anchors, Baseline empty, no console errors) and for the reworked
+  models in `/studio`.
+
+### Labels: anchors first, projects on demand
+
+Twenty-four callouts walling both margins of the site view read worse than no
+label. The site model now labels **only the planning anchors** (name, project
+count, selected count, "click to focus"), plus whatever is **selected, active
+or hovered**. A plain candidate's label appears only when the camera is close
+enough for it to sit on its own model without colliding; margin callouts with
+leader lines are reserved for the important labels. The project list beside
+the scene is sectioned by planning anchor, each project's temporary and
+permanent concepts adjacent with a phase dot, so every project is still one
+click away without being drawn as text over the models.
+
+### Spread-out arrangement (default) vs. as placed
+
+The pre-generated corridor geometry radiates from each anchor point, so the
+geographic arrangement piles a dozen projects onto one spot. The site model
+now defaults to **Spread out**: each anchor's projects are row-packed into a
+grid centred on that anchor's real local position (category order, temporary
+left of permanent, corridors as the studio's 80 m section), and the two grids
+are pushed apart along the line between the anchors if they would overlap.
+A model's place inside a grid is for reading, not geography, and the
+disclosure block says so. **As placed** keeps the previous geographic layout
+behind a toggle. `layoutSiteSpread` is pure and tested for all 11 cities: 24
+items each, no overlapping footprints, no overlapping anchor grids, every
+model nearer its own anchor than the other.
+
+### Map section removed
+
+The `/map` site model (page, `ProjectGallery3D`, `gallery`, `siteLabels`,
+`sitePlacement`, `siteModels`, `ProjectCard`) was removed at the user's
+request. The 3D design studio at `/studio` remains the single 3D view; it
+still honours the four modes through `studioProjects` → `resolveMapSelection`
+(`mapModes.ts` is kept for that reason). Frontend: 52 tests, lint and build
+clean.

@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getHealth } from "@/lib/api";
 import { LoadingBlock, ErrorBlock } from "@/components/StatusStates";
 import { SpotlightCard } from "@/components/ui/SpotlightCard";
-import { ArrowRight, Bars, Layers, MapPin, Sliders } from "@/components/ui/Icons";
+import { ArrowRight, Bars, Cube, Layers, Sliders } from "@/components/ui/Icons";
 import { formatInt } from "@/lib/format";
 
 const cards = [
@@ -28,17 +28,17 @@ const cards = [
     body: "Set objective weights and constraints, call the real mixed-integer optimizer, and see the selected portfolio and its sensitivity.",
   },
   {
-    href: "/map",
-    icon: MapPin,
-    title: "Explore the Meadowlands map",
-    body: "Every candidate project on planning-anchor geometry, in flat or 3D perspective, with the current scenario's picks highlighted.",
+    href: "/studio",
+    icon: Cube,
+    title: "Open the 3D design studio",
+    body: "Concept models of every intervention, built from each record's own dimensions. Compare temporary and permanent at the same scale.",
   },
 ];
 
 const principles = [
   ["Sourced or labeled", "Every number is linked evidence, or tagged as an assumption or model output."],
   ["Integer cents", "Money is never a float. The 11 official allocations reconcile to the cent."],
-  ["Nothing invented", "Missing values stay missing. The map draws only what the optimizer returned."],
+  ["Nothing invented", "Missing values stay missing. The studio shows as selected only what the optimizer returned."],
 ];
 
 export default function HomePage() {
@@ -81,8 +81,8 @@ export default function HomePage() {
             Run the optimizer
             <ArrowRight className="h-4 w-4" />
           </Link>
-          <Link href="/map" className="btn btn-secondary">
-            Open the 3D map
+          <Link href="/studio" className="btn btn-secondary">
+            Open the 3D studio
           </Link>
           <span className="ml-1 hidden items-center gap-1.5 text-xs text-fg-subtle sm:inline-flex">
             <span className="kbd">POST</span> /api/v1/optimize
