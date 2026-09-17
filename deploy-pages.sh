@@ -6,21 +6,24 @@
 #
 # (No Actions workflow is used, so no `workflow` token scope is needed.)
 set -euo pipefail
-cd "$(dirname "$0")"
+ROOT="$(cd "$(dirname "$0")" && pwd)"
 : "${API_BASE_URL:?set API_BASE_URL to the deployed backend, e.g. https://citystride-api.onrender.com}"
-( cd CityStride/frontend \
-  && npm ci --silent \
-  && NEXT_OUTPUT=export NEXT_PUBLIC_BASE_PATH=/hackathons NEXT_PUBLIC_API_BASE_URL="$API_BASE_URL" npm run build \
-  && touch out/.nojekyll )
+cd "$ROOT/CityStride/frontend"
+npm ci --silent
+NEXT_OUTPUT=export NEXT_PUBLIC_BASE_PATH=/hackathons NEXT_PUBLIC_API_BASE_URL="$API_BASE_URL" npm run build
+touch out/.nojekyll
+cd "$ROOT"
 tmp=$(mktemp -d)
 git worktree add -q --detach "$tmp"
-( cd "$tmp" \
-  && git checkout -q --orphan gh-pages \
-  && git rm -rfq . >/dev/null 2>&1 || true \
-  && cp -R ../../"$(realpath --relative-to="$tmp" CityStride/frontend/out 2>/dev/null || echo "$PWD/CityStride/frontend/out")"/. . 2>/dev/null || cp -R "$OLDPWD/CityStride/frontend/out/." . \
-  && git add -A \
-  && git commit -qm "Publish CityStride ($(date -u +%Y-%m-%dT%H:%MZ), API $API_BASE_URL)" \
-  && git push -qf origin gh-pages )
+(
+  cd "$tmp"
+  git checkout -q --orphan gh-pages
+  git rm -rfq . >/dev/null 2>&1 || true
+  cp -R "$ROOT/CityStride/frontend/out/." .
+  git add -A
+  git commit -qm "Publish CityStride ($(date -u +%Y-%m-%dT%H:%MZ), API $API_BASE_URL)"
+  git push -qf origin gh-pages
+)
 git worktree remove -f "$tmp"
-rm -rf CityStride/frontend/out
+rm -rf "$ROOT/CityStride/frontend/out"
 echo "published: https://adityaabandaru.github.io/hackathons/"
