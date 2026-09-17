@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "project3d.schema.json",
+  "title": "World Cup 2026 3D Project",
+  "type": "object",
+  "required": [
+    "projectId",
+    "cityId",
+    "category",
+    "phase",
+    "areaId",
+    "latitude",
+    "longitude",
+    "geometryType",
+    "allocationCents",
+    "renderEnabled",
+    "implementationStatus",
+    "spatialPrecision",
+    "evidenceClass"
+  ],
+  "properties": {
+    "projectId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "cityId": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string"
+    },
+    "phase": {
+      "enum": [
+        "temporary",
+        "permanent"
+      ]
+    },
+    "areaId": {
+      "type": "string"
+    },
+    "latitude": {
+      "type": "number",
+      "minimum": -90,
+      "maximum": 90
+    },
+    "longitude": {
+      "type": "number",
+      "minimum": -180,
+      "maximum": 180
+    },
+    "geometryType": {
+      "type": "string"
+    },
+    "allocationCents": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "renderEnabled": {
+      "enum": [
+        "Yes",
+        "No"
+      ]
+    },
+    "implementationStatus": {
+      "const": "concept_only"
+    },
+    "spatialPrecision": {
+      "type": "string"
+    },
+    "evidenceClass": {
+      "type": "string"
+    }
+  }
+}

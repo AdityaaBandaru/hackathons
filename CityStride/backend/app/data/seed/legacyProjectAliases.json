@@ -1,0 +1,8 @@
+{
+  "nynj-ped-corridor-01": "nynj-ped-PERM",
+  "nynj-tnc-hub-01": "nynj-tnc-PERM",
+  "nynj-bus-priority-01": "nynj-buslane-PERM",
+  "nynj-station-capacity-01": "nynj-station-PERM",
+  "nynj-toc-01": "nynj-toc-PERM",
+  "nynj-access-01": "nynj-access-PERM"
+}

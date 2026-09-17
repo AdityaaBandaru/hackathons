@@ -1,0 +1,233 @@
+[
+  {
+    "evidenceId": "WC26-MATCHES",
+    "hostRegion": "Tournament",
+    "dateOrScope": "Tournament",
+    "metric": "Matches staged",
+    "value": 104,
+    "unit": "matches",
+    "qualifier": "exact",
+    "evidenceClass": "observed_final",
+    "sourceUrl": "https://inside.fifa.com/tournament-organisation/fifa-world-cup-2026-by-the-numbers"
+  },
+  {
+    "evidenceId": "WC26-ATT",
+    "hostRegion": "Tournament",
+    "dateOrScope": "Tournament",
+    "metric": "Match attendees",
+    "value": 6800000,
+    "unit": "attendees",
+    "qualifier": "more than",
+    "evidenceClass": "observed_final",
+    "sourceUrl": "https://inside.fifa.com/tournament-organisation/fifa-world-cup-2026-by-the-numbers"
+  },
+  {
+    "evidenceId": "WC26-FAN",
+    "hostRegion": "Tournament",
+    "dateOrScope": "Fan festivals",
+    "metric": "Fan-festival visits",
+    "value": 9017000,
+    "unit": "visits",
+    "qualifier": "reported total",
+    "evidenceClass": "observed_final",
+    "sourceUrl": "https://inside.fifa.com/organisation/media-releases/fan-festival-extends-historic-world-cup-2026-experience-millions-record-breaking-celebrations-host-countries"
+  },
+  {
+    "evidenceId": "ATL-RAIL",
+    "hostRegion": "Atlanta",
+    "dateOrScope": "35-day event period",
+    "metric": "Rail passenger trips",
+    "value": 4700000,
+    "unit": "trips",
+    "qualifier": "reported total; includes associated events",
+    "evidenceClass": "observed_final",
+    "sourceUrl": "https://itsmarta.com/marta-safely-moves-millions.aspx"
+  },
+  {
+    "evidenceId": "ATL-PEAK",
+    "hostRegion": "Atlanta",
+    "dateOrScope": "2026-06-24",
+    "metric": "Rail passenger trips",
+    "value": 240000,
+    "unit": "trips",
+    "qualifier": "approximately",
+    "evidenceClass": "observed_final",
+    "sourceUrl": "https://itsmarta.com/marta-safely-moves-millions.aspx"
+  },
+  {
+    "evidenceId": "ATL-VC",
+    "hostRegion": "Atlanta",
+    "dateOrScope": "Match days",
+    "metric": "Vine City share of rail demand",
+    "value": 0.14,
+    "unit": "share",
+    "qualifier": "reported",
+    "evidenceClass": "observed_final",
+    "sourceUrl": "https://itsmarta.com/marta-safely-moves-millions.aspx"
+  },
+  {
+    "evidenceId": "ATL-SEC",
+    "hostRegion": "Atlanta",
+    "dateOrScope": "Match days",
+    "metric": "SEC District share of rail demand",
+    "value": 0.38,
+    "unit": "share",
+    "qualifier": "reported",
+    "evidenceClass": "observed_final",
+    "sourceUrl": "https://itsmarta.com/marta-safely-moves-millions.aspx"
+  },
+  {
+    "evidenceId": "BOS-TRAINS",
+    "hostRegion": "Boston",
+    "dateOrScope": "Seven matches",
+    "metric": "Event-train round trips",
+    "value": 98,
+    "unit": "round trips",
+    "qualifier": "reported",
+    "evidenceClass": "observed_final",
+    "sourceUrl": "https://www.mass.gov/news/governor-healey-celebrates-successful-world-cup-operations-across-massachusetts"
+  },
+  {
+    "evidenceId": "BOS-TIX",
+    "hostRegion": "Boston",
+    "dateOrScope": "Seven matches",
+    "metric": "Round-trip tickets sold",
+    "value": 108940,
+    "unit": "tickets",
+    "qualifier": "reported",
+    "evidenceClass": "observed_final",
+    "sourceUrl": "https://www.mass.gov/news/governor-healey-celebrates-successful-world-cup-operations-across-massachusetts"
+  },
+  {
+    "evidenceId": "BOS-STAFF",
+    "hostRegion": "Boston",
+    "dateOrScope": "Per match day",
+    "metric": "Employees deployed",
+    "value": 700,
+    "unit": "employees",
+    "qualifier": "approximately",
+    "evidenceClass": "observed_final",
+    "sourceUrl": "https://www.mass.gov/news/governor-healey-celebrates-successful-world-cup-operations-across-massachusetts"
+  },
+  {
+    "evidenceId": "LA-RIDES",
+    "hostRegion": "Los Angeles",
+    "dateOrScope": "Tournament",
+    "metric": "Rides directly to/from stadium",
+    "value": 212865,
+    "unit": "rides",
+    "qualifier": "reported",
+    "evidenceClass": "observed_final",
+    "sourceUrl": "https://thesource.metro.net/metro-state-of-agency-celebrates-a-year-of-milestones-and-looking-ahead-to-another-transformative-year/"
+  },
+  {
+    "evidenceId": "SF-TOTAL",
+    "hostRegion": "San Francisco Bay Area",
+    "dateOrScope": "Six matches",
+    "metric": "VTA stadium trips",
+    "value": 230000,
+    "unit": "trips",
+    "qualifier": "close to",
+    "evidenceClass": "observed_final",
+    "sourceUrl": "https://www.vta.org/sites/default/files/2026-07/Board%20Correspondence%2007_17_26.pdf"
+  },
+  {
+    "evidenceId": "SF-PEAK",
+    "hostRegion": "San Francisco Bay Area",
+    "dateOrScope": "2026-06-25",
+    "metric": "VTA stadium trips",
+    "value": 42000,
+    "unit": "trips",
+    "qualifier": "nearly",
+    "evidenceClass": "observed_final",
+    "sourceUrl": "https://www.vta.org/sites/default/files/2026-07/Board%20Correspondence%2007_17_26.pdf"
+  },
+  {
+    "evidenceId": "SEA-PEAK",
+    "hostRegion": "Seattle",
+    "dateOrScope": "United States vs Belgium",
+    "metric": "Match-day Link boardings",
+    "value": 309000,
+    "unit": "boardings",
+    "qualifier": "preliminary",
+    "evidenceClass": "observed_preliminary",
+    "sourceUrl": "https://www.soundtransit.org/get-to-know-us/news-events/news-releases/sound-transit-set-all-time-records-daily-monthly-ridership"
+  },
+  {
+    "evidenceId": "NYNJ-TRANSIT",
+    "hostRegion": "New York/New Jersey",
+    "dateOrScope": "Eight matches",
+    "metric": "Event-related NJ Transit passengers",
+    "value": 370000,
+    "unit": "passengers",
+    "qualifier": "more than",
+    "evidenceClass": "observed_final",
+    "sourceUrl": "https://www.njtransit.com/press-releases/new-jersey-interagency-transportation-after-action-report-aar-njny-stadium-fifa"
+  },
+  {
+    "evidenceId": "NYNJ-THR",
+    "hostRegion": "New York/New Jersey",
+    "dateOrScope": "Tournament",
+    "metric": "Average movement rate",
+    "value": 24000,
+    "unit": "people/hour",
+    "qualifier": "reported average",
+    "evidenceClass": "observed_final",
+    "sourceUrl": "https://www.njtransit.com/press-releases/new-jersey-interagency-transportation-after-action-report-aar-njny-stadium-fifa"
+  },
+  {
+    "evidenceId": "NYNJ-PED",
+    "hostRegion": "New York/New Jersey",
+    "dateOrScope": "Final",
+    "metric": "Pedestrian volume",
+    "value": 65000,
+    "unit": "pedestrians",
+    "qualifier": "observed",
+    "evidenceClass": "observed_final",
+    "sourceUrl": "https://www.njtransit.com/press-releases/new-jersey-interagency-transportation-after-action-report-aar-njny-stadium-fifa"
+  },
+  {
+    "evidenceId": "NYNJ-OVER",
+    "hostRegion": "New York/New Jersey",
+    "dateOrScope": "Tournament",
+    "metric": "Pedestrian volume above projection",
+    "value": 0.8,
+    "unit": "share",
+    "qualifier": "more than",
+    "evidenceClass": "observed_final",
+    "sourceUrl": "https://www.njtransit.com/press-releases/new-jersey-interagency-transportation-after-action-report-aar-njny-stadium-fifa"
+  },
+  {
+    "evidenceId": "NYNJ-TNC",
+    "hostRegion": "New York/New Jersey",
+    "dateOrScope": "Tournament egress",
+    "metric": "Rideshare demand above projection",
+    "value": 0.5,
+    "unit": "share",
+    "qualifier": "approximately",
+    "evidenceClass": "observed_final",
+    "sourceUrl": "https://www.njtransit.com/press-releases/new-jersey-interagency-transportation-after-action-report-aar-njny-stadium-fifa"
+  },
+  {
+    "evidenceId": "PHI-PLAN",
+    "hostRegion": "Philadelphia",
+    "dateOrScope": "Per match",
+    "metric": "Planned SEPTA riders",
+    "value": 31000,
+    "unit": "riders",
+    "qualifier": "approximately; plan",
+    "evidenceClass": "official_plan",
+    "sourceUrl": "https://wwww.septa.org/news/infrastructure-improvements-for-fifa/"
+  },
+  {
+    "evidenceId": "MIA-HUBS",
+    "hostRegion": "Miami",
+    "dateOrScope": "Match days",
+    "metric": "Official shuttle hubs",
+    "value": 4,
+    "unit": "hubs",
+    "qualifier": "confirmed plan",
+    "evidenceClass": "official_plan",
+    "sourceUrl": "https://www.miamidade.gov/global/release.page?Mduid_release=rel178040771715787"
+  }
+]

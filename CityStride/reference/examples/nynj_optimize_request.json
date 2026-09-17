@@ -1,0 +1,21 @@
+{
+  "cityId": "nynj",
+  "budgetCents": 1043868100,
+  "weights": {
+    "travelTime": 0.25,
+    "vehicleCongestion": 0.15,
+    "emissions": 0.12,
+    "accessibility": 0.2,
+    "reliability": 0.15,
+    "permanentLegacy": 0.13
+  },
+  "constraints": {
+    "minimumAccessibilityShare": 0.1,
+    "maximumTemporaryShare": 0.55,
+    "minimumPermanentShare": 0.35,
+    "maximumMajorConstructionProjects": 4,
+    "requiredInterventionIds": [],
+    "excludedInterventionIds": []
+  },
+  "assumptionsOverride": {}
+}

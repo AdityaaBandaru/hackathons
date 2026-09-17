@@ -1,0 +1,403 @@
+{
+  "base": [
+    {
+      "city": "Atlanta",
+      "budget_m": 9.391018,
+      "spent_m": 9.39,
+      "score": 13.867659707802,
+      "quantities": {
+        "service": 4,
+        "buslane": 3,
+        "signals": 4,
+        "hub": 1,
+        "tnc": 1,
+        "wayfinding": 2,
+        "station": 2,
+        "toc": 2
+      },
+      "passenger_hours_saved": 45312.785622,
+      "avg_minutes_saved_per_attendee": 5.005260000000001,
+      "vehicle_hours_avoided": 101539.72717000001,
+      "co2_tonnes_avoided": 611.6457456440003,
+      "accessible_trips_improved": 151328.33247199998,
+      "reliability_risk_pp_reduction": 23.895119362,
+      "next_best": {
+        "intervention": "tnc",
+        "unit_number": 2,
+        "cost_m": 0.4,
+        "utility_per_m": 0.9646912320000003
+      }
+    },
+    {
+      "city": "Boston",
+      "budget_m": 8.671598,
+      "spent_m": 8.66,
+      "score": 13.67036400296,
+      "quantities": {
+        "service": 3,
+        "buslane": 4,
+        "signals": 3,
+        "hub": 3,
+        "parkride": 1,
+        "tnc": 2,
+        "wayfinding": 1,
+        "toc": 2
+      },
+      "passenger_hours_saved": 43558.654955,
+      "avg_minutes_saved_per_attendee": 5.8431,
+      "vehicle_hours_avoided": 116993.130612,
+      "co2_tonnes_avoided": 706.6489932100001,
+      "accessible_trips_improved": 138414.40804799998,
+      "reliability_risk_pp_reduction": 19.370216511200002,
+      "next_best": {
+        "intervention": "signals",
+        "unit_number": 4,
+        "cost_m": 0.09,
+        "utility_per_m": 1.3533789617777776
+      }
+    },
+    {
+      "city": "Dallas",
+      "budget_m": 10.033037,
+      "spent_m": 9.85,
+      "score": 23.881737829239995,
+      "quantities": {
+        "service": 4,
+        "buslane": 4,
+        "signals": 4,
+        "hub": 3,
+        "parkride": 2,
+        "tnc": 3,
+        "toc": 2
+      },
+      "passenger_hours_saved": 76155.21203866665,
+      "avg_minutes_saved_per_attendee": 7.222359999999998,
+      "vehicle_hours_avoided": 221193.81908800005,
+      "co2_tonnes_avoided": 1220.7845951999996,
+      "accessible_trips_improved": 225118.85413599998,
+      "reliability_risk_pp_reduction": 33.3319240024,
+      "next_best": {
+        "intervention": "wayfinding",
+        "unit_number": 1,
+        "cost_m": 0.3,
+        "utility_per_m": 1.2315820266666666
+      }
+    },
+    {
+      "city": "Houston",
+      "budget_m": 9.092387,
+      "spent_m": 9.0,
+      "score": 13.977640237696,
+      "quantities": {
+        "service": 2,
+        "buslane": 4,
+        "signals": 4,
+        "hub": 2,
+        "parkride": 1,
+        "tnc": 2,
+        "wayfinding": 2,
+        "station": 1,
+        "toc": 2
+      },
+      "passenger_hours_saved": 44339.04224266667,
+      "avg_minutes_saved_per_attendee": 5.55358,
+      "vehicle_hours_avoided": 124652.748976,
+      "co2_tonnes_avoided": 658.2742776319999,
+      "accessible_trips_improved": 141180.31104000003,
+      "reliability_risk_pp_reduction": 20.723786577600002,
+      "next_best": {
+        "intervention": "service",
+        "unit_number": 3,
+        "cost_m": 0.55,
+        "utility_per_m": 1.002161073018182
+      }
+    },
+    {
+      "city": "Kansas City",
+      "budget_m": 8.632123,
+      "spent_m": 8.55,
+      "score": 14.70056620824,
+      "quantities": {
+        "service": 3,
+        "buslane": 4,
+        "signals": 4,
+        "hub": 3,
+        "parkride": 2,
+        "tnc": 3,
+        "toc": 1
+      },
+      "passenger_hours_saved": 47080.68278166666,
+      "avg_minutes_saved_per_attendee": 6.8530999999999995,
+      "vehicle_hours_avoided": 135075.139106,
+      "co2_tonnes_avoided": 746.5748287999999,
+      "accessible_trips_improved": 141986.06754000002,
+      "reliability_risk_pp_reduction": 20.069804430399998,
+      "next_best": {
+        "intervention": "toc",
+        "unit_number": 2,
+        "cost_m": 0.75,
+        "utility_per_m": 0.9886950254133334
+      }
+    },
+    {
+      "city": "Los Angeles",
+      "budget_m": 9.603284,
+      "spent_m": 9.600000000000001,
+      "score": 21.507892000000002,
+      "quantities": {
+        "service": 3,
+        "buslane": 4,
+        "signals": 4,
+        "hub": 3,
+        "parkride": 2,
+        "tnc": 3,
+        "wayfinding": 1,
+        "toc": 2
+      },
+      "passenger_hours_saved": 68201.65333333334,
+      "avg_minutes_saved_per_attendee": 7.30732,
+      "vehicle_hours_avoided": 202063.68,
+      "co2_tonnes_avoided": 1071.6552,
+      "accessible_trips_improved": 205253.44000000006,
+      "reliability_risk_pp_reduction": 29.981168000000004,
+      "next_best": {
+        "intervention": "service",
+        "unit_number": 4,
+        "cost_m": 0.55,
+        "utility_per_m": 1.0695287272727272
+      }
+    },
+    {
+      "city": "Miami",
+      "budget_m": 8.69743,
+      "spent_m": 8.66,
+      "score": 15.570292407629998,
+      "quantities": {
+        "service": 3,
+        "buslane": 4,
+        "signals": 3,
+        "hub": 3,
+        "parkride": 1,
+        "tnc": 2,
+        "wayfinding": 1,
+        "toc": 2
+      },
+      "passenger_hours_saved": 49262.491726999986,
+      "avg_minutes_saved_per_attendee": 6.580659999999998,
+      "vehicle_hours_avoided": 141811.44129600003,
+      "co2_tonnes_avoided": 786.5188227000002,
+      "accessible_trips_improved": 151430.58760799997,
+      "reliability_risk_pp_reduction": 22.032138995399997,
+      "next_best": {
+        "intervention": "signals",
+        "unit_number": 4,
+        "cost_m": 0.09,
+        "utility_per_m": 2.038573904
+      }
+    },
+    {
+      "city": "New York/New Jersey",
+      "budget_m": 10.438681,
+      "spent_m": 10.329999999999998,
+      "score": 20.571448514954994,
+      "quantities": {
+        "service": 3,
+        "buslane": 2,
+        "signals": 4,
+        "hub": 2,
+        "ped": 1,
+        "tnc": 3,
+        "wayfinding": 1,
+        "station": 2,
+        "toc": 2
+      },
+      "passenger_hours_saved": 65647.68604333333,
+      "avg_minutes_saved_per_attendee": 6.34732,
+      "vehicle_hours_avoided": 180671.485475,
+      "co2_tonnes_avoided": 791.5377602599998,
+      "accessible_trips_improved": 220195.25397999995,
+      "reliability_risk_pp_reduction": 33.678512737999995,
+      "next_best": {
+        "intervention": "buslane",
+        "unit_number": 3,
+        "cost_m": 0.36,
+        "utility_per_m": 1.32379895375
+      }
+    },
+    {
+      "city": "Philadelphia",
+      "budget_m": 8.474327,
+      "spent_m": 8.45,
+      "score": 10.291853329283999,
+      "quantities": {
+        "service": 3,
+        "buslane": 3,
+        "signals": 3,
+        "hub": 1,
+        "tnc": 1,
+        "wayfinding": 1,
+        "station": 2,
+        "toc": 2
+      },
+      "passenger_hours_saved": 33871.245830666674,
+      "avg_minutes_saved_per_attendee": 4.982360000000001,
+      "vehicle_hours_avoided": 75230.337784,
+      "co2_tonnes_avoided": 456.907358828,
+      "accessible_trips_improved": 111485.58808000002,
+      "reliability_risk_pp_reduction": 17.6224892184,
+      "next_best": {
+        "intervention": "signals",
+        "unit_number": 4,
+        "cost_m": 0.09,
+        "utility_per_m": 1.234196600888889
+      }
+    },
+    {
+      "city": "San Francisco Bay Area",
+      "budget_m": 8.807888,
+      "spent_m": 8.8,
+      "score": 11.234319389999998,
+      "quantities": {
+        "service": 3,
+        "buslane": 4,
+        "signals": 4,
+        "hub": 1,
+        "parkride": 1,
+        "tnc": 2,
+        "wayfinding": 2,
+        "station": 1,
+        "toc": 2
+      },
+      "passenger_hours_saved": 36070.29666666667,
+      "avg_minutes_saved_per_attendee": 5.278580000000001,
+      "vehicle_hours_avoided": 95242.59,
+      "co2_tonnes_avoided": 501.26517999999993,
+      "accessible_trips_improved": 115108.31999999999,
+      "reliability_risk_pp_reduction": 18.009660000000004,
+      "next_best": {
+        "intervention": "station",
+        "unit_number": 2,
+        "cost_m": 1.25,
+        "utility_per_m": 0.7991556
+      }
+    },
+    {
+      "city": "Seattle",
+      "budget_m": 8.408439,
+      "spent_m": 8.39,
+      "score": 10.078593182372,
+      "quantities": {
+        "service": 3,
+        "buslane": 3,
+        "signals": 4,
+        "ped": 1,
+        "tnc": 1,
+        "wayfinding": 1,
+        "station": 2,
+        "toc": 2
+      },
+      "passenger_hours_saved": 32576.257428000004,
+      "avg_minutes_saved_per_attendee": 4.892040000000001,
+      "vehicle_hours_avoided": 75597.34182000002,
+      "co2_tonnes_avoided": 441.9541823840001,
+      "accessible_trips_improved": 109779.75808799999,
+      "reliability_risk_pp_reduction": 17.3533875944,
+      "next_best": {
+        "intervention": "wayfinding",
+        "unit_number": 2,
+        "cost_m": 0.3,
+        "utility_per_m": 0.7482196397866667
+      }
+    }
+  ],
+  "sensitivity": {
+    "Atlanta": {
+      "attendance_-20": 11.094127766241602,
+      "attendance_+20": 16.641191649362398,
+      "budget_-20": 11.926419580742001,
+      "budget_+20": 15.326499900662,
+      "costs_-25": 16.274366070211997,
+      "costs_+25": 11.926419580742001
+    },
+    "Boston": {
+      "attendance_-20": 10.936291202368,
+      "attendance_+20": 16.404436803552,
+      "budget_-20": 11.90515717063,
+      "budget_+20": 15.232617068605999,
+      "costs_-25": 16.143797842924002,
+      "costs_+25": 11.90515717063
+    },
+    "Dallas": {
+      "attendance_-20": 19.105390263392,
+      "attendance_+20": 28.658085395088,
+      "budget_-20": 21.35790359898,
+      "budget_+20": 25.930771881739997,
+      "costs_-25": 26.806477315659993,
+      "costs_+25": 21.35790359898
+    },
+    "Houston": {
+      "attendance_-20": 11.182112190156802,
+      "attendance_+20": 16.7731682852352,
+      "budget_-20": 12.177501213920001,
+      "budget_+20": 15.569949312144,
+      "costs_-25": 16.468589392544,
+      "costs_+25": 12.177501213920001
+    },
+    "Kansas City": {
+      "attendance_-20": 11.760452966592002,
+      "attendance_+20": 17.640679449887998,
+      "budget_-20": 12.981032737849999,
+      "budget_+20": 16.21432169385,
+      "costs_-25": 16.94879023802,
+      "costs_+25": 12.981032737849999
+    },
+    "Los Angeles": {
+      "attendance_-20": 17.2063136,
+      "attendance_+20": 25.8094704,
+      "budget_-20": 19.0989064,
+      "budget_+20": 23.1732088,
+      "costs_-25": 24.085390560000004,
+      "costs_+25": 19.0989064
+    },
+    "Miami": {
+      "attendance_-20": 12.456233926104,
+      "attendance_+20": 18.684350889155997,
+      "budget_-20": 13.677064211639998,
+      "budget_+20": 17.160959465279998,
+      "costs_-25": 17.961084151823997,
+      "costs_+25": 13.677064211639998
+    },
+    "New York/New Jersey": {
+      "attendance_-20": 16.457158811964003,
+      "attendance_+20": 24.685738217945996,
+      "budget_-20": 18.023977156704998,
+      "budget_+20": 22.900058812474995,
+      "costs_-25": 24.095720605384997,
+      "costs_+25": 18.023977156704998
+    },
+    "Philadelphia": {
+      "attendance_-20": 8.2334826634272,
+      "attendance_+20": 12.3502239951408,
+      "budget_-20": 8.868926531316001,
+      "budget_+20": 11.549838398896,
+      "costs_-25": 12.245588089424,
+      "costs_+25": 8.868926531316001
+    },
+    "San Francisco Bay Area": {
+      "attendance_-20": 8.987455512,
+      "attendance_+20": 13.481183267999999,
+      "budget_-20": 9.679540349999996,
+      "budget_+20": 12.52326181,
+      "costs_-25": 13.299965809999998,
+      "costs_+25": 9.679540349999996
+    },
+    "Seattle": {
+      "attendance_-20": 8.0628745458976,
+      "attendance_+20": 12.094311818846398,
+      "budget_-20": 8.710553383532,
+      "budget_+20": 11.337326280851999,
+      "costs_-25": 12.009886516627999,
+      "costs_+25": 8.710553383532
+    }
+  }
+}

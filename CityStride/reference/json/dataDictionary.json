@@ -1,0 +1,98 @@
+[
+  {
+    "domainOrSheet": "Evidence",
+    "fieldOrClass": "observed_final",
+    "definition": "Measured and published after the 2026 event or analog event",
+    "implementationRule": "Must retain its qualifier and source URL"
+  },
+  {
+    "domainOrSheet": "Evidence",
+    "fieldOrClass": "observed_preliminary",
+    "definition": "Published after the event but not yet final",
+    "implementationRule": "Display PRELIMINARY in the interface"
+  },
+  {
+    "domainOrSheet": "Evidence",
+    "fieldOrClass": "official_plan",
+    "definition": "Published operational plan, not an observed result",
+    "implementationRule": "Never label as actual"
+  },
+  {
+    "domainOrSheet": "Evidence",
+    "fieldOrClass": "engineering_assumption",
+    "definition": "Transparent modeling assumption used for design or allocation",
+    "implementationRule": "Expose in assumptions panel and sensitivity test"
+  },
+  {
+    "domainOrSheet": "Pedestrian Areas",
+    "fieldOrClass": "area_code",
+    "definition": "Numeric join key used by the ML Dataset",
+    "implementationRule": "Unique integer 1–22"
+  },
+  {
+    "domainOrSheet": "Pedestrian Areas",
+    "fieldOrClass": "planning_anchor",
+    "definition": "Latitude/longitude at a named access node",
+    "implementationRule": "Not survey-grade and not a construction staking point"
+  },
+  {
+    "domainOrSheet": "Pedestrian Areas",
+    "fieldOrClass": "analysis_radius_m",
+    "definition": "Radius for spatial aggregation around the anchor",
+    "implementationRule": "Use for GIS joins; do not treat as project boundary"
+  },
+  {
+    "domainOrSheet": "Pedestrian Areas",
+    "fieldOrClass": "area_design_pedestrians",
+    "definition": "Per-event external-corridor design volume",
+    "implementationRule": "Formula: city total × area share; modeled except NY/NJ city total"
+  },
+  {
+    "domainOrSheet": "Funding Categories",
+    "fieldOrClass": "official_host_budget_usd",
+    "definition": "Federal host-region allocation",
+    "implementationRule": "Official FTA figure repeated across category rows for context"
+  },
+  {
+    "domainOrSheet": "Funding Categories",
+    "fieldOrClass": "modeled_category_allocation_usd",
+    "definition": "Selected units × typical unit cost",
+    "implementationRule": "Scenario output, not an agency award or contract"
+  },
+  {
+    "domainOrSheet": "Funding Categories",
+    "fieldOrClass": "reserve",
+    "definition": "Official allocation not assigned by the demonstration optimizer",
+    "implementationRule": "Formula residual; keep uncommitted"
+  },
+  {
+    "domainOrSheet": "3D Projects",
+    "fieldOrClass": "phase",
+    "definition": "temporary or permanent geometry variant",
+    "implementationRule": "Allow toggling and side-by-side comparison"
+  },
+  {
+    "domainOrSheet": "3D Projects",
+    "fieldOrClass": "render_enabled",
+    "definition": "Yes only when the linked phase allocation is greater than zero",
+    "implementationRule": "Renderer must filter by this field"
+  },
+  {
+    "domainOrSheet": "3D Projects",
+    "fieldOrClass": "geometry dimensions",
+    "definition": "Conceptual footprint/height for prototyping",
+    "implementationRule": "Replace with surveyed design geometry before engineering use"
+  },
+  {
+    "domainOrSheet": "Analog Events",
+    "fieldOrClass": "pedestrian_proxy",
+    "definition": "Event attendance or transit boardings used as a planning ceiling/comparator",
+    "implementationRule": "Not a directly measured corridor pedestrian count unless stated"
+  },
+  {
+    "domainOrSheet": "ML Dataset",
+    "fieldOrClass": "Outcome",
+    "definition": "Binary mobility-pressure target inherited from the diabetes-style dataset",
+    "implementationRule": "1 = high intervention need; 0 = lower intervention need"
+  }
+]

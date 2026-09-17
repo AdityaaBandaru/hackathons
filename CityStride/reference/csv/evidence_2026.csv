@@ -1,0 +1,22 @@
+evidenceId,hostRegion,dateOrScope,metric,value,unit,qualifier,evidenceClass,sourceUrl
+WC26-MATCHES,Tournament,Tournament,Matches staged,104,matches,exact,observed_final,https://inside.fifa.com/tournament-organisation/fifa-world-cup-2026-by-the-numbers
+WC26-ATT,Tournament,Tournament,Match attendees,6800000,attendees,more than,observed_final,https://inside.fifa.com/tournament-organisation/fifa-world-cup-2026-by-the-numbers
+WC26-FAN,Tournament,Fan festivals,Fan-festival visits,9017000,visits,reported total,observed_final,https://inside.fifa.com/organisation/media-releases/fan-festival-extends-historic-world-cup-2026-experience-millions-record-breaking-celebrations-host-countries
+ATL-RAIL,Atlanta,35-day event period,Rail passenger trips,4700000,trips,reported total; includes associated events,observed_final,https://itsmarta.com/marta-safely-moves-millions.aspx
+ATL-PEAK,Atlanta,2026-06-24,Rail passenger trips,240000,trips,approximately,observed_final,https://itsmarta.com/marta-safely-moves-millions.aspx
+ATL-VC,Atlanta,Match days,Vine City share of rail demand,0.14,share,reported,observed_final,https://itsmarta.com/marta-safely-moves-millions.aspx
+ATL-SEC,Atlanta,Match days,SEC District share of rail demand,0.38,share,reported,observed_final,https://itsmarta.com/marta-safely-moves-millions.aspx
+BOS-TRAINS,Boston,Seven matches,Event-train round trips,98,round trips,reported,observed_final,https://www.mass.gov/news/governor-healey-celebrates-successful-world-cup-operations-across-massachusetts
+BOS-TIX,Boston,Seven matches,Round-trip tickets sold,108940,tickets,reported,observed_final,https://www.mass.gov/news/governor-healey-celebrates-successful-world-cup-operations-across-massachusetts
+BOS-STAFF,Boston,Per match day,Employees deployed,700,employees,approximately,observed_final,https://www.mass.gov/news/governor-healey-celebrates-successful-world-cup-operations-across-massachusetts
+LA-RIDES,Los Angeles,Tournament,Rides directly to/from stadium,212865,rides,reported,observed_final,https://thesource.metro.net/metro-state-of-agency-celebrates-a-year-of-milestones-and-looking-ahead-to-another-transformative-year/
+SF-TOTAL,San Francisco Bay Area,Six matches,VTA stadium trips,230000,trips,close to,observed_final,https://www.vta.org/sites/default/files/2026-07/Board%20Correspondence%2007_17_26.pdf
+SF-PEAK,San Francisco Bay Area,2026-06-25,VTA stadium trips,42000,trips,nearly,observed_final,https://www.vta.org/sites/default/files/2026-07/Board%20Correspondence%2007_17_26.pdf
+SEA-PEAK,Seattle,United States vs Belgium,Match-day Link boardings,309000,boardings,preliminary,observed_preliminary,https://www.soundtransit.org/get-to-know-us/news-events/news-releases/sound-transit-set-all-time-records-daily-monthly-ridership
+NYNJ-TRANSIT,New York/New Jersey,Eight matches,Event-related NJ Transit passengers,370000,passengers,more than,observed_final,https://www.njtransit.com/press-releases/new-jersey-interagency-transportation-after-action-report-aar-njny-stadium-fifa
+NYNJ-THR,New York/New Jersey,Tournament,Average movement rate,24000,people/hour,reported average,observed_final,https://www.njtransit.com/press-releases/new-jersey-interagency-transportation-after-action-report-aar-njny-stadium-fifa
+NYNJ-PED,New York/New Jersey,Final,Pedestrian volume,65000,pedestrians,observed,observed_final,https://www.njtransit.com/press-releases/new-jersey-interagency-transportation-after-action-report-aar-njny-stadium-fifa
+NYNJ-OVER,New York/New Jersey,Tournament,Pedestrian volume above projection,0.8,share,more than,observed_final,https://www.njtransit.com/press-releases/new-jersey-interagency-transportation-after-action-report-aar-njny-stadium-fifa
+NYNJ-TNC,New York/New Jersey,Tournament egress,Rideshare demand above projection,0.5,share,approximately,observed_final,https://www.njtransit.com/press-releases/new-jersey-interagency-transportation-after-action-report-aar-njny-stadium-fifa
+PHI-PLAN,Philadelphia,Per match,Planned SEPTA riders,31000,riders,approximately; plan,official_plan,https://wwww.septa.org/news/infrastructure-improvements-for-fifa/
+MIA-HUBS,Miami,Match days,Official shuttle hubs,4,hubs,confirmed plan,official_plan,https://www.miamidade.gov/global/release.page?Mduid_release=rel178040771715787

@@ -1,0 +1,259 @@
+{
+  "name": "World Cup 2026 Hackathon Data Bundle",
+  "version": "2026.09.06-hackathon-v1",
+  "generatedDate": "2026-09-06",
+  "canonicalCrs": "EPSG:4326",
+  "heroScenario": "nynj",
+  "files": [
+    {
+      "path": "README.md",
+      "sizeBytes": 2691,
+      "sha256": "85bb2532543a9b7846d5511586f70ceb2a1305262869db0309f96f23a4334020"
+    },
+    {
+      "path": "csv/analog_events.csv",
+      "sizeBytes": 3927,
+      "sha256": "54c91b15da4673c3e6623e358571b7988be9c7f4af671846a21eda03624a7002"
+    },
+    {
+      "path": "csv/evidence_2026.csv",
+      "sizeBytes": 4249,
+      "sha256": "6e2548e4626b35e5485da349ccb2efaa0185bcb2dd71283de1dc58c356a2316a"
+    },
+    {
+      "path": "csv/funding.csv",
+      "sizeBytes": 51800,
+      "sha256": "78dcd518cb33263b3ec800cf651d7cfe749d164d3512a4e33b05eaeff0021fd6"
+    },
+    {
+      "path": "csv/host_regions.csv",
+      "sizeBytes": 2753,
+      "sha256": "c8150c37a6c6605824346c4efe7d6d925f1a68c3c0e065335c2df7c01ae59301"
+    },
+    {
+      "path": "csv/interventions.csv",
+      "sizeBytes": 2825,
+      "sha256": "48e324139896f40e6124e511924ccda02daedbb3c6dd27ac3cb4232f40672a77"
+    },
+    {
+      "path": "csv/ml_scenarios.csv",
+      "sizeBytes": 58829,
+      "sha256": "5c1816e1acb5c47e57afb089368948691d9036e68fc1bd25e5c5e6cc1b24a74b"
+    },
+    {
+      "path": "csv/nj_match_data.csv",
+      "sizeBytes": 2913,
+      "sha256": "743f0d45f73e8b6e3a4f24080b6eeb63ed9c49b6fcb8e2c0ac81f2af78c0a1e8"
+    },
+    {
+      "path": "csv/pedestrian_areas.csv",
+      "sizeBytes": 12881,
+      "sha256": "44ad10979196c1726d40039f80b9cd1e508417fa384cf0683108ecb0d5fd359d"
+    },
+    {
+      "path": "csv/projects_3d.csv",
+      "sizeBytes": 107315,
+      "sha256": "6874cef62c36475202ca2e90ec5d7f9a0d29a39ddfbfde3c013c75dad3a52a0e"
+    },
+    {
+      "path": "csv/sources.csv",
+      "sizeBytes": 6957,
+      "sha256": "53b0722e7736ca9308b527513b3a25c936c2fcad7e6f0fc4a872ed2d24a5bb1a"
+    },
+    {
+      "path": "examples/nynj_context.json",
+      "sizeBytes": 52645,
+      "sha256": "25c96f09dd807518e88b67fae961cd23eaf0c458aea38c5c0149ae92e3476822"
+    },
+    {
+      "path": "examples/nynj_optimize_request.json",
+      "sizeBytes": 502,
+      "sha256": "8d06562f8373a2fe8222c011c070bc40e361693657a59e4ea54ac1ef597bedf0"
+    },
+    {
+      "path": "geojson/nynj_projects.geojson",
+      "sizeBytes": 36758,
+      "sha256": "2f31041d9e0f8108e87bb0e9b6d5b5564e59d13ac19e7d389edca0c2133cc300"
+    },
+    {
+      "path": "geojson/pedestrian_areas.geojson",
+      "sizeBytes": 24678,
+      "sha256": "4650d3cdb378bfb1d3062eb117467e2720de88c5ddac8dcf455ce0d64c3e24ff"
+    },
+    {
+      "path": "geojson/projects_all.geojson",
+      "sizeBytes": 394682,
+      "sha256": "4ec699d5ae53fdbbc0c040cff322112389cd2f1e4182cb16d80edfa550554f05"
+    },
+    {
+      "path": "geojson/projects_permanent.geojson",
+      "sizeBytes": 197224,
+      "sha256": "ff81b295b2b4c58085c0ab8a07e040127aa0f9e99b502a8758d5a14eea667ff9"
+    },
+    {
+      "path": "geojson/projects_temporary.geojson",
+      "sizeBytes": 197541,
+      "sha256": "e9e7e841d2463e9d5eb99293a241296c54e404fa2cce135ffb45d76bbaa52dec"
+    },
+    {
+      "path": "json/allHostSummary.json",
+      "sizeBytes": 8399,
+      "sha256": "db9be63857d1126c42ca03f73027fc71e49943d32562ab2ef70e957c14a82242"
+    },
+    {
+      "path": "json/analogEvents.json",
+      "sizeBytes": 9067,
+      "sha256": "7ea67f71548272fe8bf22d6a6c18531b15c4a8a78d8389e68cc1a51e11dd78f4"
+    },
+    {
+      "path": "json/cityMultipliers.json",
+      "sizeBytes": 4880,
+      "sha256": "32826b7e91826027df6e044f7ff800ea5e359f25b5faf59435a1afa002b4c934"
+    },
+    {
+      "path": "json/cityProfiles.json",
+      "sizeBytes": 5797,
+      "sha256": "81c536201fd40d89f78ee0ea2237e294f9646744ea8af546e0313e69e2486c0f"
+    },
+    {
+      "path": "json/codebook.json",
+      "sizeBytes": 6299,
+      "sha256": "75d5048c089033951a45a78d153f3c10562f8572f89332843316508654fc15ca"
+    },
+    {
+      "path": "json/dataDictionary.json",
+      "sizeBytes": 3744,
+      "sha256": "c8c50599b8cd23f5e43adff4ad545eb919323008b03de4a2e4e05add2bce4897"
+    },
+    {
+      "path": "json/evidence2026.json",
+      "sizeBytes": 7988,
+      "sha256": "d94b5459c0d96eb89b6e0237d6330be667c65af523fd140ce153f2f2442bfe01"
+    },
+    {
+      "path": "json/funding.json",
+      "sizeBytes": 124531,
+      "sha256": "fc44e526ee87a3109667f694a6f2d3b9181b803b2d97b26d12bad50340687744"
+    },
+    {
+      "path": "json/hostRegions.json",
+      "sizeBytes": 6497,
+      "sha256": "593532233b497cd0c6c67c14785b6372bd4d8456fd2672271a16daedd88f6041"
+    },
+    {
+      "path": "json/interventions.json",
+      "sizeBytes": 6483,
+      "sha256": "fe32b12266871bee214f3b469cb5c07195e9b72ef4a6e9a29fb7983460b44e03"
+    },
+    {
+      "path": "json/legacyProjectAliases.json",
+      "sizeBytes": 256,
+      "sha256": "4096b678a0546de5618e9ec88f8cefb2c64bc1de676018f4977768539004f61f"
+    },
+    {
+      "path": "json/legacyProjects.json",
+      "sizeBytes": 5195,
+      "sha256": "3bbf9f4f01c87d318a2ae02232c6edf4c20813d6694eabc64eadf82b37659c9f"
+    },
+    {
+      "path": "json/mlScenarios.json",
+      "sizeBytes": 325109,
+      "sha256": "dfe4deaaf21a0ac0497f73a36664c5e29be2a0c0b6e7265d79b05b53f0f7e0a0"
+    },
+    {
+      "path": "json/modelOutputs.json",
+      "sizeBytes": 8344,
+      "sha256": "383d75e1d2d91de2740115cbd30132034a2b4e5f6687b39e3b8896245e9e8243"
+    },
+    {
+      "path": "json/njMatchData.json",
+      "sizeBytes": 7572,
+      "sha256": "ad3ec7c737f53c204da3eb02822ca1b3c0530b1f7fdf5af831189a76f6d9a7dc"
+    },
+    {
+      "path": "json/nynjHackathonContext.json",
+      "sizeBytes": 52645,
+      "sha256": "25c96f09dd807518e88b67fae961cd23eaf0c458aea38c5c0149ae92e3476822"
+    },
+    {
+      "path": "json/observedSummary.json",
+      "sizeBytes": 22550,
+      "sha256": "ec95a554778f150bdd148d87481aa126567d87e2b27f2c05b4c79abb3cf28069"
+    },
+    {
+      "path": "json/pedestrianAreas.json",
+      "sizeBytes": 24959,
+      "sha256": "75f5173c07c503050339dd25f28a47495b5044e824310adbdc788f9d6a6277c4"
+    },
+    {
+      "path": "json/projects3d.json",
+      "sizeBytes": 262732,
+      "sha256": "25bacb3737756a225aa8a5a85ea0210ecc1f7421041cb2874c64f2957c0275c1"
+    },
+    {
+      "path": "json/sources.json",
+      "sizeBytes": 11738,
+      "sha256": "259abce4b3683657b16199e439ffa49a92a7a8d56291ccdfd9525ba6c353e677"
+    },
+    {
+      "path": "reference/Claude_Code_Execution_Runbook.md",
+      "sizeBytes": 26762,
+      "sha256": "f1bc6d8e8db9bd33e0f0f9dfab6517ba91c5acfc44990785483407c99a2a9d07"
+    },
+    {
+      "path": "reference/Research_and_Modeling_Task.md",
+      "sizeBytes": 15035,
+      "sha256": "62e8306057a45028ccb70e9ae03d191a02585daeaef30efd990e8fb5030b4fde"
+    },
+    {
+      "path": "reference/World_Cup_2026_Showcase_Data.xlsx",
+      "sizeBytes": 49287,
+      "sha256": "90b564532a0f33cc910fca06adb826c36181392269c45a9c5f9854f70a81cd68"
+    },
+    {
+      "path": "reference/World_Cup_2026_Spatial_Mobility_Dataset.xlsx",
+      "sizeBytes": 162514,
+      "sha256": "9da92c8a4e2d4d7fdbb476620024de3f09748883e6bacdc5c08ba39959e6593c"
+    },
+    {
+      "path": "reference/model_results.json",
+      "sizeBytes": 11619,
+      "sha256": "4e74a9a679a6c221665d0ace14de222b70ea7962070d5932538a189c20e95433"
+    },
+    {
+      "path": "reference/model_run.py",
+      "sizeBytes": 9441,
+      "sha256": "60dc038e1e6e29a66304901f41663d4eea6649a5cbe902d50308b295435a7d50"
+    },
+    {
+      "path": "reference/world_cup_mobility.csv",
+      "sizeBytes": 32712,
+      "sha256": "ca31509e8ab852e2ff8f5536e9bb21c5378f810c849bfa07613f150ba5c652a2"
+    },
+    {
+      "path": "schemas/funding.schema.json",
+      "sizeBytes": 946,
+      "sha256": "438c83e140326d5473cfa4005c365c00ce4b99d71efc96b0da2520e9c9611837"
+    },
+    {
+      "path": "schemas/project3d.schema.json",
+      "sizeBytes": 1313,
+      "sha256": "0afa02bcb45bcee89a0f1663cf8bbd911ef252064e240be7c1326d8c20d0eb75"
+    },
+    {
+      "path": "scripts/validate_bundle.py",
+      "sizeBytes": 2712,
+      "sha256": "eea33e3fbc01d6fe762af4be57ed1b411232a44039e272179ceb5492e4994b18"
+    },
+    {
+      "path": "types/datasets.ts",
+      "sizeBytes": 2266,
+      "sha256": "57aa4a4034ed70348d7781047ec668dfff0f83f90c2660b997d9a352cdf031f8"
+    },
+    {
+      "path": "validation_report.json",
+      "sizeBytes": 766,
+      "sha256": "da62707c99d140ad5439f05b54feb8f38ecdc5111b366b668716d37816759dad"
+    }
+  ]
+}
