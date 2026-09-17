@@ -1,0 +1,17 @@
+# One-click backend deploy for CityStride on Render (free web service).
+# After it is live, set the GitHub repository variable API_BASE_URL to this
+# service's URL and re-run the "Deploy CityStride to GitHub Pages" workflow.
+services:
+  - type: web
+    name: citystride-api
+    runtime: python
+    plan: free
+    rootDir: CityStride/backend
+    buildCommand: pip install .
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12"
+      - key: CORS_ALLOWED_ORIGINS
+        value: https://adityaabandaru.github.io
