@@ -18,6 +18,7 @@ def test_off_by_default(monkeypatch):
     assert keep_alive_settings() is None
     with TestClient(app) as client:
         assert client.app.state.keep_alive_task is None
+        assert client.get("/health").json()["keepAlive"] is False
 
 
 def test_interval_defaults_and_is_clamped(monkeypatch):
@@ -36,6 +37,7 @@ def test_task_starts_with_the_app_and_stops_on_shutdown(monkeypatch):
     with TestClient(app) as client:
         task = client.app.state.keep_alive_task
         assert task is not None and not task.done()
+        assert client.get("/health").json()["keepAlive"] is True
     assert task.cancelled() or task.done()
 
 
