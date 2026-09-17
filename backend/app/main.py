@@ -106,6 +106,8 @@ def health(request: Request) -> dict[str, Any]:
         "bundleVersion": BUNDLE_VERSION,
         "canonicalCrs": CANONICAL_CRS,
         "heroScenarioCityId": HERO_SCENARIO_CITY_ID,
+        # True when the self-ping loop is running (free-tier hosting).
+        "keepAlive": getattr(request.app.state, "keep_alive_task", None) is not None,
         "seed": {
             "datasets": len(seed.record_counts()),
             "recordCounts": dict(seed.record_counts()),
