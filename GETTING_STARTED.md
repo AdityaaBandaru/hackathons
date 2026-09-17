@@ -19,7 +19,7 @@ python -m venv .venv
 ./.venv/bin/uvicorn app.main:app --port 8000
 ```
 
-Open http://localhost:3000/map or http://localhost:3000/studio. Both services must be running. Run the optimizer before using scenario-only modes.
+Open http://localhost:3000. Both services must be running. Run the optimizer before using the studio's scenario-only modes.
 
 On Windows use `.venv\Scripts\python.exe -m pip install -e .` and `.venv\Scripts\python.exe -m uvicorn app.main:app --port 8000`.
 
@@ -34,6 +34,6 @@ npm run build
 
 In backend, install test extras with `./.venv/bin/pip install -e '.[dev]'`, then run `./.venv/bin/python -m pytest`.
 
-The frontend predev/pretest/prebuild step copies authoritative site context and GeoJSON byte-for-byte. Keep backend/ and reference/ beside frontend/. No geometry is regenerated. No API keys or map tile services are required.
+The frontend predev/pretest/prebuild step copies authoritative city context byte-for-byte. Keep backend/ and reference/ beside frontend/. No geometry is regenerated. No API keys or map tile services are required.
 
-See docs/phase-5-map.md for assumptions and verification. Live browser verification is incomplete.
+See docs/phase-5-map.md for assumptions and verification.
