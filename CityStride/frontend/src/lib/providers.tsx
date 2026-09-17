@@ -16,7 +16,12 @@ export function Providers({ children }: { children: React.ReactNode }) {
         defaultOptions: {
           queries: {
             staleTime: 30_000,
-            retry: 1,
+            // The hosted API sleeps when idle; while it wakes, the first
+            // requests can fail outright rather than hang. Keep retrying
+            // with backoff (1 s, 2 s, 4 s, 8 s, 16 s) so a cold start turns
+            // into a slow load, not an error.
+            retry: 5,
+            retryDelay: (attempt) => Math.min(16_000, 1000 * 2 ** attempt),
           },
         },
       }),

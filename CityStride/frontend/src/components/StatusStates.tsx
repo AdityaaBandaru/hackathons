@@ -1,8 +1,23 @@
 /** Shared loading / error presentational states. */
 
+"use client";
+
+import { useEffect, useState } from "react";
 import { Spinner } from "@/components/ui/Icons";
 
+/**
+ * After a few seconds of loading, say why it might be slow: the hosted API
+ * sleeps when idle and takes up to a minute to wake. Better than a judge
+ * staring at a spinner wondering if the site is broken.
+ */
+const SLOW_AFTER_MS = 4000;
+
 export function LoadingBlock({ label = "Loading…" }: { label?: string }) {
+  const [slow, setSlow] = useState(false);
+  useEffect(() => {
+    const timer = window.setTimeout(() => setSlow(true), SLOW_AFTER_MS);
+    return () => window.clearTimeout(timer);
+  }, []);
   return (
     <div
       role="status"
@@ -12,6 +27,13 @@ export function LoadingBlock({ label = "Loading…" }: { label?: string }) {
         <Spinner className="h-4 w-4 flex-none text-accent-fg" />
         {label}
       </div>
+      {slow && (
+        <p className="animate-fade-in text-xs leading-relaxed text-fg-subtle">
+          Still working — the hosted API goes to sleep when nobody has used it
+          for a while and takes up to a minute to wake up. It will be quick
+          after this.
+        </p>
+      )}
       <div aria-hidden="true" className="space-y-2">
         <div className="skeleton h-3 w-2/3" />
         <div className="skeleton h-3 w-1/2" />
