@@ -17,6 +17,7 @@ tmp=$(mktemp -d)
 git worktree add -q --detach "$tmp"
 (
   cd "$tmp"
+  git branch -D gh-pages >/dev/null 2>&1 || true
   git checkout -q --orphan gh-pages
   git rm -rfq . >/dev/null 2>&1 || true
   cp -R "$ROOT/CityStride/frontend/out/." .
